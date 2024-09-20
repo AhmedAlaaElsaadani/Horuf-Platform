@@ -18,7 +18,7 @@ const Navbar = () => {
     {
       link: t("nav_link_Home"),
       active: "Home",
-      to: "#Home",
+      to: "./#Home",
     },
     {
       link: t("nav_link_About"),
