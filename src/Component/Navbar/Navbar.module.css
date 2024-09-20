@@ -14,9 +14,11 @@
   font-size: 1.5rem;
   font-weight: 700;
   opacity: 1 !important;
+  padding-bottom: 0;
 }
 .list-links a.selected {
   color: #0269b3 !important;
+  border-bottom: 2px solid #0269b3;
 }
 .list-links a:hover {
   color: #0269b3 !important;

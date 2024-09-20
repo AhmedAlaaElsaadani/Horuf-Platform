@@ -1,7 +1,6 @@
 .Heading1 {
   background: linear-gradient(90deg, #f3faff 0%, #c0daec 100%);
   min-height: 25vh;
-  margin-top: 120px;
 }
 .Heading1 h2 {
   color: #002e50;
