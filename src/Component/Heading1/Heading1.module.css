@@ -1,0 +1,29 @@
+.Heading1 {
+  background: linear-gradient(90deg, #f3faff 0%, #c0daec 100%);
+  min-height: 25vh;
+  margin-top: 120px;
+}
+.Heading1 h2 {
+  color: #002e50;
+  font-size: 3rem;
+  font-weight: 700;
+}
+.Heading1 img {
+  position: absolute;
+  width: 140px;
+}
+
+.Heading1 img:nth-child(1) {
+  bottom: -23%;
+  left: 20%;
+}
+
+.Heading1 img:nth-child(2) {
+  width: 180px;
+  bottom: -23%;
+  right: 20%;
+}
+.Heading1 img:nth-child(3) {
+  top: 0;
+  right: 20%;
+}

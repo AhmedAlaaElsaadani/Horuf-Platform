@@ -1,0 +1,11 @@
+.Heading2{
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 25vh;
+}
+.Heading2 .layer{
+    min-height: 25vh;
+    background: rgba(0, 0, 0, 0.5);
+}

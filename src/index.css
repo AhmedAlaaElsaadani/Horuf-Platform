@@ -1,0 +1,94 @@
+/* General styles */
+/* 
+///////////////////////////////////////////
+// Coloring
+// General style and classes
+// selection
+// scrollbar
+
+///////////////////////////////////////////
+*/
+
+/* 
+//////////Coloring///////////
+*/
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* Global coloring  */
+  --primary: #0269b3;
+  --bg-color: #fff;
+  --primHover: #3482ba;
+  --second-color: #1e1e1e;
+  /* Navbar coloring  */
+  --nav-link-color: #303030;
+  --nav-bg-color: #f5f5f5;
+}
+.dark {
+  /* Global coloring  */
+  --bg-color: #1e1e1e;
+  --second-color: #f5f5f5;
+  
+  /* Navbar coloring  */
+  --nav-link-color: #f5f5f5;
+  --nav-bg-color: #1e1e1e;
+}
+
+/* 
+//////////General style and classes///////////
+*/
+body {
+  color: var(--second-color);
+  background-color: var(--bg-color) ;
+  margin: 0;
+  min-height: 100vh;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+}
+
+/* 
+//////////selection///////////
+*/
+::selection {
+  background-color: var(--primary);
+  color: var(--second-color);
+}
+/* 
+//////////scrollbar///////////
+*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primHover);
+}
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--primHover);
+}
+::-webkit-scrollbar-track {
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  margin: -10px 0px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
