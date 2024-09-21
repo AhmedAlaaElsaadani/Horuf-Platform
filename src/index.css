@@ -12,6 +12,12 @@
 /* 
 //////////Coloring///////////
 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap');
+
+/* Apply the font globally or to specific elements */
+body {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+}
 
 html {
   scroll-behavior: smooth;

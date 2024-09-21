@@ -1,4 +1,64 @@
 .About {
   margin-top: 120px;
   min-height: calc(100vh-120px);
+  width: 100%;
+
 }
+
+.About .about-content h1 {
+  color: var(--home-main-color);
+  font-size: 1.9rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.About .about-content .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.About .about-content .text p:nth-child(2) {
+  color: #0269b3;
+  font-size: 2.3rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.text-desc{
+  color: var(--home-main-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 2.8125rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.miniNav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #a5d4f743;
+}
+
+.miniNav a {
+  color: #0269B3;
+  font-size: 1.5rem;
+  text-decoration: none; 
+  padding-bottom: 5px; 
+}
+
+.miniNav a:hover {
+  text-decoration: none; 
+}
+
+.miniNav .active {
+  border-bottom: 5px solid #0269B3; 
+  font-weight: bold;
+}
+
+
+
