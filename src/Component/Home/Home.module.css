@@ -5,5 +5,99 @@
   justify-content: center;
   margin-top: 120px;
   min-height: calc(100vh - 120px);
+  width: 100%;
+  overflow: hidden;
+}
+.Home .home-content h1 {
+  color: var(--home-main-color);
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 5.3125rem; /* 177.083% */
+}
+.Home .home-content .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}
+.Home .home-content .text p:nth-child(2) {
+  color: #0269b3;
+  font-size: 3.375rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 5.3125rem;
+}
+.Home .home-content .text p:nth-child(3) {
+  color: var(--home-main-color);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.links {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.9375rem;
+  margin-top: 20px;
+}
+.links a {
+  color: #0269b3;
+  text-align: center;
+  font-family: "Noto Kufi Arabic";
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: 0.3125rem 0.8125rem;
+  opacity: 0.9;
+  transition-property: color, background-color, scale, opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+.links a:nth-child(1) {
+  background-color: #0269b3;
+  color: var(--home-main-color);
+  border-radius: 0.3125rem;
+  -webkit-border-radius: 0.3125rem;
+  -moz-border-radius: 0.3125rem;
+  -ms-border-radius: 0.3125rem;
+  -o-border-radius: 0.3125rem;
+}
+.links a:nth-child(2) {
+  border-radius: 0.3125rem;
+  border: 2px solid #0269b3;
+  -webkit-border-radius: 0.3125rem;
+  -moz-border-radius: 0.3125rem;
+  -ms-border-radius: 0.3125rem;
+  -o-border-radius: 0.3125rem;
+}
+.links a:hover {
+  color: #0269b3;
+  background-color: var(--home-main-color);
+  opacity: 1;
+}
 
+.links a:active {
+  scale: 0.9;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 991px) {
+  .Home .home-content .text {
+    text-align: center;
+  }
+  html {
+    font-size: 14px;
+  }
+  .links {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+  .links {
+    flex-direction: column;
+  }
 }

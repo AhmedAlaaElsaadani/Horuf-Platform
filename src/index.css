@@ -26,15 +26,19 @@ html {
   /* Navbar coloring  */
   --nav-link-color: #303030;
   --nav-bg-color: #f5f5f5;
+  /* Home coloring  */
+  --home-main-color: #1e1e1e;
 }
 .dark {
   /* Global coloring  */
   --bg-color: #1e1e1e;
   --second-color: #f5f5f5;
-  
+
   /* Navbar coloring  */
   --nav-link-color: #f5f5f5;
   --nav-bg-color: #1e1e1e;
+  /* Home coloring  */
+  --home-main-color: #f5f5f5;
 }
 
 /* 
@@ -42,9 +46,10 @@ html {
 */
 body {
   color: var(--second-color);
-  background-color: var(--bg-color) ;
+  background-color: var(--bg-color);
   margin: 0;
   width: 100%;
+  font-family: "Noto Kufi Arabic";
 }
 a {
   text-decoration: none;

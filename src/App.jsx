@@ -28,7 +28,7 @@ const router = createBrowserRouter([
  * components
  *      -navbar <Ahmed> 80%
  *      -RoutLayout <Ahmed> 80%
- *      -Home
+ *      -Home <Ahmed> 100% ✅
  *      -student account
  *                . Edit student profile
  *                . Change password

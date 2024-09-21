@@ -110,11 +110,14 @@ const Navbar = () => {
     <>
       <nav
         id="navBarMain"
-        className={"navbar lead navbar-expand-lg  fixed-top pt-1 shadow "+style["navbar"]}
+        className={
+          "navbar lead navbar-expand-lg  fixed-top pt-1 shadow " +
+          style["navbar"]
+        }
         data-bs-theme={isDarkMode ? "dark" : "light"}
       >
         <div className="container d-flex justify-content-between ">
-          <HashLink className="navbar-brand  py-3 px-2 rounded-3" to="/">
+          <HashLink className="navbar-brand  py-3 rounded-3" to="/">
             <img src={logo} style={{ width: "75px" }} alt="logo website " />
           </HashLink>
           <button

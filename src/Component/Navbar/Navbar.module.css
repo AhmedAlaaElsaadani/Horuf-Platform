@@ -13,6 +13,8 @@
   font-family: "Noto Kufi Arabic";
   font-size: 1.5rem;
   font-weight: 700;
+  width: fit-content;
+  margin: auto;
   opacity: 1 !important;
   padding-bottom: 0;
 }
