@@ -23,6 +23,18 @@ const router = createBrowserRouter([
 ]);
 
 /**
+ * Api 
+ *      -login
+ *      -register
+ *      -forget password
+ *      -update student profile
+ *      -update student password
+ *      -get student courses
+ *      -get course units  
+ *      -get course content
+ *      -get course video
+ *      -get teachers
+ * 
  * contexts
  *      -AuthContext <Ahmed>
  * components
