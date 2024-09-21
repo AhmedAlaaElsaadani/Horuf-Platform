@@ -12,29 +12,48 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home/>,
+        element: <Home />,
       },
       {
-        path:"/about",
-        element:<About/>
-      }
+        path: "/about",
+        element: <About />,
+        children: [
+          {
+            index: true,
+            element: <h1>ourMission</h1>
+          },
+          {
+            path: "/ourMission",
+            element: <h1>ourMission</h1>,
+          },
+          {
+            path: "/ourVision",
+            element: <h1>ourVision</h1>,
+          },
+
+          {
+            path: "/ourValues",
+            element: <h1>ourValues</h1>,
+          },
+        ],
+      },
     ],
   },
 ]);
 
 /**
- * Api 
+ * Api
  *      -login
  *      -register
  *      -forget password
  *      -update student profile
  *      -update student password
  *      -get student courses
- *      -get course units  
+ *      -get course units
  *      -get course content
  *      -get course video
  *      -get teachers
- * 
+ *
  * contexts
  *      -AuthContext <Ahmed>
  * components
@@ -58,7 +77,7 @@ const router = createBrowserRouter([
  *                . Course video
  *      -Teachers
  *      -Heading1 <Ahmed> 90%
- *      -Heading2 <Ahmed> 90% 
+ *      -Heading2 <Ahmed> 90%
  */
 
 function App() {
