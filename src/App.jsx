@@ -4,42 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RoutLayout from "./Component/RoutLayout/RoutLayout";
 import About from "./Component/About/About";
 import Home from "./Component/Home/Home";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RoutLayout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-        children: [
-          {
-            index: true,
-            element: <p>في منصة حروف، نؤمن بأن التعليم هو المفتاح لتحقيق النجاح الشخصي والمهني. مهمتنا هي توفير منصة تعليمية شاملة وملهمة تساعد كل متعلم على الوصول إلى أهدافه. نلتزم بتقديم محتوى تعليمي متميز وأدوات مبتكرة، مع التركيز على دعم نجاحك في كل خطوة من رحلتك التعليمية.</p>
-          },
-          {
-            path: "ourMission",
-            element: <p>في منصة حروف، نؤمن بأن التعليم هو المفتاح لتحقيق النجاح الشخصي والمهني. مهمتنا هي توفير منصة تعليمية شاملة وملهمة تساعد كل متعلم على الوصول إلى أهدافه. نلتزم بتقديم محتوى تعليمي متميز وأدوات مبتكرة، مع التركيز على دعم نجاحك في كل خطوة من رحلتك التعليمية.</p>,
-          },
-          {
-            path: "ourVision",
-            element: <p>في منصة حروف، نؤمن بأن التعليم هو المفتاح لتحقيق النجاح الن رحلتك التعليمية.</p>,
-          },
-
-          {
-            path: "ourValues",
-            element: <p>في منصة حروف، نؤمن بأن التعليم هو المفتاح لتحقيق النجاح الشخصي والمهني. مهمتنا هي توفير منصة تعليمية شاملة وملهمة تساعد كل متعلم على الوصول إلى أهدافه. نلتزم بتقديم محتوى تعليمي متميز وأدوات مبتكرة، مع التركيزة.</p>,
-          },
-        ],
-      },
-    ],
-  },
-]);
+import { useTranslation } from "react-i18next";
 
 /**
  * Api
@@ -65,7 +30,7 @@ const router = createBrowserRouter([
  *                . Change password
  *                . Update Email
  *                . My courses
- *      -About <Mohamed>
+ *      -About <Mohamed> 80%
  *      -Contact <Mohamed>
  *      -Footer <Mohamed>
  *      -Login
@@ -81,10 +46,68 @@ const router = createBrowserRouter([
  */
 
 function App() {
+  const {t}=useTranslation();
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RoutLayout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+          children: [
+            {
+              index: true,
+              element: (
+                <p> 
+                  {t("about_mission")}
+                </p>
+              ),
+            },
+            {
+              path: "ourMission",
+              element: (
+                <p>
+                  {
+                    t("about_mission")
+                  }     </p>
+              ),
+            },
+            {
+              path: "ourVision",
+              element: (
+                <p>
+                  {
+                    t("about_vision")
+                  }
+                </p>
+              ),
+            },
+  
+            {
+              path: "ourValues",
+              element: (
+                <p>
+                  {
+                    t("about_values")
+                  }
+                </p>
+              ),
+            },
+          ],
+        },
+      ],
+    },
+  ]);
+  
   useEffect(() => {
     // this code is for the language direction
     // const i18nextLng = localStorage.getItem("i18nextLng") || "ar";
-    const i18nextLng = "ar";
+    const i18nextLng = "en";
     i18n.changeLanguage(i18nextLng);
     if (i18nextLng === "ar") document.body.dir = "rtl";
     else document.body.dir = "ltr";

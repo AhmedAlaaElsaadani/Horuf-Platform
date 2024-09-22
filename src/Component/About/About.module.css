@@ -5,7 +5,7 @@
 
 }
 
-.About .about-content h1 {
+.About .about-content h2 {
   color: var(--home-main-color);
   font-size: 1.9rem;
   font-style: normal;
@@ -41,10 +41,13 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
-  background-color: #a5d4f743;
+  background-color: #e8f5ff;
+  
 }
 
 .miniNav a {
+  width: 100%;
+  text-align: center;
   color: #0269B3;
   font-size: 1.5rem;
   text-decoration: none; 
@@ -54,10 +57,22 @@
 .miniNav a:hover {
   text-decoration: none; 
 }
+.miniNav .active{
+  position: relative;
+}
 
-.miniNav .active {
+.miniNav .active::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 5px;
+  background-color: #0269B3;
+  
+/*   
   border-bottom: 5px solid #0269B3; 
-  font-weight: bold;
+  font-weight: bold; */
 }
 
 
