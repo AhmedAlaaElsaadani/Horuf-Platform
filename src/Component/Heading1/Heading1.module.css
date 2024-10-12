@@ -26,3 +26,33 @@
   top: 0;
   right: 20%;
 }
+.Heading1 img.specialPositionForSomePages {
+  top: 3%;
+  left: 20%;
+  right: auto;
+}
+
+@media (max-width: 991px) {
+  .Heading1 img {
+    width: 100px;
+  }
+  .Heading1 img:nth-child(1) {
+    bottom: -10%;
+    left: 5%;
+  }
+
+  .Heading1 img:nth-child(2) {
+    width: 120px;
+    bottom: -10%;
+    right: 5%;
+  }
+  .Heading1 img:nth-child(3) {
+    top: 10%;
+    right: 5%;
+  }
+  .Heading1 img.specialPositionForSomePages {
+    top: 13%;
+    left: 5%;
+    right: auto;
+  }
+}

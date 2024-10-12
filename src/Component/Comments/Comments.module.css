@@ -1,0 +1,15 @@
+.comment {
+  border-bottom: 1px solid #0269b3;
+}
+.comment p {
+  color: #0269b3;
+  font-size: 1em;
+  font-weight: 400;
+  padding: 0.5em 0.5em 0.5em 0;
+}
+.comment-body p {
+  color: var(--second-color);
+  font-size: 0.875em;
+  padding: 0.5em 0;
+  font-weight: 400;
+}

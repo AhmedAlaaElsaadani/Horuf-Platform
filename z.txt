@@ -1,0 +1,18 @@
+بسم الله الرحمن الرحيم 
+<-------جدول اجتماع الربع [6/10] ------------>
+1>  الاطمئنان على مدى استقرار كل شخص    
+2>  مناقشة سبب فشل اهداف الربع الفائت
+3>  اعادة هيكلة السيتم الادارى 
+4>  تحديد اهداف الربع 
+5>  تحديد اهداف الشهر الاول 
+6>  توزيع التسكات وواقرار السيستم الجديد للمتابعة والعقاب
+ 
+
+
+<Backend Duties>
+-- Apis working well without any problems 
+-- seeding variety data 
+-- please flow the Design or say to the designers to remove parts which is unnecessary according to you
+<Front end Duties>
+-- full responsive website
+-- template Dashboard

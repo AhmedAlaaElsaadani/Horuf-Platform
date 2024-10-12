@@ -1,0 +1,40 @@
+
+.lesson {
+  padding: 0.8125rem 0.875rem 0.75rem 2.6875rem;
+  border-radius: 0.625rem;
+  background: #0269b3 !important;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  max-width: 80%;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+.lesson span {
+  width: 40px;
+  height: 40px;
+  color: #0269b3;
+  text-align: center;
+  font-size: 1.875rem;
+  font-weight: 700;
+  border-radius: 1.875rem;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-border-radius: 1.875rem;
+  -moz-border-radius: 1.875rem;
+  -ms-border-radius: 1.875rem;
+  -o-border-radius: 1.875rem;
+}
+.lesson:hover{
+  color: #0269b3 !important;
+  background-color: #fff !important;
+  text-decoration: none;
+}

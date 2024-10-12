@@ -4,7 +4,10 @@ import img1 from "../../assets/Images/Heading1/Books.png";
 import img2 from "../../assets/Images/Heading1/graduition.png";
 import img3 from "../../assets/Images/Heading1/Mastarh.png";
 
-export default function Heading1({ headingText }) {
+export default function Heading1({
+  headingText,
+  flagChangeGraduationPlace = false,
+}) {
   const images = [
     { id: 1, src: img1, alt: "Books" },
     { id: 3, src: img3, alt: "Masterh" },
@@ -18,7 +21,17 @@ export default function Heading1({ headingText }) {
       }
     >
       {images.map((image) => (
-        <img key={image.id} src={image.src} alt={image.alt} loading="lazy" />
+        <img
+          key={image.id}
+          src={image.src}
+          alt={image.alt}
+          loading="lazy"
+          className={`${
+            flagChangeGraduationPlace && image.id === 3
+              ? style["specialPositionForSomePages"]
+              : ""
+          }`}
+        />
       ))}
       <h2>{headingText}</h2>
     </div>

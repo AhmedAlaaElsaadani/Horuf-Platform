@@ -12,11 +12,11 @@
 /* 
 //////////Coloring///////////
 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap");
 
 /* Apply the font globally or to specific elements */
 body {
-  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-family: "Noto Kufi Arabic", sans-serif;
 }
 
 html {
@@ -27,6 +27,7 @@ html {
   /* Global coloring  */
   --primary: #0269b3;
   --bg-color: #fff;
+  --bg-color-inverse: #1e1e1e;
   --primHover: #3482ba;
   --second-color: #1e1e1e;
   /* Navbar coloring  */
@@ -34,10 +35,30 @@ html {
   --nav-bg-color: #f5f5f5;
   /* Home coloring  */
   --home-main-color: #1e1e1e;
+
+  /* About coloring  */
+  --about-main-color: #1e1e1e;
+
+  /* Contact */
+  --Contact-heading-color: #002e50;
+
+  /* Login */
+  --input-border: #6b7280;
+  --input-text-color: #1e1e1e;
+  --Login-heading-color: #1e1e1e;
+  --Login-message: #6b7280;
+
+  /* profile */
+  --profile-nav-bg-color: #fff;
+
+  /* Email Confirmation otp */
+  --form-heading-color: var(--Contact-heading-color);
+  --form-message: var(--Login-message);
 }
 .dark {
   /* Global coloring  */
   --bg-color: #1e1e1e;
+  --bg-color-inverse: #f5f5f5;
   --second-color: #f5f5f5;
 
   /* Navbar coloring  */
@@ -45,6 +66,25 @@ html {
   --nav-bg-color: #1e1e1e;
   /* Home coloring  */
   --home-main-color: #f5f5f5;
+
+  /* About coloring  */
+  --about-main-color: #f5f5f5;
+
+  /* Contact */
+  --Contact-heading-color: #0a7cd4;
+
+  /* Login */
+  --input-border: var(--primary);
+  --input-text-color: #f5f5f5;
+  --Login-heading-color: #f5f5f5;
+  --Login-message: #eeeff0a7;
+  
+  /* profile */
+  --profile-nav-bg-color: #0f0e0e8d;
+
+  /* Email Confirmation otp */
+  --form-heading-color: var(--Contact-heading-color);
+  --form-message: var(--Login-message);
 }
 
 /* 
@@ -60,13 +100,32 @@ body {
 a {
   text-decoration: none;
 }
+button:active {
+  scale: 0.9;
+}
+form input,
+form textarea,
+form select {
+  border: none !important;
+  border-bottom: 0.0625em var(--input-border) solid !important;
+  background-color: var(--bg-color) !important;
+  color: var(--input-text-color) !important;
+}
+
+form textarea::placeholder {
+  color: #6b7280 !important ;
+}
+form label {
+  font-size: 1.25em;
+  font-weight: 400;
+}
 
 /* 
 //////////selection///////////
 */
 ::selection {
   background-color: var(--primary);
-  color: var(--second-color);
+  color: #fff;
 }
 /* 
 //////////scrollbar///////////

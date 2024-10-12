@@ -1,12 +1,11 @@
 .About {
-  margin-top: 120px;
-  min-height: calc(100vh-120px);
+  margin-top:160px;
+  min-height: calc(100vh - 160px);
   width: 100%;
-
 }
 
 .About .about-content h2 {
-  color: var(--home-main-color);
+  color: var(--about-main-color);
   font-size: 1.9rem;
   font-style: normal;
   font-weight: 700;
@@ -16,18 +15,21 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   margin-top: 60px;
 }
 
 .About .about-content .text p:nth-child(2) {
   color: #0269b3;
+  text-shadow: 0px 0px 3px var(--about-main-color);
+
   font-size: 2.3rem;
   font-style: normal;
   font-weight: 700;
 }
 
-.text-desc{
-  color: var(--home-main-color);
+.text-desc {
+  color: var(--about-main-color);
   font-size: 1.2rem;
   font-weight: 700;
   line-height: 2.8125rem;
@@ -42,38 +44,34 @@
   display: flex;
   justify-content: space-around;
   background-color: #e8f5ff;
-  
 }
 
 .miniNav a {
   width: 100%;
   text-align: center;
-  color: #0269B3;
+  color: #0269b3;
   font-size: 1.5rem;
-  text-decoration: none; 
-  padding-bottom: 5px; 
+  text-decoration: none;
+  padding-bottom: 5px;
 }
 
 .miniNav a:hover {
-  text-decoration: none; 
+  text-decoration: none;
 }
-.miniNav .active{
+.miniNav .active {
   position: relative;
 }
 
 .miniNav .active::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   left: 0;
   bottom: 0;
   height: 5px;
-  background-color: #0269B3;
-  
-/*   
+  background-color: #0269b3;
+
+  /*   
   border-bottom: 5px solid #0269B3; 
   font-weight: bold; */
 }
-
-
-

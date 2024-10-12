@@ -1,0 +1,54 @@
+.Login {
+  margin-top: 160px;
+  min-height: calc(100vh - 160px);
+  width: 100%;
+  font-size: 16px;
+}
+.Login .heading h2 {
+  color: var(--Login-heading-color);
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 10px -16px;
+}
+.Login .heading span {
+  color: #0269b3;
+}
+.Login p {
+  color: var(--Login-message);
+  font-size: 1.25em;
+  font-weight: 400;
+}
+.Login form .inputContainer {
+  width: 80%;
+}
+.Login form label {
+  color: #6b7280;
+  font-size: 1.25em;
+  font-weight: 400;
+}
+.Login form label i {
+  color: #0269b3;
+}
+.Login form button {
+  width: fit-content;
+}
+@media (max-width: 991px) {
+  .Login {
+    font-size: 14px;
+    margin-top: 180px;
+  }
+  
+  .Login .heading h2 {
+    margin: 10px ;
+  }
+}
+@media (max-width: 425px) {
+  .Login {
+    font-size: 10px;
+  }
+  .Login form .inputContainer {
+    width: 100% ;
+  }
+  
+}
+

@@ -12,23 +12,25 @@ export default function About() {
   const location = useLocation();
   useEffect(() => {
     setActive(location.pathname);
-    console.log(location.pathname);
   }, [location.pathname]);
   const links = [
     {
       to: "/About/ourMission",
       text: t("about_links_1"),
       active: "/About/ourMission",
+      jsx: <i className="fa-solid fa-bullseye mx-2"></i>,
     },
     {
       to: "/About/ourVision",
       text: t("about_links_2"),
       active: "/About/ourVision",
+      jsx: <i className="fa-solid fa-eye mx-2"></i>,
     },
     {
       to: "/About/ourValues",
       text: t("about_links_3"),
       active: "/About/ourValues",
+      jsx: <i className="fa-solid fa-bars-staggered mx-2"></i>,
     },
   ];
   return (
@@ -54,6 +56,7 @@ export default function About() {
                       : ""
                   }
                 >
+                  {link.jsx}
                   {link.text}
                 </NavLink>
               ))}

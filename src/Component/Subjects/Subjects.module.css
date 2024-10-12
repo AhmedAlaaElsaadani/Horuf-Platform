@@ -1,0 +1,66 @@
+.selector {
+  width: 50% !important;
+}
+select.selector:hover,
+select.selector:focus {
+  border-color: var(--primHover) !important;
+}
+
+select.selector option {
+  background-color: var(--bg-color);
+  color: var(--second-color);
+  padding: 10px;
+  font-size: 16px;
+}
+
+.card {
+  overflow: hidden;
+  transition: transform 0.5s;
+  -webkit-transition: transform 0.5s;
+  -moz-transition: transform 0.5s;
+  -ms-transition: transform 0.5s;
+  -o-transition: transform 0.5s;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
+.card-heading {
+  bottom: 10%;
+  max-width: 90%;
+  padding: 0rem 3.25rem 0rem 3.3125rem !important;
+  background: rgba(255, 255, 255, 0.75);
+  transition: transform 0.5s ease-in-out;
+  -webkit-transition: transform 0.5s ease-in-out;
+  -moz-transition: transform 0.5s ease-in-out;
+  -ms-transition: transform 0.5s ease-in-out;
+  -o-transition: transform 0.5s ease-in-out;
+}
+.card-heading h5 {
+  color: #0269b3;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+.card:hover .card-heading {
+  transform: translate(0) !important;
+  -webkit-transform: translate(0) !important;
+  -moz-transform: translate(0) !important;
+  -ms-transform: translate(0) !important;
+  -o-transform: translate(0) !important;
+}
+/* in mobile clear hover */
+@media (max-width: 768px) {
+  .card-heading {
+    transform: translate(0) !important;
+    -webkit-transform: translate(0) !important;
+    -moz-transform: translate(0) !important;
+    -ms-transform: translate(0) !important;
+    -o-transform: translate(0) !important;
+  }
+}

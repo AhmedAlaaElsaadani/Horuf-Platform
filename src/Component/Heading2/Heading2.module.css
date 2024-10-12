@@ -1,11 +1,47 @@
-.Heading2{
-    background-attachment: fixed;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 25vh;
+.Heading2 {
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 25vh;
+  font-size: 14px;
 }
-.Heading2 .layer{
-    min-height: 25vh;
-    background: rgba(0, 0, 0, 0.5);
+.Heading2 .layer {
+  min-height: 25vh;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.Heading2 h2 ,.Heading2 a {
+  color: #fff;
+  text-align: center;
+  font-size: 3em;
+  font-weight: 700;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+}
+.Heading2 a:hover{
+  color: var(--primary);
+}
+.Heading2 span {
+  font-size: 3em;
+  font-weight: 700;
+  margin: 0 0.5em;
+}
+@media (max-width: 991px) {
+  .Heading2  {
+    font-size: 8px;
+  }
+  
+}
+@media (max-width: 425px) {
+  .Heading2  {
+    font-size: 6px;
+  }
+  .Heading2 .layer {
+    padding: 12px;
+    flex-direction: column;
+  }
 }

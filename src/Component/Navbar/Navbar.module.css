@@ -1,6 +1,77 @@
 .navbar {
   background-color: var(--nav-bg-color);
 }
+.navbarTop {
+  background-color: var(--primary);
+}
+.navbarTop {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.profile{
+  margin:0  15px;
+}
+.profile .icon{
+  background-color: #f9f9f9;
+  color: #0094ff;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+.profile .icon:hover{
+  color: var(--primary);
+}
+.profile ul {
+  display: none;
+}
+.profile:hover ul {
+  display: block;
+}
+.profile ul {
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  width: 700%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.profile ul a {
+  color: #000;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px;
+  display: block;
+}
+.profile ul a:hover {
+  color: var(--primary);
+  background-color: #f1f1f1;
+}
+.profile ul a.selected:active {
+  color: var(--primary) !important;
+  background-color: #f1f1f1 !important;
+}
+
+.navbarTop a {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  width: fit-content;
+  margin: auto;
+  color: #fff;
+  padding-bottom: 0;
+}
+.navbarTop span {
+  color: #0094ff !important;
+}
 .list-links {
   display: flex;
   justify-content: space-between;
@@ -10,22 +81,26 @@
 .list-links a {
   color: var(--nav-link-color);
   text-align: center;
-  font-family: "Noto Kufi Arabic";
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   width: fit-content;
   margin: auto;
-  opacity: 1 !important;
   padding-bottom: 0;
 }
 .list-links a.selected {
-  color: #0269b3 !important;
-  border-bottom: 2px solid #0269b3;
+  color: var(--primary) !important;
+  border-bottom: 2px solid var(--primary);
 }
 .list-links a:hover {
-  color: #0269b3 !important;
+  color: var(--primary) !important;
 }
 @media (max-width: 991px) {
+  .navbarTop > div {
+    flex-direction: column;
+  }
+  .navbarTop > div > p {
+    text-align: center;
+  }
   .list-links ul {
     width: 100%;
   }
