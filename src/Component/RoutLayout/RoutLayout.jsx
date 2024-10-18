@@ -7,7 +7,7 @@ export default function RoutLayout() {
     <>
       <Navbar />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
