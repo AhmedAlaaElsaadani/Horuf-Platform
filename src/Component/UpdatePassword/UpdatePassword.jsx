@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { authContext } from "../../Context/authContext";
+import ApiManager from "../../Utilies/ApiManager";
 
 export default function UpdatePassword({ flagDirection }) {
   const { t } = useTranslation();
@@ -22,6 +23,36 @@ export default function UpdatePassword({ flagDirection }) {
       .oneOf([Yup.ref("password"), null], t("Passwords must match"))
       .required(t("Required")),
   });
+  const updateYourPassword = async (values) => {
+    setResponseFlag(true);
+    try {
+      let { data } = await ApiManager.updatePassword(
+        {
+          current: values.prevPassword,
+          new: values.password,
+        },
+        token
+      );
+      if (data.code === 200) {
+        setResMessage({
+          flag: true,
+          message: t("Password updated successfully"),
+        });
+      } else {
+        setResMessage({
+          flag: false,
+          message: t("Something went wrong, please try again later"),
+        });
+      }
+    } catch (error) {
+      setResMessage({
+        flag: false,
+        message: t("Something went wrong, please try again later"),
+      });
+    }
+    setResponseFlag(false);
+  };
+
   const myFormik = useFormik({
     initialValues: {
       prevPassword: "",
@@ -29,9 +60,7 @@ export default function UpdatePassword({ flagDirection }) {
       confirmPassword: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-    },
+    onSubmit: updateYourPassword,
   });
   return (
     <form
@@ -124,7 +153,7 @@ export default function UpdatePassword({ flagDirection }) {
               </div>
             )}
         </div>
-        <div className="col-md-12 justify-content-center d-flex">
+        <div className="col-md-12 align-items-center flex-column d-flex">
           <button
             type="submit"
             className="btn btn-primary my-2"

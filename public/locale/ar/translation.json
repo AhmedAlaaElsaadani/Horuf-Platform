@@ -6,10 +6,11 @@
   "nav_link_Login": "تسجيل الدخول",
   "nav_link_Register": "تسجيل جديد",
   "nav_lang": "English",
-  "nav_link_edit_profile": "تعديل الحساب",
-  "nav_link_edit_password": "تعديل كلمة المرور",
-  "nav_link_edit_email": "تعديل البريد الإلكتروني",
-  "nav_link_my_courses": "دوراتي",
+  "nav_link_edit_profile": "بيانات الحساب",
+  "nav_link_edit_password": "تغيير كلمة المرور",
+  "nav_link_edit_email": "تغيير البريد الإلكتروني",
+  "nav_link_verify_email": "تأكيد البريد الإلكتروني",
+  "nav_link_my_courses": "دروسي",
   "nav_link_logout": "تسجيل الخروج",
 
   "home_title": "منصة حروف التعليمية",
@@ -30,6 +31,17 @@
   "about_mission": "في منصة حروف، نؤمن بأن التعليم هو المفتاح لتحقيق النجاح الشخصي والمهني. مهمتنا هي توفير منصة تعليمية شاملة وملهمة تساعد كل متعلم على الوصول إلى أهدافه. نلتزم بتقديم محتوى تعليمي متميز وأدوات مبتكرة، مع التركيز على دعم نجاحك في كل خطوة من رحلتك التعليمية.",
 
   "subjects_heading": "موادنا الدراسية",
+  "Loading...": "جار التحميل...",
+  "level 6": "الصف السادس",
+  "level 7": "الصف السابع",
+  "level 8": "الصف الثامن",
+  "level 9": "الصف التاسع",
+  "level 10": "الصف العاشر",
+  "level 11": "الصف الحادي عشر",
+  "level 12": "الصف الثاني عشر",
+  
+  "other lessons": "دروس أخرى",
+
 
   "profile_title": "ملفك الشخصي",
 
@@ -51,6 +63,8 @@
   "birthday": "تاريخ الميلاد",
   "level": "المرحلة الدراسية",
   "Gender": "النوع",
+  "Male": "ذكر",
+  "Female": "أنثى",
   "prevPassword": "كلمة المرور السابقة",
 
   "Contact Us": "تواصل معنا",
@@ -86,6 +100,13 @@
 
   "Update Password": "تحديث كلمة المرور",
   "Update Email": "تحديث البريد الإلكتروني",
+  "Update Profile": "تحديث الحساب",
+  "You need to verify your email it ": "يجب عليك تأكيد بريدك الإلكتروني ولقد ارسلنا لك رسالة تأكيد ",
+  "Verify Email Now": "تحقق من البريد الإلكتروني الآن",
+  "myCourses-heading": "دروسي",
+  "no-lessons": "لا توجد دروس متاحة حاليا",
+  "Profile updated successfully": "تم تحديث الحساب بنجاح",
+  "Password updated successfully": "تم تحديث كلمة المرور بنجاح",
 
   "Invalid email": "لا يوجد حساب مرتبط بهذا البريد الإلكتروني",
   "OTP has been sent before": "تم إرسال رمز التحقق من قبل",

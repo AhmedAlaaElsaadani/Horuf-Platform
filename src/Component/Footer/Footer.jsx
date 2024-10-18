@@ -8,7 +8,7 @@ export default function Footer() {
   const { t } = useTranslation();
   return (
     <footer
-      className={style["footer-container"]}
+      className={style["footer-container"]+" mt-3"}
       style={{
         backgroundImage: `url(${footerImg})`,
       }}

@@ -128,7 +128,6 @@ export default function Login() {
               name="emailOrPhone"
               placeholder="name@example.com"
               onChange={myFormik.handleChange}
-              onBlur={myFormik.handleBlur}
               value={myFormik.values.emailOrPhone}
             />
             <label
@@ -159,7 +158,6 @@ export default function Login() {
               name="password"
               placeholder="Password"
               onChange={myFormik.handleChange}
-              onBlur={myFormik.handleBlur}
               value={myFormik.values.password}
             />
             <label
@@ -178,7 +176,11 @@ export default function Login() {
           )}
         </div>
 
-        <button type="submit" disabled={responseFlag} className="btn object-fit-contain btn-primary">
+        <button
+          type="submit"
+          disabled={responseFlag}
+          className="btn object-fit-contain btn-primary"
+        >
           <span>
             {responseFlag ? (
               <div className="spinner-border text-light" role="status">

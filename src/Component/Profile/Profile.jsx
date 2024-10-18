@@ -5,9 +5,9 @@ import { authContext } from "../../Context/authContext";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import ApiManager from "../../Utilies/ApiManager";
 import Heading1 from "../Heading1/Heading1";
+import { motion } from "framer-motion";
 export default function Profile() {
-  
-  const { t ,i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const { setToken, token, user } = useContext(authContext);
   const location = useLocation();
   const [active, setActive] = useState("/profile");
@@ -23,6 +23,19 @@ export default function Profile() {
     await ApiManager.logOut(token);
   };
   let profileLinks = [
+    {
+      link: t("nav_link_edit_profile"),
+      active: "/profile",
+      to: "/profile",
+      clickFun: null,
+    },
+    {
+      link: t("nav_link_edit_email"),
+      active: "/profile/edit-email",
+      to: "/profile/edit-email",
+      clickFun: null,
+    },
+    ,
     {
       link: t("nav_link_edit_password"),
       active: "/profile/edit-password",
@@ -50,50 +63,39 @@ export default function Profile() {
       />
       <div className="container flex-grow-1 d-flex align-items-center">
         <div className="row g-3 w-100 my-5 ">
-          <div className="col-md-3  ">
-            <div
+          <motion.div
+            initial={{ opacity: 0, x: flagDirection ? 100 : -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="col-md-3  "
+          >
+            <ul
               className={
-                style["profile-links"] + " shadow d-flex flex-md-column gap-3 flex-sm-wrap  "
+                style["profile-links"] +
+                " shadow d-flex flex-md-column gap-3 flex-sm-wrap justify-content-center  "
               }
             >
-              <Link
-                className={active == "/profile" ? style["selected"] : ""}
-                to="/profile"
-              >
-                {t("nav_link_edit_profile")}
-              </Link>
-              {
-                // !user?.isVerified
-                user && true && (
-                  <Link
-                    className={
-                      "position-relative " +
-                      (active == "/profile/edit-email" ? style["selected"] : "")
-                    }
-                    to="/profile/edit-email"
-                  >
-                    {t("nav_link_edit_email")}
-                    <span className={`position-absolute  top-50 translate-middle-y p-2 bg-danger border border-light rounded-circle ${flagDirection?"end-100":"start-100"}`}>
-                      <span className="visually-hidden">New alerts</span>
-                    </span>
-                  </Link>
-                )
-              }{" "}
               {profileLinks.map((link, index) => (
-                <Link
+                <motion.li
+                  initial={{ opacity: 0, x: flagDirection ? 100 : -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
                   key={index}
-                  to={link.to}
-                  onClick={link.clickFun}
                   className={link.active === active ? style["selected"] : ""}
                 >
-                  {link.link}
-                </Link>
+                  <Link to={link.to} onClick={link.clickFun}>
+                    {link.link}
+                  </Link>
+                </motion.li>
               ))}
-            </div>
-          </div>
-          <div className="col-md-9 d-flex align-items-center">
+            </ul>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: flagDirection ? -100 : 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }} className="col-md-9 d-flex align-items-center">
             <Outlet flagDirection={flagDirection} />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

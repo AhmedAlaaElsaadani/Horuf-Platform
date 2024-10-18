@@ -5,6 +5,7 @@ import aboutAnimation from "../../assets/animations/teacher.json";
 import { useTranslation } from "react-i18next";
 import style from "./About.module.css";
 import { NavLink, Outlet, useLocation } from "react-router-dom"; // Use NavLink instead of Link
+import { motion } from "framer-motion";
 
 export default function About() {
   const { t } = useTranslation();
@@ -38,14 +39,29 @@ export default function About() {
       <Heading1 headingText={t("About us")} />
       <div className={"container " + style["about-content"]}>
         <div className="row justify-content-center g-5 mt-2">
-          <div className={"col-lg-4   " + style["text"]}>
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className={"col-lg-4   " + style["text"]}
+          >
             <h2>{t("about_title")}</h2>
             <p>{t("about_subtitle")}</p>
             <Lottie animationData={aboutAnimation} className="w-100 " />
-          </div>
-          <div className={"col-lg-8 " + style["text-desc"]}>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className={"col-lg-8 " + style["text-desc"]}
+          >
             <p>{t("about_desc")}</p>
-            <div className={style["miniNav"]}>
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className={style["miniNav"]}
+            >
               {links.map((link, index) => (
                 <NavLink
                   key={index}
@@ -60,9 +76,15 @@ export default function About() {
                   {link.text}
                 </NavLink>
               ))}
-            </div>
-            <Outlet />
-          </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              <Outlet />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

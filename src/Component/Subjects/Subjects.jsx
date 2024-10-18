@@ -4,6 +4,7 @@ import erorrImage from "../../assets/Images/Subjects/subject.jpeg";
 import { useTranslation } from "react-i18next";
 import ApiManager from "../../Utilies/ApiManager";
 import { Link, useOutletContext } from "react-router-dom";
+import { motion } from "framer-motion";
 export default function Subjects() {
   const [subjects, setSubjects] = useState([]);
   const { t, i18n } = useTranslation();
@@ -47,13 +48,13 @@ export default function Subjects() {
     <div className="row g-3 my-3 justify-content-center">
       <div className="col-12">
         <select
-          className={"form-select m-auto w-50 " + style.selector}
+          className={"form-select form-control m-auto w-50 " + style.selector}
           aria-label="Default select example"
           onChange={(e) => setLevelID(e.target.value)}
         >
           {Object.entries(Level).map(([key, value]) => (
             <option key={key} value={value}>
-              {key.replace("_", " ")}{" "}
+              {t(key.replace("_", " "))}{" "}
               {/* Replace underscores with spaces for better readability */}
             </option>
           ))}
@@ -99,7 +100,7 @@ export default function Subjects() {
                   left: directionFlag ? "auto" : "0",
                 }}
               >
-                <h5 className="card-title">Loading...</h5>
+                <h5 className="card-title">{t("Loading...")}</h5>
               </div>
             </div>
           </div>
@@ -110,12 +111,21 @@ export default function Subjects() {
         </div>
       ) : (
         subjects.map((subject, idx) => (
-          <div key={idx} className="col-sm-12 col-lg-4 col-md-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{
+              duration: 0.5,
+              delay: 0.1 * idx > 2 ? 0.1 * idx : 0.1,
+            }}
+            key={idx}
+            className="col-sm-12 col-lg-4 col-md-6"
+          >
             <Link
               to={`/subjects/units/${subject.id}`}
               state={{
                 links: [
-                  ...links,
+                  ...links.slice(0, 1),
                   {
                     to: `/subjects/units/${subject.id}`,
                     text: subject.title,
@@ -150,7 +160,7 @@ export default function Subjects() {
                 </div>
               </div>
             </Link>
-          </div>
+          </motion.div>
         ))
       )}
     </div>

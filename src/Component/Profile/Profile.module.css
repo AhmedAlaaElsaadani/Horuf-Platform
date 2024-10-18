@@ -14,8 +14,8 @@
   -ms-border-radius: 0.9375em;
   -o-border-radius: 0.9375em;
 }
-.profile-links a {
-  color: #0269b3;
+.profile-links li {
+  list-style: none;
   padding: 8px 8px 12px;
   border-bottom: 1px solid #0269b3;
   font-size: 1.25em;
@@ -26,7 +26,10 @@
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
 }
-.profile-links a:hover {
+.profile-links a {
+  color: #0269b3;
+}
+.profile-links li:hover {
   border-radius: 0.3125em;
   background: rgba(107, 114, 128, 0.15);
   -webkit-border-radius: 0.3125em;
@@ -34,7 +37,7 @@
   -ms-border-radius: 0.3125em;
   -o-border-radius: 0.3125em;
 }
-.profile-links a.selected {
+.profile-links li.selected {
   border-radius: 0.3125em;
   background: rgba(107, 114, 128, 0.15);
   -webkit-border-radius: 0.3125em;

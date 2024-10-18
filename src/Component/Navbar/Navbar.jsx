@@ -198,12 +198,14 @@ const Navbar = () => {
                       "nav-link rounded rounded-circle position-relative  d-grid shadow " +
                       style["icon"]
                     }
-                    
                   >
                     <i className="fa-solid fa-user m-auto  "></i>
 
                     {user && !user?.isVerified && (
-                      <span className="position-absolute end-0 top-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                      <span
+                        className="position-absolute end-0 top-100 translate-middle p-1 bg-danger border border-light rounded-circle"
+                        style={{}}
+                      >
                         <span className="visually-hidden">New alerts</span>
                       </span>
                     )}
@@ -221,22 +223,24 @@ const Navbar = () => {
                       </Link>
                     </li>
 
-                    {user && !user?.isVerified && (
-                      <li className="nav-item  position-relative">
-                        <Link
-                          className={
-                            "nav-link " +
-                            (active == "edit-email" ? style["selected"] : "")
-                          }
-                          to="/profile/edit-email"
-                        >
-                          {t("nav_link_edit_email")}
-                          <span className="position-absolute end-0 top-50 translate-middle-y p-2 bg-danger border border-light rounded-circle">
+                    <li className="nav-item  position-relative">
+                      <Link
+                        className={
+                          "nav-link " +
+                          (active == "edit-email" ? style["selected"] : "")
+                        }
+                        to="/profile/edit-email"
+                      >
+                        {user && !user?.isVerified
+                          ? t("nav_link_verify_email")
+                          : t("nav_link_edit_email")}
+                        {user && !user?.isVerified && (
+                          <span className="position-absolute end-0 top-50 translate-middle-y p-1 mx-1 bg-danger border border-light rounded-circle">
                             <span className="visually-hidden">New alerts</span>
                           </span>
-                        </Link>
-                      </li>
-                    )}{" "}
+                        )}
+                      </Link>
+                    </li>
                     {profileLinks.map((link, idx) => (
                       <li key={idx} className="nav-item  position-relative">
                         <Link
@@ -335,9 +339,10 @@ const Navbar = () => {
               <li>
                 <button
                   className="btn btn-outline-primary"
-                  onClick={toggleLanguage}
+                  // onClick={toggleLanguage}
                 >
-                  {t("nav_lang")}
+                  {/* {t("nav_lang")} */}
+                  الكويت
                   <i className="fa-solid fa-globe mx-2"></i>
                 </button>
               </li>

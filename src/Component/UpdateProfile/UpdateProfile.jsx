@@ -4,11 +4,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { authContext } from "../../Context/authContext";
 import img from "../../assets/Images/undraw_profile_pic_ic5t.svg";
+import ApiManager from "../../Utilies/ApiManager";
 export default function UpdateProfile({ flagDirection }) {
   const { t } = useTranslation();
   const { user, token } = useContext(authContext);
   const [responseFlag, setResponseFlag] = useState(false);
   const [resMessage, setResMessage] = useState(null);
+
   const Level = {
     level_6: 6,
     level_7: 7,
@@ -18,37 +20,80 @@ export default function UpdateProfile({ flagDirection }) {
     level_11: 11,
     level_12: 12,
   };
-  const validationSchema = Yup.object({
-    prevPassword: Yup.string()
-      .min(6, t("Password must contain at least 6 characters"))
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required(t("Required")),
+    lastName: Yup.string().required(t("Required")),
+    phone: Yup.string()
+      .matches(/^(00965|\+965|965)?[5691][0-9]{7}$/, t("Invalid phone number"))
       .required(t("Required")),
-
-    password: Yup.string()
-      .min(6, t("Password must contain at least 6 characters"))
-      .required(t("Required")),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], t("Passwords must match"))
-      .required(t("Required")),
+    parentPhone: Yup.string()
+      .matches(/^(00965|\+965|965)?[5691][0-9]{7}$/, t("Invalid phone number"))
+      .required(t("Required"))
+      .notOneOf(
+        [Yup.ref("phone")],
+        t("Phone number and parent phone must be different")
+      ),
+    level: Yup.number().required(t("Required")),
+    gender: Yup.string().required(t("Required")),
+    address: Yup.string().required(t("Required")),
   });
+  const sendData = async (values) => {
+    setResponseFlag(true);
+    let user = JSON.stringify({
+      firstName: values.firstName,
+      lastName: values.lastName,
+      phone: values.phone,
+      parentPhone: values.parentPhone,
+      level: values.level,
+      address: values.address,
+      gender: values.gender == "M",
+    });
+
+    try {
+      await ApiManager.updateProfile(user, token)
+        .then((response) => {
+          let res = response.data;
+          if (res.code && res.code == 200) {
+            setResMessage({
+              flag: true,
+              message: t("Profile updated successfully"),
+            });
+            setResponseFlag(false);
+          } else {
+            setResMessage({ flag: false, message: res.errors[0] });
+            setResponseFlag(false);
+          }
+        })
+        .catch((error) => {
+          let { data } = error.response;
+          if (data.code == 400) {
+            setResMessage({ flag: false, message: data.errors[0] });
+          } else
+            setResMessage({
+              flag: false,
+              message: t("Something went wrong, please try again later"),
+            });
+          setResponseFlag(false);
+        });
+    } catch (error) {}
+  };
   const myFormik = useFormik({
     initialValues: {
-      prevPassword: "",
-      password: "",
-      confirmPassword: "",
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      phone: user?.phoneNumber,
+      parentPhone: user?.parentPhone,
+      address: user?.address,
+      level: user?.level,
+      gender: user?.gender ? "M" : "F",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-    },
+    onSubmit: sendData,
   });
   return (
-    <form
-      action=""
-      onSubmit={myFormik.handleSubmit}
-      className="UpdateProfile container rounded-3  shadow"
-    >
-      <div className="row">
-        <div className="col-md-8">
+    <div action="" className="UpdateProfile container rounded-3  shadow">
+      <div className="row justify-content-center">
+        <form onSubmit={myFormik.handleSubmit} className="col-md-8">
           <div className="col-md-12">
             <div className={"form-floating"}>
               <input
@@ -59,7 +104,6 @@ export default function UpdateProfile({ flagDirection }) {
                 name="firstName"
                 placeholder={t("firstName")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.firstName}
               />
               <label
@@ -89,7 +133,6 @@ export default function UpdateProfile({ flagDirection }) {
                 name="lastName"
                 placeholder={t("lastName")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.lastName}
               />
               <label
@@ -119,7 +162,6 @@ export default function UpdateProfile({ flagDirection }) {
                 name="phone"
                 placeholder={t("phoneNumber")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.phone}
               />
               <label
@@ -147,7 +189,6 @@ export default function UpdateProfile({ flagDirection }) {
                 name="parentPhone"
                 placeholder={t("parentPhone")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.parentPhone}
               />
               <label
@@ -168,20 +209,47 @@ export default function UpdateProfile({ flagDirection }) {
           </div>
           <div className="col-md-12">
             <div className={"form-floating"}>
+              <input
+                dir={flagDirection ? "ltr" : "rtl"}
+                type="text"
+                className="form-control mb-4"
+                id="address"
+                name="address"
+                placeholder={t("address")}
+                onChange={myFormik.handleChange}
+                value={myFormik.values.address}
+              />
+              <label
+                style={{
+                  left: flagDirection ? "auto" : "0",
+                  right: flagDirection ? "0" : "auto",
+                }}
+                htmlFor="address"
+              >
+                {t("address")} <i className="fa-solid fa-location-dot"></i>
+              </label>
+            </div>
+            {myFormik.errors.address && myFormik.touched.address && (
+              <div className="alert alert-danger">
+                {myFormik.errors.address}
+              </div>
+            )}
+          </div>
+
+          <div className="col-md-12">
+            <div className={"form-floating"}>
               <select
                 className={"form-select mb-4 "}
                 aria-label="Default select example"
                 dir={flagDirection ? "ltr" : "rtl"}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.level}
                 name="level"
                 id="level"
               >
                 {Object.entries(Level).map(([key, value]) => (
                   <option key={key} value={value}>
-                    {key.replace("_", " ")}{" "}
-                    {/* Replace underscores with spaces for better readability */}
+                    {t(key.replace("_", " "))}
                   </option>
                 ))}
               </select>
@@ -208,7 +276,6 @@ export default function UpdateProfile({ flagDirection }) {
                 className="form-select mb-4"
                 dir={flagDirection ? "ltr" : "rtl"}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.gender}
               >
                 <option value="M" label={t("Male")} />
@@ -228,9 +295,35 @@ export default function UpdateProfile({ flagDirection }) {
               <div className="alert alert-danger">{myFormik.errors.gender}</div>
             )}
           </div>
-        </div>
-        <div className="col-md-4">
-          <div className="row align-items-center h-100">
+
+          <div className="col-md-12 flex-column align-items-center d-flex">
+            <button
+              type="submit"
+              className="btn btn-primary my-2"
+              onClick={myFormik.handleSubmit}
+            >
+              {responseFlag ? (
+                <div className="spinner-border text-light" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                t("Update Profile")
+              )}
+            </button>
+
+            {resMessage && (
+              <div
+                className={`my-3 ${
+                  resMessage.flag ? "text-success" : "text-danger"
+                }`}
+              >
+                {resMessage.message}
+              </div>
+            )}
+          </div>
+        </form>
+        <form className="col-md-4 d-none">
+          <div className="row align-items-center ">
             <div className="col-md-12">
               <div className="containerImg bg-white rounded-2 ">
                 <img
@@ -251,17 +344,13 @@ export default function UpdateProfile({ flagDirection }) {
               </div>
             </div>
             <div className="col-md-12 justify-content-center d-flex">
-              <button
-                type="submit"
-                className="btn btn-primary my-2"
-                onClick={myFormik.handleSubmit}
-              >
+              <button type="submit" className="btn btn-primary my-2">
                 {responseFlag ? (
                   <div className="spinner-border text-light" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 ) : (
-                  t("Update Password")
+                  t("Update Profile")
                 )}
               </button>
 
@@ -276,8 +365,8 @@ export default function UpdateProfile({ flagDirection }) {
               )}
             </div>
           </div>
-        </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 }

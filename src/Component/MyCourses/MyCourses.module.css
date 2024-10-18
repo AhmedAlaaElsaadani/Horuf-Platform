@@ -1,0 +1,65 @@
+.my-courses {
+  font-size: 16px;
+  height: 70vh;
+}
+.my-courses h3 {
+  font-size: 2em;
+  font-weight: 700;
+  color: #0269b3;
+}
+.card {
+  overflow: hidden;
+  max-height: 300px;
+  transition: scale 0.5s;
+  -webkit-transition: scale 0.5s;
+  -moz-transition: scale 0.5s;
+  -ms-transition: scale 0.5s;
+  -o-transition: scale 0.5s;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card:hover {
+  scale: 0.9;
+}
+.card-heading {
+  bottom: 10%;
+  max-width: 90%;
+  padding: 0em 3.25em 0em 3.3125em !important;
+  background: rgba(255, 255, 255, 0.75);
+  transition: transform 0.5s ease-in-out;
+  -webkit-transition: transform 0.5s ease-in-out;
+  -moz-transition: transform 0.5s ease-in-out;
+  -ms-transition: transform 0.5s ease-in-out;
+  -o-transition: transform 0.5s ease-in-out;
+}
+.card-heading h5 {
+  color: #0269b3;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 700;
+  margin: 0;
+}
+.card:hover .card-heading {
+  transform: translate(0) !important;
+  -webkit-transform: translate(0) !important;
+  -moz-transform: translate(0) !important;
+  -ms-transform: translate(0) !important;
+  -o-transform: translate(0) !important;
+}
+/* in mobile clear hover */
+@media (max-width: 768px) {
+  .my-courses {
+    font-size: 16px;
+  }
+  .card-heading {
+    transform: translate(0) !important;
+    -webkit-transform: translate(0) !important;
+    -moz-transform: translate(0) !important;
+    -ms-transform: translate(0) !important;
+    -o-transform: translate(0) !important;
+  }
+}

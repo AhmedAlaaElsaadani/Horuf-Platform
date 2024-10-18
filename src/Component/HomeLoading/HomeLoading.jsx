@@ -12,7 +12,7 @@ export default function HomeLoading() {
       <img
         src={img}
         alt="logo "
-        className="fa-flip"
+        className="fa-beat-fade"
         style={{
           width: "100px",
           height: "100px",

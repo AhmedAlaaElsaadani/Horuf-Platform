@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./Units.module.css";
 import {
   Link,
@@ -9,13 +9,15 @@ import {
 import ApiManager from "../../Utilies/ApiManager";
 import erorrImage from "../../assets/Images/Subjects/unit.jpg";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+import { authContext } from "../../Context/authContext";
 export default function Units() {
   let { subjectID } = useParams();
   const location = useLocation();
   const [Units, setUnits] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [subjectTitle, setSubjectTitle] = useState("");
+  const { isRegistered } = useContext(authContext);
   const { t } = useTranslation();
   const { links, setLinks } = useOutletContext(); // Receiving data from parent
 
@@ -62,7 +64,7 @@ export default function Units() {
                 }}
               ></div>
               <div className={"card-body " + style["card-heading"]}>
-                <h5 className="card-title">Loading...</h5>
+                <h5 className="card-title">{t("Loading...")}</h5>
               </div>
             </div>
           </div>
@@ -73,12 +75,21 @@ export default function Units() {
         </div>
       ) : (
         Units.map((unit, idx) => (
-          <div key={idx} className="col-sm-12 col-lg-4 col-md-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{
+              duration: 0.5,
+              delay: 0.1 * idx > 2 ? 0.1 * idx : 0.1,
+            }}
+            key={idx}
+            className="col-sm-12 col-lg-4 col-md-6"
+          >
             <Link
-              to={`/subjects/content/${unit.id}`}
+              to={isRegistered ? `/subjects/content/${unit.id}` : "/login"}
               state={{
                 links: [
-                  ...links,
+                  ...links.slice(0, 2),
                   { to: `/subjects/content/${unit.id}`, text: unit.title },
                 ],
               }}
@@ -96,7 +107,7 @@ export default function Units() {
                 </div>
               </div>
             </Link>
-          </div>
+          </motion.div>
         ))
       )}
     </div>

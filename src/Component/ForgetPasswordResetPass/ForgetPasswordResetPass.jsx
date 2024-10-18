@@ -109,7 +109,7 @@ export default function ForgetPasswordResetPass() {
               name="password"
               placeholder={t("password")}
               onChange={myFormik.handleChange}
-              onBlur={myFormik.handleBlur}
+              
               value={myFormik.values.password}
             />
             <label
@@ -137,7 +137,7 @@ export default function ForgetPasswordResetPass() {
               name="confirmPassword"
               placeholder={t("confirmPassword")}
               onChange={myFormik.handleChange}
-              onBlur={myFormik.handleBlur}
+              
               value={myFormik.values.confirmPassword}
             />
             <label

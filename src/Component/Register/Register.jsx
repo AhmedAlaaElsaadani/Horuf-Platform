@@ -12,7 +12,7 @@ export default function Register() {
   const [flagDirection, setFlagDirection] = useState(i18n.language === "ar");
   const [responseFlag, setResponseFlag] = useState(false);
   const [resMessage, setResMessage] = useState(null);
-  const{setToken,setIsRegistered} = useContext(authContext);
+  const { setToken, setIsRegistered } = useContext(authContext);
   let navigator = useNavigate();
   const Level = {
     level_6: 6,
@@ -31,16 +31,10 @@ export default function Register() {
     firstName: Yup.string().required(t("Required")),
     lastName: Yup.string().required(t("Required")),
     phone: Yup.string()
-      .matches(
-        /^(00201|\+201|01)[0-2,5]{1}[0-9]{8}$/,
-        t("Invalid phone number")
-      )
+      .matches(/^(00965|\+965|965)?[5691][0-9]{7}$/, t("Invalid phone number"))
       .required(t("Required")),
     parentPhone: Yup.string()
-      .matches(
-        /^(00201|\+201|01)[0-2,5]{1}[0-9]{8}$/,
-        t("Invalid phone number")
-      )
+      .matches(/^(00965|\+965|965)?[5691][0-9]{7}$/, t("Invalid phone number"))
       .required(t("Required"))
       .notOneOf(
         [Yup.ref("phone")],
@@ -73,21 +67,18 @@ export default function Register() {
       ...values,
       gender: "M" == values.gender,
     });
-    console.log(data);
 
     setResponseFlag(true);
     await ApiManager.register(data)
       .then((response) => {
-        console.log(response);
         let res = response.data;
 
-        if (res.code==200 && res.token) {
+        if (res.code == 200 && res.token) {
           setResMessage({
             flag: true,
             message: t("You need to verify your email"),
           });
           setTimeout(() => {
-            
             setToken(res.token);
             setIsRegistered(true);
             navigator("/EmailConfirmOtp", { state: { token: res.token } });
@@ -104,8 +95,7 @@ export default function Register() {
       .catch((error) => {
         setResponseFlag(false);
         let res = error.response.data;
-        console.log(res);
-        
+
         if (res.code && res.code == 400) {
           setResMessage({
             flag: false,
@@ -162,7 +152,6 @@ export default function Register() {
                 name="firstName"
                 placeholder={t("firstName")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.firstName}
               />
               <label
@@ -192,7 +181,6 @@ export default function Register() {
                 name="lastName"
                 placeholder={t("lastName")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.lastName}
               />
               <label
@@ -222,7 +210,6 @@ export default function Register() {
                 name="phone"
                 placeholder={t("phoneNumber")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.phone}
               />
               <label
@@ -250,7 +237,6 @@ export default function Register() {
                 name="parentPhone"
                 placeholder={t("parentPhone")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.parentPhone}
               />
               <label
@@ -279,7 +265,6 @@ export default function Register() {
                 name="email"
                 placeholder={t("email")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.email}
               />
               <label
@@ -299,18 +284,17 @@ export default function Register() {
           <div className="col-md-12">
             <div className={"form-floating"}>
               <select
-                className={"form-select mb-4 " }
+                className={"form-select mb-4 "}
                 aria-label="Default select example"
                 dir={flagDirection ? "ltr" : "rtl"}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.level}
                 name="level"
                 id="level"
               >
                 {Object.entries(Level).map(([key, value]) => (
                   <option key={key} value={value}>
-                    {key.replace("_", " ")}{" "}
+                    {t(key.replace("_", " "))}{" "}
                     {/* Replace underscores with spaces for better readability */}
                   </option>
                 ))}
@@ -337,7 +321,6 @@ export default function Register() {
                 className="form-select mb-4"
                 dir={flagDirection ? "ltr" : "rtl"}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.gender}
               >
                 <option value="M" label={t("Male")} />
@@ -368,7 +351,6 @@ export default function Register() {
                 name="birthday"
                 placeholder={t("birthday")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.birthday}
               />
               <label
@@ -398,7 +380,6 @@ export default function Register() {
                 name="address"
                 placeholder={t("address")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.address}
               />
               <label
@@ -428,7 +409,6 @@ export default function Register() {
                 name="password"
                 placeholder={t("password")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.password}
               />
               <label
@@ -458,7 +438,6 @@ export default function Register() {
                 name="confirmPassword"
                 placeholder={t("confirmPassword")}
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.confirmPassword}
               />
               <label

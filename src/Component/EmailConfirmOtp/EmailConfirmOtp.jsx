@@ -1,15 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useFormik } from "formik";
 import style from "./EmailConfirmOtp.module.css";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import ApiManager from "../../Utilies/ApiManager";
+import { authContext } from "../../Context/authContext";
 
 export default function EmailConfirmOtp() {
   const otpRefs = useRef([]);
   const [countdown, setCountdown] = useState(90);
   const [canResend, setCanResend] = useState(false);
-  const [token, setToken] = useState("");
+  const [tokenLocal, setTokenLocal] = useState("");
+  const { setToken } = useContext(authContext);
   const [responseFlag, setResponseFlag] = useState(false);
   const [resMessage, setResMessage] = useState(null);
   const { t } = useTranslation();
@@ -17,8 +19,8 @@ export default function EmailConfirmOtp() {
   const navigator = useNavigate();
 
   useEffect(() => {
-    if (location.state&&location.state.token) {
-      setToken(location.state.token);
+    if (location.state && location.state.token) {
+      setTokenLocal(location.state.token);
     } else {
       navigator("/");
     }
@@ -41,7 +43,7 @@ export default function EmailConfirmOtp() {
 
   const sendInitialOtp = async () => {
     try {
-      await ApiManager.sendOtp(token);
+      await ApiManager.sendOtp(tokenLocal);
     } catch (error) {}
   };
 
@@ -53,9 +55,10 @@ export default function EmailConfirmOtp() {
   const confirmOtp = async (otp) => {
     try {
       setResponseFlag(true);
-      let { data } = await ApiManager.otpConfirm(otp, token);
+      let { data } = await ApiManager.otpConfirm(otp, tokenLocal);
       if (data.code == 200) {
         setResMessage({ flag: true, message: data.message });
+        setToken(tokenLocal);
         setTimeout(() => {
           navigator("/");
         }, 2000);

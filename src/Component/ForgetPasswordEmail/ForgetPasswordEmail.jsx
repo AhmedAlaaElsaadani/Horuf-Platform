@@ -104,7 +104,6 @@ export default function ForgetPasswordEmail() {
               name="email"
               placeholder={t("email")}
               onChange={myFormik.handleChange}
-              onBlur={myFormik.handleBlur}
               value={myFormik.values.email}
             />
             <label

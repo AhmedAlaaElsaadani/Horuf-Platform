@@ -6,8 +6,9 @@ import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import ApiManager from "../../Utilies/ApiManager";
 import * as Yup from "yup";
+import { motion } from "framer-motion";
 
-export default function Contact() {
+export default function Contact({ flagNotAloneCompounded }) {
   const { t, i18n } = useTranslation();
   const [responseFlag, setResponseFlag] = useState(false);
   const [resMessage, setResMessage] = useState(null);
@@ -90,20 +91,39 @@ export default function Contact() {
   });
 
   return (
-    <section id="Contact" className={style.Contact }>
+    <section
+      id="Contact"
+      className={style.Contact}
+      style={{
+        marginTop: flagNotAloneCompounded ? "0px" : "160px",
+      }}
+    >
       <Heading2 img={img} headingText={t("Contact Us")} />
       <div className="container">
         <form
           onSubmit={myFormik.handleSubmit}
-          className={
-            "row  shadow my-3 pt-5 rounded-5 " + style.ParentContainer
-          }
+          className={"row  justify-content-between shadow my-3 pt-5 rounded-5 " + style.ParentContainer}
         >
-          <div className="col-12 my-3">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="col-12 my-3"
+          >
             <h3>{t("contact_title")}</h3>
-          </div>
-          <div className="col-md-6  d-flex flex-column justify-content-center">
-            <div className="form-floating mb-3">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: i18n.language === "ar" ? 100 : -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="col-md-6  d-flex flex-column justify-content-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="form-floating mb-3"
+            >
               <input
                 dir={flagDirection ? "rtl" : "ltr"}
                 type="text"
@@ -112,7 +132,6 @@ export default function Contact() {
                 name="name"
                 placeholder="name"
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.name}
               />
               <label
@@ -124,13 +143,18 @@ export default function Contact() {
               >
                 {t("name")} <i className="fa-solid fa-user"></i>
               </label>
-            </div>
+            </motion.div>
 
             {myFormik.errors.name && myFormik.touched.name && (
               <div className="alert alert-danger">{myFormik.errors.name}</div>
             )}
 
-            <div className="form-floating mb-3">
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
+              className="form-floating mb-3"
+            >
               <input
                 dir={flagDirection ? "rtl" : "ltr"}
                 type="email"
@@ -150,12 +174,17 @@ export default function Contact() {
               >
                 {t("email")} <i className="fa-solid fa-envelope"></i>
               </label>
-            </div>
+            </motion.div>
 
             {myFormik.errors.email && myFormik.touched.email && (
               <div className="alert alert-danger">{myFormik.errors.email}</div>
             )}
-            <div className="form-floating">
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.13 }}
+              className="form-floating"
+            >
               <input
                 dir={flagDirection ? "rtl" : "ltr"}
                 type="tel"
@@ -164,7 +193,6 @@ export default function Contact() {
                 name="phonNumber"
                 placeholder="phoneNumber"
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 value={myFormik.values.phonNumber}
               />
               <label
@@ -176,15 +204,20 @@ export default function Contact() {
               >
                 {t("phoneNumber")} <i className="fa-solid fa-phone-volume"></i>
               </label>
-            </div>
+            </motion.div>
 
             {myFormik.errors.phonNumber && myFormik.touched.phonNumber && (
               <div className="alert alert-danger">
                 {myFormik.errors.phonNumber}
               </div>
             )}
-          </div>
-          <div className="col-md-6 ">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: i18n.language === "ar" ? -100 : 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="col-md-6 "
+          >
             <div className=" h-100 overflow-hidden d-flex flex-column ">
               <label htmlFor="message" className="form-label ">
                 {t("message")} <i className="fa-solid fa-message"></i>
@@ -193,7 +226,6 @@ export default function Contact() {
                 id="message"
                 name="message"
                 onChange={myFormik.handleChange}
-                onBlur={myFormik.handleBlur}
                 className="form-control flex-grow-1 mb-3"
                 placeholder={t("contact_message_placeholder")}
                 value={myFormik.values.message}
@@ -207,7 +239,7 @@ export default function Contact() {
                 </div>
               )}
             </div>
-          </div>
+          </motion.div>
           <div className="col-12 my-3 d-flex justify-content-center flex-column">
             <button type="submit" className="btn m-auto btn-primary">
               {
@@ -236,7 +268,12 @@ export default function Contact() {
             )}
           </div>
         </form>
-        <div className={"row shadow " + style.info}></div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className={"row shadow " + style.info}
+        ></motion.div>
       </div>
     </section>
   );

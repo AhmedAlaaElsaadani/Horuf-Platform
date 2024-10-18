@@ -6,10 +6,10 @@
   "nav_link_Login": "Login",
   "nav_link_Register": "Register",
   "nav_lang": "عربى",
-  "nav_link_edit_profile": "Edit Profile",
+  "nav_link_edit_profile": "Your Profile",
   "nav_link_edit_password": "Edit Password",
   "nav_link_edit_email": "Edit Email",
-  "nav_link_my_courses": "My Courses",
+  "nav_link_my_courses": "My Lessons",
   "nav_link_logout": "Logout",
 
   "home_title": "Horuf Academy",
@@ -30,6 +30,16 @@
   "about_mission": "At Horuf Academy, we believe that education is the key to achieving personal and professional success. Our mission is to provide a comprehensive and inspiring educational platform that helps every learner reach their goals. We are committed to providing outstanding educational content and innovative tools, with a focus on supporting your success at every step of your educational journey.",
 
   "subjects_heading": "Our Subjects",
+  "loading": "Loading...",
+  "level 6": "Level 6",
+  "level 7": "Level 7",
+  "level 8": "Level 8",
+  "level 9": "Level 9",
+  "level 10": "Level 10",
+  "level 11": "Level 11",
+  "level 12": "Level 12",
+
+  "other lessons": "Other Lessons",
 
   "profile_title": "Your Profile",
 
@@ -50,6 +60,8 @@
   "birthday": "Birthday",
   "level": "Level",
   "Gender": "Gender",
+  "Male": "Male",
+  "Female": "Female",
   "prevPassword": "Previous Password",
 
   "Contact Us": "Contact Us",
@@ -84,6 +96,13 @@
 
   "Update Password": "Update Password",
   "Update Email": "Update Email",
+  "Update Profile": "Update Profile",
+  "You need to verify your email it ": "You need to verify your email and we have sent you a verification message ",
+  "Verify Email Now": "Verify Email Now",
+  "myCourses-heading": "My Lessons",
+  "no-lessons": "No lessons available at the moment",
+  "Profile updated successfully": "Profile updated successfully",
+  "Password updated successfully": "Password updated successfully",
 
   "Invalid email": "there is no account associated with this email",
   "OTP has been sent before": "OTP has been sent before",

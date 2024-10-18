@@ -25,6 +25,7 @@ import UpdatePassword from "./Component/UpdatePassword/UpdatePassword";
 import UpdateEmail from "./Component/UpdateEmail/UpdateEmail";
 import UpdateProfile from "./Component/UpdateProfile/UpdateProfile";
 import Projector from "./Component/Projector/Projector";
+import MyCourses from "./Component/MyCourses/MyCourses";
 
 /**
  * Api
@@ -118,9 +119,13 @@ function App() {
               element: <Content />,
             },
             {
-              path:"lessons/:lessonID",
-              element:<Projector/>,
-            }
+              path: "lessons/:lessonID",
+              element: (
+                <ProtectedRoute>
+                  <Projector />
+                </ProtectedRoute>
+              ),
+            },
           ],
         },
         {
@@ -183,7 +188,7 @@ function App() {
               path: "",
               element: (
                 <ProtectedRoute>
-                  <UpdateProfile/>
+                  <UpdateProfile />
                 </ProtectedRoute>
               ),
             },
@@ -207,7 +212,7 @@ function App() {
               path: "my-courses",
               element: (
                 <ProtectedRoute>
-                  <p>My Courses</p>
+                  <MyCourses/>
                 </ProtectedRoute>
               ),
             },

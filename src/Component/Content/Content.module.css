@@ -1,13 +1,12 @@
-
 .lesson {
   padding: 0.8125rem 0.875rem 0.75rem 2.6875rem;
   border-radius: 0.625rem;
   background: #0269b3 !important;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: 700;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   max-width: 80%;
   transition: all 0.5s ease;
@@ -15,26 +14,47 @@
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
+  -webkit-border-radius: 0.625rem;
+  -moz-border-radius: 0.625rem;
+  -ms-border-radius: 0.625rem;
+  -o-border-radius: 0.625rem;
 }
 .lesson span {
   width: 40px;
   height: 40px;
   color: #0269b3;
   text-align: center;
-  font-size: 1.875rem;
+  font-size: 1em;
   font-weight: 700;
-  border-radius: 1.875rem;
+  border-radius: 50%;
   background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  -webkit-border-radius: 1.875rem;
-  -moz-border-radius: 1.875rem;
-  -ms-border-radius: 1.875rem;
-  -o-border-radius: 1.875rem;
+  transition: all 0.5s ease;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
 }
-.lesson:hover{
+.lesson:hover {
   color: #0269b3 !important;
   background-color: #fff !important;
   text-decoration: none;
+}
+.lesson:hover span {
+  color: #fff;
+  background-color: #0269b3;
+}
+@media (max-width: 768px) {
+  .lesson {
+    font-size: 14px;
+  }
+  .lesson {
+    max-width: 100%;
+  }
 }
