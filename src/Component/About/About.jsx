@@ -35,7 +35,7 @@ export default function About() {
     },
   ];
   return (
-    <section id="About" className={style.About}>
+    <section id="About" className={  `${style.About} overflow-hidden `}>
       <Heading1 headingText={t("About us")} />
       <div className={"container " + style["about-content"]}>
         <div className="row justify-content-center g-5 mt-2">
