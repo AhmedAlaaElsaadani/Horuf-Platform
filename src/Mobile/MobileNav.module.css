@@ -1,0 +1,88 @@
+
+.navbar{
+  background-color:var(--nav-bg-color) !important ;
+  z-index: 999;
+  height: 60px;
+  margin-top: 20px;
+}
+.fixedButton {
+  z-index: 1000;
+  bottom: calc(60px + 1rem); /* Place it above the Mobilenav */
+  left: 1rem;
+}
+.mobile{
+  margin-top: 40px;
+}
+.fixedButton button {
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.full_screen {
+  z-index: 10001;
+  background-color:var(--nav-bg-color) !important ;
+  width: 100vw;
+  height: calc(100vh - 60px); /* Full height minus the navbar */
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.aside_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2rem;
+}
+
+.close_aside {
+  font-size: 1.5rem;
+}
+.spancolor {
+  color: #0094ff !important;
+}
+.line{
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary) !important  ;
+
+}
+
+  .list-links a {
+    color: var(--nav-link-color);
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    width: fit-content;
+    margin: auto;
+    padding-bottom: 0;
+  }
+  .list-links a.selected {
+    color: var(--primary) !important;
+
+    /* border-bottom: 2px solid var(--primary); */
+  }
+  .list-links a:hover {
+    color: var(--primary) !important;
+  }
+
+li{
+  list-style: none;
+}
+ul li {
+  padding: 10px 0;
+  margin-bottom: 5px;
+}
+ul li a{
+  font-size: 1rem;
+  color: var(--nav-link-color) !important ;
+
+}
+.minus{
+ margin-right: -9px !important;
+}

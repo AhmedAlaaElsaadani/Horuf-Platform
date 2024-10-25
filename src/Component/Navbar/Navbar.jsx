@@ -34,7 +34,7 @@ const Navbar = () => {
     },
     {
       link: t("nav_link_Subjects"),
-      active: "subjects",
+      active: "Subjects",
       to: "subjects#subjects",
     },
     {
@@ -252,6 +252,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="container d-flex justify-content-between  ">
+        
           <HashLink
             className="navbar-brand  py-3 rounded-3 overflow-hidden"
             to="/"
@@ -265,6 +266,7 @@ const Navbar = () => {
               alt="logo website "
             />
           </HashLink>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -327,6 +329,8 @@ const Navbar = () => {
               </li>
             </motion.ul>
           </div>
+
+
         </div>
       </nav>
     </>

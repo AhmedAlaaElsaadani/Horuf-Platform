@@ -2,6 +2,7 @@
   margin-top: 160px;
   min-height: calc(100vh - 160px);
   width: 100%;
+  overflow: hidden;
 }
 .ParentContainer {
   min-height: 50vh;
