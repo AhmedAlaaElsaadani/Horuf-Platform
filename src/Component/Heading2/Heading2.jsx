@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import style from "./Heading2.module.css";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Heading2({
   headingText,
@@ -18,20 +19,32 @@ export default function Heading2({
         }
       >
         {flagLinks ? (
-          links.map((link, index) => (
-            <React.Fragment key={index}>
-              <Link
-                onClick={() => setLinks(links.slice(0, index+1))}
-                to={link.to}
-              >
-                {link.text}
-              </Link>
-              {index < links.length - 1 && <span>||</span>}{" "}
-              {/* Add separator except after the last link */}
-            </React.Fragment>
-          ))
+          <motion.div
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {links.map((link, index) => (
+              <React.Fragment key={index}>
+                <Link
+                  onClick={() => setLinks(links.slice(0, index + 1))}
+                  to={link.to}
+                >
+                  {link.text}
+                </Link>
+                {index < links.length - 1 && <span>||</span>}{" "}
+                {/* Add separator except after the last link */}
+              </React.Fragment>
+            ))}
+          </motion.div>
         ) : (
-          <h2>{headingText}</h2>
+          <motion.h2
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {headingText}
+          </motion.h2>
         )}
       </div>
     </div>

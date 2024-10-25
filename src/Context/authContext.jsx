@@ -1,10 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import ApiManager from "../Utilies/ApiManager";
+import HomeLoading from "../Component/HomeLoading/HomeLoading";
 export const authContext = createContext();
 export default function AuthProvider({ children }) {
   const [token, setToken] = useState("");
   const [isRegistered, setIsRegistered] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   /**
    * this function check if the session is still valid or not
    * @returns {void}
@@ -23,8 +25,12 @@ export default function AuthProvider({ children }) {
       if (data.code == 200) {
         setUser(data);
       }
-    } catch (error) {}
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
   };
+
   useEffect(() => {
     //get token from local storage to handle refresh
     let tokenFromLocalStorage = localStorage.getItem("token");
@@ -41,9 +47,10 @@ export default function AuthProvider({ children }) {
     }
   }, [token]);
   useEffect(() => {
-    if (isRegistered) {
-      getCurrentUserData(token);
-    }
+    let timeOutIdx;
+    if (isRegistered) getCurrentUserData(token);
+    else timeOutIdx = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timeOutIdx);
   }, [isRegistered]);
   return (
     <authContext.Provider
@@ -55,7 +62,7 @@ export default function AuthProvider({ children }) {
         setUser,
       }}
     >
-      {children}
+      {loading ? <HomeLoading /> : children}
     </authContext.Provider>
   );
 }

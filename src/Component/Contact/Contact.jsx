@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import style from "./Contact.module.css";
-import Heading2 from "../Heading2/Heading2";
-import img from "../../assets/Images/Heading2/2.jpeg";
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import ApiManager from "../../Utilies/ApiManager";
 import * as Yup from "yup";
 import { motion } from "framer-motion";
+import img from "../../assets/Images/Heading2/2.jpeg";
+import Heading2 from "../Heading2/Heading2";
 
 export default function Contact({ flagNotAloneCompounded }) {
   const { t, i18n } = useTranslation();
@@ -102,7 +102,10 @@ export default function Contact({ flagNotAloneCompounded }) {
       <div className="container">
         <form
           onSubmit={myFormik.handleSubmit}
-          className={"row  justify-content-between shadow my-3 pt-5 rounded-5 " + style.ParentContainer}
+          className={
+            "row  justify-content-between shadow my-3 pt-5 rounded-5 " +
+            style.ParentContainer
+          }
         >
           <motion.div
             initial={{ opacity: 0 }}

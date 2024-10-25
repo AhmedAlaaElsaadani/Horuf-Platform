@@ -10,15 +10,17 @@ import i18n from "../../i18n";
 import { authContext } from "../../Context/authContext";
 import ApiManager from "../../Utilies/ApiManager";
 import { motion } from "framer-motion";
+import { isThemeModeContext } from "../../Context/isThemeModeContext";
 // import whiteLogo from "../../assets/Images/Logo.png";
 
 const Navbar = () => {
   const [navbarCollapse, setNavbarCollapse] = useState();
   const location = useLocation();
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [active, setActive] = useState("Home");
   const { t } = useTranslation();
-  let { isRegistered, setToken, token, user } = useContext(authContext);
+  const { isRegistered, setToken, token, user } = useContext(authContext);
+  const { isDarkMode, setIsDarkMode } = useContext(isThemeModeContext);
+
   const links = [
     {
       link: t("nav_link_Home"),
@@ -83,11 +85,6 @@ const Navbar = () => {
     navbarCollapse.hide();
   };
 
-  const toggleThemeMode = () => {
-    document.querySelector("body").classList.toggle("dark");
-    setIsDarkMode(!isDarkMode);
-  };
-
   const toggleLanguage = () => {
     let flagDirection = i18n.language == "en";
 
@@ -100,27 +97,6 @@ const Navbar = () => {
       document.title = "Harouf Education Platform";
     }
   };
-  // this to part to get the prefers-color-scheme from device
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    if (mediaQuery.matches) {
-      setIsDarkMode(mediaQuery.matches);
-    }
-
-    const handleChange = (e) => {
-      if (e.matches) {
-        toggleThemeMode();
-      }
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-
-    return () => {
-      mediaQuery.removeEventListener("change", handleChange);
-    };
-  }, []);
-
   useEffect(() => {
     // Manually collapse the navbar when a link is clicked
     setNavbarCollapse(
@@ -334,7 +310,10 @@ const Navbar = () => {
               className="navbar-nav  d-flex justify-content-center align-items-center"
             >
               <li>
-                <DarkModeToggle isDark={isDarkMode} toggle={toggleThemeMode} />
+                <DarkModeToggle
+                  isDarkMode={isDarkMode}
+                  setIsDarkMode={setIsDarkMode}
+                />
               </li>
               <li>
                 <button

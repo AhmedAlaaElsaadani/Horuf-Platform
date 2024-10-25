@@ -3,6 +3,7 @@ import style from "./Heading1.module.css";
 import img1 from "../../assets/Images/Heading1/Books.png";
 import img2 from "../../assets/Images/Heading1/graduition.png";
 import img3 from "../../assets/Images/Heading1/Mastarh.png";
+import { motion } from "framer-motion";
 
 export default function Heading1({
   headingText,
@@ -21,7 +22,10 @@ export default function Heading1({
       }
     >
       {images.map((image) => (
-        <img
+        <motion.img
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
           key={image.id}
           src={image.src}
           alt={image.alt}
@@ -33,7 +37,13 @@ export default function Heading1({
           }`}
         />
       ))}
-      <h2>{headingText}</h2>
+      <motion.h2
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        {headingText}
+      </motion.h2>
     </div>
   );
 }
