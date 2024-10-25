@@ -16,7 +16,7 @@ export default function SubjectsLayout() {
     ]
   )
   return (
-    <section id="subjects" className={style.subjects}>
+    <section id="Subjects" className={style.subjects}>
       <Heading2 img={img} headingText={t("subjects_heading")} links={links} flagLinks={true} setLinks={setLinks} />
       <div className="container ">
             <Outlet 
