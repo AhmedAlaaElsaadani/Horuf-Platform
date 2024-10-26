@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/Images/logo.png";
@@ -11,6 +11,7 @@ import { authContext } from "../../Context/authContext";
 import ApiManager from "../../Utilies/ApiManager";
 import { motion } from "framer-motion";
 import { isThemeModeContext } from "../../Context/isThemeModeContext";
+import { IsMobileContext } from "../../Context/isMobileContext";
 // import whiteLogo from "../../assets/Images/Logo.png";
 
 const Navbar = () => {
@@ -18,8 +19,10 @@ const Navbar = () => {
   const location = useLocation();
   const [active, setActive] = useState("Home");
   const { t } = useTranslation();
+  const navBar = useRef(null);
   const { isRegistered, setToken, token, user } = useContext(authContext);
   const { isDarkMode, setIsDarkMode } = useContext(isThemeModeContext);
+  const { isMobile } = useContext(IsMobileContext);
 
   const links = [
     {
@@ -107,6 +110,15 @@ const Navbar = () => {
         }
       )
     );
+    // Add padding to the body to prevent the content from being hidden behind the navbar when the page is scrolled
+    if (!isMobile) {
+      document.body.style.paddingTop = navBar.current.clientHeight + "px";
+    } else {
+      document.body.style.paddingTop = "0px";
+    }
+    return () => {
+      document.body.style.paddingTop = "0px";
+    };
   }, []);
 
   useEffect(() => {
@@ -147,6 +159,7 @@ const Navbar = () => {
           style["navbar"]
         }
         data-bs-theme={isDarkMode ? "dark" : "light"}
+        ref={navBar}
       >
         <div className={"w-100 " + style["navbarTop"]}>
           <div className="container p-3 d-flex justify-content-between align-items-center">
@@ -252,7 +265,6 @@ const Navbar = () => {
           </div>
         </div>
         <div className="container d-flex justify-content-between  ">
-        
           <HashLink
             className="navbar-brand  py-3 rounded-3 overflow-hidden"
             to="/"
@@ -329,8 +341,6 @@ const Navbar = () => {
               </li>
             </motion.ul>
           </div>
-
-
         </div>
       </nav>
     </>

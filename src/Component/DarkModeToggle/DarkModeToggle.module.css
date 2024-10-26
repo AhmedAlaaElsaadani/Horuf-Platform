@@ -27,6 +27,10 @@
   cursor: pointer;
   transition: 0.3s ease background-color;
   overflow: hidden;
+  -webkit-border-radius: 56px;
+  -moz-border-radius: 56px;
+  -ms-border-radius: 56px;
+  -o-border-radius: 56px;
 }
 
 #star {

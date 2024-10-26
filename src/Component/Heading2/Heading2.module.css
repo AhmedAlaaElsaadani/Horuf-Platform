@@ -33,12 +33,19 @@
 @media (max-width: 991px) {
   .Heading2  {
     font-size: 8px;
+    background-attachment: scroll;
   }
+  .Heading2 h2 {
+    font-size: 4em;
+  } 
   
 }
 @media (max-width: 425px) {
   .Heading2  {
     font-size: 6px;
+  }
+  .Heading2 h2 {
+    font-size: 5em;
   }
   .Heading2 .layer {
     padding: 12px;

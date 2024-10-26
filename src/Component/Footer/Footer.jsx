@@ -23,7 +23,7 @@ export default function Footer() {
           <img src={whiteLogo} alt="logo" className="m-auto" />
         </motion.div>
         <div className="heading">
-          <h2>منصة حروف التعليمة</h2>
+          <h2>منصة حروف التعليمية</h2>
         </div>
         <div className={style["line"]}></div>
 

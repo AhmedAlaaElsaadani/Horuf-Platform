@@ -1,0 +1,59 @@
+.Register {
+  width: 100%;
+  font-size: 16px;
+}
+.Register .heading h2 {
+  color: var(--Register-heading-color);
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 10px -16px;
+}
+.Register .heading span {
+  color: #0269b3;
+}
+.Register p {
+  color: var(--Register-message);
+  font-size: 1.25em;
+  font-weight: 400;
+}
+.Register form input {
+  border: none;
+  border-bottom: 0.0625em var(--input-border) solid;
+}
+.Register form .inputContainer {
+  width: 80%;
+}
+.Register input[type="date"] {
+  display: flex;
+  justify-content: center;
+}
+.Register input[type="date"]::placeholder {
+  color: #6b7280;
+}
+
+.Register form label {
+  color: #6b7280;
+  font-size: 1.25em;
+  font-weight: 400;
+}
+.Register form label i {
+  color: #0269b3;
+}
+.Register form button {
+  width: fit-content;
+}
+@media (max-width: 991px) {
+  .Register {
+    font-size: 14px;
+  }
+
+  .Register .heading h2 {
+    margin: 10px -8px;
+  }
+}
+
+@media (max-width: 425px) {
+  .Register {
+    font-size: 12px;
+  }
+}

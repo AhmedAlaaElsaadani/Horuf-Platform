@@ -36,6 +36,9 @@
   .Heading1 img {
     width: 100px;
   }
+  .Heading1 h2{
+    font-size: 2rem;
+  }
   .Heading1 img:nth-child(1) {
     bottom: -10%;
     left: 5%;
@@ -44,6 +47,33 @@
   .Heading1 img:nth-child(2) {
     width: 120px;
     bottom: -10%;
+    right: 5%;
+  }
+  .Heading1 img:nth-child(3) {
+    top: 10%;
+    right: 5%;
+  }
+  .Heading1 img.specialPositionForSomePages {
+    top: 13%;
+    left: 5%;
+    right: auto;
+  }
+}
+@media (max-width: 425px) {
+  .Heading1 img {
+    width: 80px;
+  }
+  .Heading1 h2{
+    font-size: 1.5rem;
+  }
+  .Heading1 img:nth-child(1) {
+    bottom: -5%;
+    left: 5%;
+  }
+
+  .Heading1 img:nth-child(2) {
+    width: 100px;
+    bottom: -5%;
     right: 5%;
   }
   .Heading1 img:nth-child(3) {

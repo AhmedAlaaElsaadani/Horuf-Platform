@@ -2,24 +2,24 @@ import { useEffect, useState } from "react";
 import i18n from "./i18n";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RoutLayout from "./Component/RoutLayout/RoutLayout";
-import About from "./Component/About/About";
-import Home from "./Component/Home/Home";
+import About from "./Pages/About/About";
+import Home from "./Pages/Home/Home";
 import { useTranslation } from "react-i18next";
 import AuthProvider from "./Context/authContext";
-import SubjectsLayout from "./Component/SubjectsLayout/SubjectsLayout";
-import Contact from "./Component/Contact/Contact";
+import SubjectsLayout from "./Pages/SubjectsLayout/SubjectsLayout";
+import Contact from "./Pages/Contact/Contact";
 import Subjects from "./Component/Subjects/Subjects";
 import Units from "./Component/Units/Units";
 import Content from "./Component/Content/Content";
-import Login from "./Component/Login/Login";
-import Register from "./Component/Register/Register";
-import EmailConfirmOtp from "./Component/EmailConfirmOtp/EmailConfirmOtp";
+import Login from "./Pages/Login/Login";
+import Register from "./Pages/Register/Register";
+import EmailConfirmOtp from "./Pages/EmailConfirmOtp/EmailConfirmOtp";
 import ProtectedRoute from "./Component/ProtectedRoute/ProtectedRoute";
 import InverseProtectedRoute from "./Component/InverseProtectedRoute/InverseProtectedRoute";
-import ForgetPasswordEmail from "./Component/ForgetPasswordEmail/ForgetPasswordEmail";
-import ForgetPasswordConfirmOtp from "./Component/ForgetPasswordConfirmOtp/ForgetPasswordConfirmOtp";
-import ForgetPasswordResetPass from "./Component/ForgetPasswordResetPass/ForgetPasswordResetPass";
-import Profile from "./Component/Profile/Profile";
+import ForgetPasswordEmail from "./Pages/ForgetPasswordEmail/ForgetPasswordEmail";
+import ForgetPasswordConfirmOtp from "./Pages/ForgetPasswordConfirmOtp/ForgetPasswordConfirmOtp";
+import ForgetPasswordResetPass from "./Pages/ForgetPasswordResetPass/ForgetPasswordResetPass";
+import Profile from "./Pages/Profile/Profile";
 import UpdatePassword from "./Component/UpdatePassword/UpdatePassword";
 import UpdateEmail from "./Component/UpdateEmail/UpdateEmail";
 import UpdateProfile from "./Component/UpdateProfile/UpdateProfile";
@@ -239,11 +239,11 @@ function App() {
   return (
     <>
       <IsThemeModeProvider>
-        <AuthProvider>
-          <IsMobileProvider>
+        <IsMobileProvider>
+          <AuthProvider>
             <RouterProvider router={router} />
-          </IsMobileProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </IsMobileProvider>
       </IsThemeModeProvider>
     </>
   );

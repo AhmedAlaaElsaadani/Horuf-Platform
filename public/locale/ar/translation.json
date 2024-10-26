@@ -1,8 +1,12 @@
 {
   "nav_link_Home": "الرئيسية",
+  "mobile_nav_link_Home": "رئيسية",
   "nav_link_About": "عن المنصة",
+  "mobile_nav_link_About": "عنا",
   "nav_link_Subjects": "مواد دراسية",
+  "mobile_nav_link_Subjects": "المواد",
   "nav_link_Contact": "تواصل معنا",
+  "mobile_nav_link_Contact": "تواصل",
   "nav_link_Login": "تسجيل الدخول",
   "nav_link_Register": "تسجيل جديد",
   "nav_lang": "English",
@@ -46,7 +50,7 @@
   "profile_title": "ملفك الشخصي",
 
   "Footer Copy": "2024 © جميع الحقوق محفوظة |",
-  "Footer comp": " مؤسسة حروف للدعاية والإعلان والخدمات التعليمية",
+  "Footer comp": "مؤسسة حروف للدعاية والإعلان والخدمات التعليمية",
   "Footer IzI1": "تم بناء وتطوير الموقع من قبل شركة",
   "Footer IzI2": "لتطوير البرمجيات",
 

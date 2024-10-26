@@ -1,0 +1,48 @@
+.Contact {
+  width: 100%;
+  overflow: hidden;
+  font-size: 16px;
+}
+.ParentContainer {
+  min-height: 50vh;
+  background-color: var(--bg-color);
+}
+.ParentContainer h3 {
+  color: var(  --Contact-heading-color  );
+  text-align: center;
+  font-family: "Noto Kufi Arabic";
+  font-size: 2.25em;
+  font-weight: 700;
+}
+.ParentContainer input {
+  border: none;
+  border-bottom: 0.0625em rgba(107, 114, 128, 0.75) solid;
+}
+.ParentContainer label {
+  color: #6b7280;
+  font-size: 1.25em;
+  font-weight: 400;
+}
+.ParentContainer label i {
+  color: #0269b3;
+}
+.info {
+  border-radius: 1.5625em;
+  background: #0269b3;
+  height: 30vh;
+  -webkit-border-radius: 1.5625em;
+  -moz-border-radius: 1.5625em;
+  -ms-border-radius: 1.5625em;
+  -o-border-radius: 1.5625em;
+}
+
+@media (max-width: 991px) {
+  .Contact {
+    font-size: 14px;
+  }
+}
+@media (max-width: 425px) {
+  .Contact {
+    font-size: 12px;
+  }
+}
