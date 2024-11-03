@@ -16,6 +16,9 @@
   "nav_link_my_courses": "My Lessons",
   "nav_link_logout": "Logout",
 
+  "home_title_for_meta": "Horuf Academy",
+  "home_desc_for_meta": "A comprehensive educational platform, aiming to support you in every step towards success in your educational journey with high-quality content and an easy-to-use user interface. Join us now!",
+  "home_keywords_for_meta": "Horuf Academy, educational platform, online learning, technology, science, programming, business, knowledge, skills, success, high-quality content, user interface, join us , Kuwait, KSA, UAE, Bahrain, Qatar, Oman, Jordan, Egypt, Iraq, Syria",
   "home_title": "Horuf Academy",
   "home_subtitle": "A great entity aiming for your success",
   "home_desc": "A comprehensive educational platform, aiming to support you in every step towards success",
@@ -23,7 +26,7 @@
   "home_links_2": "Learn more about us",
 
   "About us": "About us",
-  "about_title": "Horuf Academpy",
+  "about_title": "Horuf Academy",
   "about_subtitle": "Your safe route to success",
   "about_desc": "Horuf Academy is an innovative educational platform that aims to improve the online learning experience. Our platform offers a variety of lessons and educational materials across various fields including technology, science, programming, and business. We strive to empower individuals to acquire knowledge and develop their skills easily and effectively through high-quality content and an easy-to-use user interface.",
   "about_links_1": "Our values",
@@ -33,6 +36,7 @@
   "about_vision": "At Horuf Academy, we believe that education is the key to achieving success during your educational journey.",
   "about_mission": "At Horuf Academy, we believe that education is the key to achieving personal and professional success. Our mission is to provide a comprehensive and inspiring educational platform that helps every learner reach their goals. We are committed to providing outstanding educational content and innovative tools, with a focus on supporting your success at every step of your educational journey.",
 
+  "Subjects_title_meta": "Horuf Academy - Our Subjects",
   "subjects_heading": "Our Subjects",
   "loading": "Loading...",
   "level 6": "Level 6",
@@ -47,6 +51,7 @@
 
   "profile_title": "Your Profile",
 
+  "Footer Heading": "Horuf Academy",
   "Footer Copy": "2024 © All rights reserved | Horuf Foundation for Advertising, Media and Educational Services",
   "Footer IzI1": "Built and Developed by",
   "Footer IzI2": " Company For Software Development",
@@ -68,11 +73,15 @@
   "Female": "Female",
   "prevPassword": "Previous Password",
 
+  "contact_title_meta": "Horuf Academy - Contact Us",
+  "contact_keywords_for_meta": "Horuf Academy, Contact Us, Contact, Inquiries, Complaints, Suggestions, Contact Us, Kuwait, KSA, UAE, Bahrain, Qatar, Oman, Jordan, Egypt, Iraq, Syria",
+  "contact_description_for_meta": "For inquiries, complaints, and suggestions, please contact us through the form below. We are always happy to hear from you and will respond as soon as possible.",
   "Contact Us": "Contact Us",
   "contact_title": "For inquiries, complaints, and suggestions",
   "contact_send": "Send",
   "contact_message_placeholder": "Enter your message here...",
 
+  "forms_meta_title": "Horuf Academy - account",
   "Login": "Login",
   "User": "User",
   "Login_desc": "Enter your account by entering the email and password registered with them before",

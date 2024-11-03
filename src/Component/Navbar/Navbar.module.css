@@ -9,6 +9,30 @@
   font-size: 1rem;
   font-weight: 700;
 }
+.navbarTop a.login-register{
+  color: #fff !important;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+.navbarTop a::after{
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #0094ff;
+  transition: width 0.3s;
+  -webkit-transition: width 0.3s;
+  -moz-transition: width 0.3s;
+  -ms-transition: width 0.3s;
+  -o-transition: width 0.3s;
+
+}
+.navbarTop a:hover::after{
+  width: 100%;
+}
 .profile{
   margin:0  15px;
 }
@@ -26,6 +50,7 @@
 }
 .profile ul {
   display: none;
+  background-color: var(--bg-color) !important;
 }
 .profile:hover ul {
   display: block;
@@ -45,14 +70,13 @@
   -o-border-radius: 5px;
 }
 .profile ul a {
-  color: #000;
   font-size: 1rem;
   font-weight: 700;
   padding: 10px;
   display: block;
 }
 .profile ul a:hover {
-  color: var(--primary);
+  color: var(--primary) !important;
   background-color: #f1f1f1;
 }
 .profile ul a.selected:active {

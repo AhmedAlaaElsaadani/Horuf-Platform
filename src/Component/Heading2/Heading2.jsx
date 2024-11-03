@@ -23,6 +23,7 @@ export default function Heading2({
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className={style["links"] }
           >
             {links.map((link, index) => (
               <React.Fragment key={index}>

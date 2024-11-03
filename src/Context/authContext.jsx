@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import ApiManager from "../Utilies/ApiManager";
-import HomeLoading from "../Component/HomeLoading/HomeLoading";
+import HomeLoading from "../Component/Ui/HomeLoading/HomeLoading";
 export const authContext = createContext();
 export default function AuthProvider({ children }) {
   const [token, setToken] = useState("");

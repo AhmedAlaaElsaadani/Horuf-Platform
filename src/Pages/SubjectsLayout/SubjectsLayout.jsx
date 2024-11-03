@@ -4,6 +4,7 @@ import img from "../../assets/Images/Heading2/1.jpeg";
 import style from "./SubjectsLayout.module.css";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 export default function SubjectsLayout() {
   const { t } = useTranslation();
@@ -14,6 +15,11 @@ export default function SubjectsLayout() {
     },
   ]);
   return (
+    <>
+    <Helmet>
+      <title>{t("Subjects_title_meta")}</title>
+    </Helmet>
+
     <section
       id="Subjects"
       className={style.subjects}
@@ -40,5 +46,6 @@ export default function SubjectsLayout() {
         />
       </div>
     </section>
+    </>
   );
 }

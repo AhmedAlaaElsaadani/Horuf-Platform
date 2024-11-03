@@ -6,6 +6,8 @@ import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import ApiManager from "../../Utilies/ApiManager";
 import { authContext } from "../../Context/authContext";
+import FloatingInput from "../../Component/Ui/FloatingInput/FloatingInput";
+import { motion } from "framer-motion";
 
 export default function Login() {
   const { t, i18n } = useTranslation();
@@ -104,7 +106,20 @@ export default function Login() {
     onSubmit: loginToWebsite,
     validationSchema: validationSchemaYup,
   });
-
+  const loginInputs = [
+    {
+      inputType: "text",
+      inputName: "emailOrPhone",
+      inputTransition: "emailOrPhone",
+      icon: "fa-user",
+    },
+    {
+      inputType: "password",
+      inputName: "password",
+      inputTransition: "password",
+      icon: "fa-lock",
+    },
+  ];
   return (
     <section
       className={style.Login + " d-flex align-items-center "}
@@ -120,72 +135,35 @@ export default function Login() {
         onSubmit={myFormik.handleSubmit} // Changed from submitForm to handleSubmit
         className="container d-flex flex-column"
       >
-        <div className={style["heading"] + " my-5"}>
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className={style["heading"] + " my-5"}
+        >
           <h2>
             {t("User")} <span>{t("Login")}</span>
           </h2>
           <p>{t("Login_desc")}</p>
-        </div>
+        </motion.div>
 
-        <div className={style["inputContainer"] + " mb-3"}>
-          <div className={"form-floating"}>
-            <input
-              dir={flagDirection ? "ltr" : "rtl"}
-              type="text" //
-              className="form-control mb-3"
-              id="emailOrPhone"
-              name="emailOrPhone"
-              placeholder="name@example.com"
-              onChange={myFormik.handleChange}
-              value={myFormik.values.emailOrPhone}
+        {loginInputs.map((input, index) => (
+          <div className={style["inputContainer"] + " mb-3"}>
+            <FloatingInput
+              key={index}
+              idx={index}
+              {...input}
+              myFormik={myFormik}
+              flagDirection={flagDirection}
+              t={t}
             />
-            <label
-              htmlFor="emailOrPhone"
-              style={{
-                left: flagDirection ? "auto" : "0",
-                right: flagDirection ? "0" : "auto",
-              }}
-            >
-              {t("emailOrPhone")} <i className="fa-solid fa-envelope"></i>
-            </label>
           </div>
+        ))}
 
-          {myFormik.errors.emailOrPhone && myFormik.touched.emailOrPhone && (
-            <div className="alert alert-danger">
-              {myFormik.errors.emailOrPhone}
-            </div>
-          )}
-        </div>
-
-        <div className={style["inputContainer"] + " mb-5"}>
-          <div className={"form-floating"}>
-            <input
-              dir={flagDirection ? "ltr" : "rtl"}
-              type="password"
-              className="form-control mb-3 "
-              id="password"
-              name="password"
-              placeholder="Password"
-              onChange={myFormik.handleChange}
-              value={myFormik.values.password}
-            />
-            <label
-              htmlFor="password"
-              style={{
-                left: flagDirection ? "auto" : "0",
-                right: flagDirection ? "0" : "auto",
-              }}
-            >
-              {t("password")} <i className="fa-solid fa-lock"></i>{" "}
-            </label>
-          </div>
-
-          {myFormik.errors.password && myFormik.touched.password && (
-            <div className="alert alert-danger">{myFormik.errors.password}</div>
-          )}
-        </div>
-
-        <button
+        <motion.button
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
           type="submit"
           disabled={responseFlag}
           className="btn object-fit-contain btn-primary"
@@ -199,7 +177,7 @@ export default function Login() {
               t("Login_btn")
             )}
           </span>
-        </button>
+        </motion.button>
 
         {resMessage && (
           <div
@@ -211,13 +189,24 @@ export default function Login() {
           </div>
         )}
 
-        <p className="my-3">
+        <motion.p
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="my-3"
+        >
           {t("donot_have_account")}
           <Link to={"/Register"}> {t("create_account")} </Link>
-        </p>
-        <Link className="lead" to={"/forget-password-email"}>
-          {t("Login_forget_password")}
-        </Link>
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+        >
+          <Link className="lead" to={"/forget-password-email"}>
+            {t("Login_forget_password")}
+          </Link>
+        </motion.div>
       </form>
     </section>
   );

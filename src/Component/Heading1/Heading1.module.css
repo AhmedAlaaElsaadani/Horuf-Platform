@@ -4,7 +4,7 @@
 }
 .Heading1 h2 {
   color: #002e50;
-  font-size: 3rem;
+  font-size: 3.5em;
   font-weight: 700;
 }
 .Heading1 img {
@@ -32,13 +32,11 @@
   right: auto;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1024px) {
   .Heading1 img {
     width: 100px;
   }
-  .Heading1 h2{
-    font-size: 2rem;
-  }
+
   .Heading1 img:nth-child(1) {
     bottom: -10%;
     left: 5%;
@@ -63,9 +61,7 @@
   .Heading1 img {
     width: 80px;
   }
-  .Heading1 h2{
-    font-size: 1.5rem;
-  }
+
   .Heading1 img:nth-child(1) {
     bottom: -5%;
     left: 5%;

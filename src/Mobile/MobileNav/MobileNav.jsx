@@ -77,33 +77,42 @@ const MobileNav = () => {
   ];
 
   useEffect(() => {
-    const sections = document.querySelectorAll("section");
-    const options = {
-      threshold: 0.01,
+    const options = { threshold: 0.01 };
+    let observer;
+
+    const createObserver = () => {
+      const sections = document.querySelectorAll("section");
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      }, options);
+
+      sections.forEach((section) => observer.observe(section));
     };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
+
+    // Initial setup
+    createObserver();
+
+    // MutationObserver to detect newly loaded sections
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length > 0) {
+          if (observer) observer.disconnect(); // Disconnect previous observer
+          createObserver(); // Recreate observer with new sections
         }
       });
-    }, options);
+    });
 
-    if (sections.length > 0) {
-      sections.forEach((section) => {
-        observer.observe(section);
-      });
-    }
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      if (sections.length > 0) {
-        sections.forEach((section) => {
-          observer.unobserve(section);
-        });
-      }
+      observer && observer.disconnect();
+      mutationObserver.disconnect();
     };
   }, [location.pathname]);
-
   const linksLoginRegister = [
     {
       link: t("nav_link_Login"),
@@ -155,6 +164,7 @@ const MobileNav = () => {
             <button
               className="btn position-relative btn-primary rounded-circle p-3"
               onClick={toggleAside}
+              aria-label={isRegistered ? "User Menu" : "Navigation Menu"}
             >
               {isRegistered ? (
                 <i className="fa-solid fa-user"></i>

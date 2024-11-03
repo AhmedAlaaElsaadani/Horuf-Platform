@@ -8,7 +8,7 @@ export default function Footer() {
   const { t } = useTranslation();
   return (
     <footer
-      className={style["footer-container"]+" mt-3"}
+      className={style["footer-container"] + " mt-3"}
       style={{
         backgroundImage: `url(${footerImg})`,
       }}
@@ -23,7 +23,7 @@ export default function Footer() {
           <img src={whiteLogo} alt="logo" className="m-auto" />
         </motion.div>
         <div className="heading">
-          <h2>منصة حروف التعليمية</h2>
+          <h2>{t("Footer Heading")}</h2>
         </div>
         <div className={style["line"]}></div>
 
@@ -35,9 +35,7 @@ export default function Footer() {
             className="mb-0"
           >
             {t("Footer Copy")}
-            <span className={style["comp-name"]}>
-              {t("Footer comp")}
-            </span>
+            <span className={style["comp-name"]}>{t("Footer comp")}</span>
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 100 }}

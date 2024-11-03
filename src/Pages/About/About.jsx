@@ -35,64 +35,71 @@ export default function About() {
     },
   ];
   return (
-    <section id="About" className={  `${style.About} overflow-hidden `}
-    style={{
-      minHeight: `calc(100vh - ${parseInt(
-        window.getComputedStyle(document.body).paddingTop,
-        10
-      )}px)`,
-    }}>
-      <Heading1 headingText={t("About us")} />
-      <div className={"container " + style["about-content"]}>
-        <div className="row justify-content-center g-5 mt-2">
-          <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className={"col-lg-4   " + style["text"]}
-          >
-            <h2>{t("about_title")}</h2>
-            <p>{t("about_subtitle")}</p>
-            <Lottie animationData={aboutAnimation} className="w-100 " />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className={"col-lg-8 " + style["text-desc"]}
-          >
-            <p>{t("about_desc")}</p>
+    <>
+      
+      <section
+        id="About"
+        className={`${style.About} overflow-hidden `}
+        style={{
+          minHeight: `calc(100vh - ${parseInt(
+            window.getComputedStyle(document.body).paddingTop,
+            10
+          )}px)`,
+        }}
+      >
+        <Heading1 headingText={t("About us")} />
+        <div className={"container " + style["about-content"]}>
+          <div className="row justify-content-center g-5 mt-2">
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className={style["miniNav"]}
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className={"col-lg-4   " + style["text"]}
             >
-              {links.map((link, index) => (
-                <NavLink
-                  key={index}
-                  to={link.to}
-                  className={
-                    link.active === active || (index == 0 && active == "/About")
-                      ? style.active
-                      : ""
-                  }
-                >
-                  {link.jsx}
-                  {link.text}
-                </NavLink>
-              ))}
+              <h2>{t("about_title")}</h2>
+              <p>{t("about_subtitle")}</p>
+              <Lottie animationData={aboutAnimation} className="w-100 " />
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              initial={{ opacity: 0, x: -100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className={"col-lg-8 " + style["text-desc"]}
             >
-              <Outlet />
+              <p>{t("about_desc")}</p>
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className={style["miniNav"]}
+              >
+                {links.map((link, index) => (
+                  <NavLink
+                    key={index}
+                    to={link.to}
+                    className={
+                      link.active === active ||
+                      (index == 0 && active == "/About")
+                        ? style.active
+                        : ""
+                    }
+                  >
+                    {link.jsx}
+                    {link.text}
+                  </NavLink>
+                ))}
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                <Outlet />
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

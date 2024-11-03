@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import ApiManager from "../../Utilies/ApiManager";
 import * as Yup from "yup";
+import FloatingInput from "../../Component/Ui/FloatingInput/FloatingInput";
+import { motion } from "framer-motion";
 
 export default function ForgetPasswordResetPass() {
   const [token, setToken] = useState("");
@@ -80,6 +82,20 @@ export default function ForgetPasswordResetPass() {
     },
     validationSchema: validationSchemaYup,
   });
+  const forgetPasswordResetPassInputs = [
+    {
+      inputType: "password",
+      inputName: "password",
+      inputTransition: "password",
+      icon: "fa-lock",
+    },
+    {
+      inputType: "password",
+      inputName: "confirmPassword",
+      inputTransition: "confirmPassword",
+      icon: "fa-lock",
+    },
+  ];
   return (
     <section
       className={
@@ -98,70 +114,35 @@ export default function ForgetPasswordResetPass() {
           "container shadow rounded-4 border p-3 " + style["parentContainer"]
         }
       >
-        <div className={style["heading"]}>
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
+          className={style["heading"]}
+        >
           {" "}
           <h2 className="text-center py-3">{t("Reset Password")}</h2>
           <p className="text-center">
             {t("Enter your new password to reset your password")}
           </p>
-        </div>
+        </motion.div>
         <form onSubmit={myFormik.handleSubmit} className="my-5" dir="ltr">
-          <div className={"form-floating"}>
-            <input
-              dir={flagDirection ? "ltr" : "rtl"}
-              type="password"
-              className="form-control mb-4"
-              id="password"
-              name="password"
-              placeholder={t("password")}
-              onChange={myFormik.handleChange}
-              value={myFormik.values.password}
+          {forgetPasswordResetPassInputs.map((input, index) => (
+            <FloatingInput
+              key={index}
+              idx={index}
+              {...input}
+              myFormik={myFormik}
+              flagDirection={flagDirection}
+              t={t}
             />
-            <label
-              style={{
-                left: flagDirection ? "auto" : "0",
-                right: flagDirection ? "0" : "auto",
-              }}
-              htmlFor="password"
-            >
-              {t("password")} <i className="fa-solid fa-lock"></i>
-            </label>
-            {myFormik.errors.password && myFormik.touched.password && (
-              <div className="alert alert-danger">
-                {myFormik.errors.password}
-              </div>
-            )}
-          </div>
-
-          <div className={"form-floating"}>
-            <input
-              dir={flagDirection ? "ltr" : "rtl"}
-              type="password"
-              className="form-control mb-4"
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder={t("confirmPassword")}
-              onChange={myFormik.handleChange}
-              value={myFormik.values.confirmPassword}
-            />
-            <label
-              style={{
-                left: flagDirection ? "auto" : "0",
-                right: flagDirection ? "0" : "auto",
-              }}
-              htmlFor="confirmPassword"
-            >
-              {t("confirmPassword")} <i className="fa-solid fa-lock"></i>
-            </label>
-          </div>
-          {myFormik.errors.confirmPassword &&
-            myFormik.touched.confirmPassword && (
-              <div className="alert alert-danger">
-                {myFormik.errors.confirmPassword}
-              </div>
-            )}
-
-          <div className="text-center">
+          ))}
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+            className="text-center"
+          >
             <button
               type="submit"
               className="btn btn-primary "
@@ -185,7 +166,7 @@ export default function ForgetPasswordResetPass() {
                 {resMessage.message}
               </div>
             )}
-          </div>
+          </motion.div>
         </form>
       </div>
     </section>

@@ -115,10 +115,6 @@ form select {
 form textarea::placeholder {
   color: #6b7280 !important ;
 }
-form label {
-  font-size: 1.25em;
-  font-weight: 400;
-}
 
 /* 
 //////////selection///////////

@@ -8,22 +8,24 @@
   background-color: var(--bg-color);
 }
 .ParentContainer h3 {
-  color: var(  --Contact-heading-color  );
+  color: var(--Contact-heading-color);
   text-align: center;
   font-family: "Noto Kufi Arabic";
   font-size: 2.25em;
   font-weight: 700;
 }
-.ParentContainer input {
-  border: none;
-  border-bottom: 0.0625em rgba(107, 114, 128, 0.75) solid;
+.Contact textarea {
+  border: none !important;
+  border-bottom: 0.0625em var(--input-border) solid !important;
+  background-color: var(--bg-color) !important;
+  color: var(--input-text-color) !important;
 }
-.ParentContainer label {
+.Contact .message label {
   color: #6b7280;
   font-size: 1.25em;
   font-weight: 400;
 }
-.ParentContainer label i {
+.Contact .message label i {
   color: #0269b3;
 }
 .info {

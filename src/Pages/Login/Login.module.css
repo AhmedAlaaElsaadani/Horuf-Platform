@@ -1,6 +1,7 @@
 .Login {
   width: 100%;
   font-size: 16px;
+  overflow: hidden;
 }
 .Login .heading h2 {
   color: var(--Login-heading-color);
@@ -18,14 +19,6 @@
 }
 .Login form .inputContainer {
   width: 80%;
-}
-.Login form label {
-  color: #6b7280;
-  font-size: 1.25em;
-  font-weight: 400;
-}
-.Login form label i {
-  color: #0269b3;
 }
 .Login form button {
   width: fit-content;

@@ -7,6 +7,8 @@ import * as Yup from "yup";
 import { motion } from "framer-motion";
 import img from "../../assets/Images/Heading2/2.jpeg";
 import Heading2 from "../../Component/Heading2/Heading2";
+import FloatingInput from "../../Component/Ui/FloatingInput/FloatingInput";
+import { Helmet } from "react-helmet-async";
 
 export default function Contact({ flagNotAloneCompounded }) {
   const { t, i18n } = useTranslation();
@@ -89,199 +91,152 @@ export default function Contact({ flagNotAloneCompounded }) {
     onSubmit: sendMessage,
     validationSchema: validationSchemaYup,
   });
+  const contactInputs = [
+    {
+      inputType: "text",
+      inputName: "name",
+      inputTransition: "name",
+      icon: "fa-user",
+    },
+    {
+      inputType: "email",
+      inputName: "email",
+      inputTransition: "email",
+      icon: "fa-envelope",
+    },
+    {
+      inputType: "tel",
+      inputName: "phonNumber",
+      inputTransition: "phoneNumber",
+      icon: "fa-phone",
+    },
+  ];
 
   return (
-    <section
-      id="Contact"
-      className={style.Contact}
-      
-      style={{
-        minHeight: `calc(100vh - ${parseInt(
-          window.getComputedStyle(document.body).paddingTop,
-          10
-        )}px)`,
-      }}
-    >
-      <Heading2 img={img} headingText={t("Contact Us")} />
-      <div className="container">
-        <form
-          onSubmit={myFormik.handleSubmit}
-          className={
-            "row  justify-content-between shadow my-3 pt-5 rounded-5 " +
-            style.ParentContainer
-          }
-        >
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="col-12 my-3"
-          >
-            <h3>{t("contact_title")}</h3>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: i18n.language === "ar" ? 100 : -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="col-md-6  d-flex flex-column justify-content-center"
+    <>
+      {
+        !flagNotAloneCompounded &&
+        <Helmet>
+          <meta name="Keywords" content={t("contact_keywords_for_meta")} />
+          <meta
+            name="description"
+            content={t("contact_description_for_meta")}
+          />
+          <title>{t("contact_title_meta")}</title>
+        </Helmet>
+      }
+      <section
+        id="Contact"
+        className={style.Contact}
+        style={{
+          minHeight: `calc(100vh - ${parseInt(
+            window.getComputedStyle(document.body).paddingTop,
+            10
+          )}px)`,
+        }}
+      >
+        <Heading2 img={img} headingText={t("Contact Us")} />
+        <div className="container">
+          <form
+            onSubmit={myFormik.handleSubmit}
+            className={
+              "row  justify-content-between shadow my-3 pt-5 rounded-5 " +
+              style.ParentContainer
+            }
           >
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="form-floating mb-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+              className="col-12 my-3"
             >
-              <input
-                dir={flagDirection ? "rtl" : "ltr"}
-                type="text"
-                className="form-control"
-                id="name"
-                name="name"
-                placeholder="name"
-                onChange={myFormik.handleChange}
-                value={myFormik.values.name}
-              />
-              <label
-                htmlFor="name"
-                style={{
-                  right: flagDirection ? "auto" : "0",
-                  left: flagDirection ? "0" : "auto",
-                }}
-              >
-                {t("name")} <i className="fa-solid fa-user"></i>
-              </label>
+              <h3>{t("contact_title")}</h3>
             </motion.div>
-
-            {myFormik.errors.name && myFormik.touched.name && (
-              <div className="alert alert-danger">{myFormik.errors.name}</div>
-            )}
-
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-              className="form-floating mb-3"
+              initial={{ opacity: 0, x: i18n.language === "ar" ? 100 : -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+              className="col-md-6  d-flex flex-column justify-content-center"
             >
-              <input
-                dir={flagDirection ? "rtl" : "ltr"}
-                type="email"
-                className="form-control"
-                id="email"
-                name="email"
-                placeholder="name@example.com"
-                onChange={myFormik.handleChange}
-                value={myFormik.values.email}
-              />
-              <label
-                htmlFor="email"
-                style={{
-                  right: flagDirection ? "auto" : "0",
-                  left: flagDirection ? "0" : "auto",
-                }}
-              >
-                {t("email")} <i className="fa-solid fa-envelope"></i>
-              </label>
+              {contactInputs.map((input, index) => (
+                <FloatingInput
+                  key={index}
+                  idx={index}
+                  {...input}
+                  myFormik={myFormik}
+                  flagDirection={flagDirection}
+                  t={t}
+                />
+              ))}
             </motion.div>
-
-            {myFormik.errors.email && myFormik.touched.email && (
-              <div className="alert alert-danger">{myFormik.errors.email}</div>
-            )}
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.13 }}
-              className="form-floating"
+              initial={{ opacity: 0, x: i18n.language === "ar" ? -100 : 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+              className="col-md-6 "
             >
-              <input
-                dir={flagDirection ? "rtl" : "ltr"}
-                type="tel"
-                className="form-control mb-3"
-                id="phonNumber"
-                name="phonNumber"
-                placeholder="phoneNumber"
-                onChange={myFormik.handleChange}
-                value={myFormik.values.phonNumber}
-              />
-              <label
-                htmlFor="phonNumber"
-                style={{
-                  right: flagDirection ? "auto" : "0",
-                  left: flagDirection ? "0" : "auto",
-                }}
-              >
-                {t("phoneNumber")} <i className="fa-solid fa-phone-volume"></i>
-              </label>
-            </motion.div>
-
-            {myFormik.errors.phonNumber && myFormik.touched.phonNumber && (
-              <div className="alert alert-danger">
-                {myFormik.errors.phonNumber}
-              </div>
-            )}
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: i18n.language === "ar" ? -100 : 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="col-md-6 "
-          >
-            <div className=" h-100 overflow-hidden d-flex flex-column ">
-              <label htmlFor="message" className="form-label ">
-                {t("message")} <i className="fa-solid fa-message"></i>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                onChange={myFormik.handleChange}
-                className="form-control flex-grow-1 mb-3"
-                placeholder={t("contact_message_placeholder")}
-                value={myFormik.values.message}
-                style={{
-                  minHeight: "100px",
-                }}
-              ></textarea>
-              {myFormik.errors.message && myFormik.touched.message && (
-                <div className="alert w-100  alert-danger">
-                  {myFormik.errors.message}
-                </div>
-              )}
-            </div>
-          </motion.div>
-          <div className="col-12 my-3 d-flex justify-content-center flex-column">
-            <button type="submit" className="btn m-auto btn-primary">
-              {
-                <span>
-                  {responseFlag ? (
-                    <div className="spinner-border text-light" role="status">
-                      <span className="visually-hidden">Loading...</span>
-                    </div>
-                  ) : (
-                    t("contact_send")
-                  )}
-                </span>
-              }
-            </button>
-            {resMessage != null ? (
               <div
                 className={
-                  "alert text-center mt-2 " +
-                  (resMessage.flag ? "alert-success" : "alert-danger")
+                  " h-100 overflow-hidden d-flex flex-column " + style.message
                 }
               >
-                {resMessage.message}
+                <label htmlFor="message" className="form-label ">
+                  {t("message")} <i className="fa-solid fa-message"></i>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  onChange={myFormik.handleChange}
+                  className="form-control flex-grow-1 mb-3"
+                  placeholder={t("contact_message_placeholder")}
+                  value={myFormik.values.message}
+                  style={{
+                    minHeight: "100px",
+                  }}
+                ></textarea>
+                {myFormik.errors.message && myFormik.touched.message && (
+                  <div className="alert w-100  alert-danger">
+                    {myFormik.errors.message}
+                  </div>
+                )}
               </div>
-            ) : (
-              ""
-            )}
-          </div>
-        </form>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className={"row shadow " + style.info}
-        ></motion.div>
-      </div>
-    </section>
+            </motion.div>
+            <div className="col-12 my-3 d-flex justify-content-center flex-column">
+              <button type="submit" className="btn m-auto btn-primary">
+                {
+                  <span>
+                    {responseFlag ? (
+                      <div className="spinner-border text-light" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    ) : (
+                      t("contact_send")
+                    )}
+                  </span>
+                }
+              </button>
+              {resMessage != null ? (
+                <div
+                  className={
+                    "alert text-center mt-2 " +
+                    (resMessage.flag ? "alert-success" : "alert-danger")
+                  }
+                >
+                  {resMessage.message}
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          </form>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
+            className={"row shadow " + style.info}
+          ></motion.div>
+        </div>
+      </section>
+    </>
   );
 }

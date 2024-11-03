@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../../assets/Images/logo.png";
+import img from "../../../assets/Images/logo.png";
 export default function HomeLoading() {
   return (
     <div

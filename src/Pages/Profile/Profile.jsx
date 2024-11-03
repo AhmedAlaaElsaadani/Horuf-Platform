@@ -81,7 +81,7 @@ export default function Profile() {
             <ul
               className={
                 style["profile-links"] +
-                " shadow d-flex flex-md-column gap-3 flex-sm-wrap justify-content-center  "
+                " shadow d-flex gap-3  justify-content-center   "
               }
             >
               {profileLinks.map((link, index) => (

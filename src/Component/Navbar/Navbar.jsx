@@ -120,33 +120,41 @@ const Navbar = () => {
       document.body.style.paddingTop = "0px";
     };
   }, []);
-
   useEffect(() => {
-    const sections = document.querySelectorAll("section");
-    const options = {
-      threshold: 0.01,
+    const options = { threshold: 0.01 };
+    let observer;
+
+    const createObserver = () => {
+      const sections = document.querySelectorAll("section");
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      }, options);
+
+      sections.forEach((section) => observer.observe(section));
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
+    // Initial setup
+    createObserver();
+
+    // MutationObserver to detect newly loaded sections
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length > 0) {
+          if (observer) observer.disconnect(); // Disconnect previous observer
+          createObserver(); // Recreate observer with new sections
         }
       });
-    }, options);
+    });
 
-    if (sections.length > 0) {
-      sections.forEach((section) => {
-        observer.observe(section);
-      });
-    }
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      if (sections.length > 0) {
-        sections.forEach((section) => {
-          observer.unobserve(section);
-        });
-      }
+      observer && observer.disconnect();
+      mutationObserver.disconnect();
     };
   }, [location.pathname]);
 
@@ -199,7 +207,11 @@ const Navbar = () => {
                       </span>
                     )}
                   </div>
-                  <ul className="navbar-nav p-0 z-3 position-absolute  rounded-3">
+                  <ul
+                    className={
+                      "navbar-nav p-0 z-3 position-absolute  rounded-3 "
+                    }
+                  >
                     <li className="nav-item  position-relative">
                       <Link
                         className={
@@ -250,10 +262,7 @@ const Navbar = () => {
                 linksLoginRegister.map((link, idx) => (
                   <li key={idx} className="nav-item ">
                     <HashLink
-                      className={
-                        "nav-link " +
-                        (link.active == active ? style["selected"] : "")
-                      }
+                      className={"nav-link " + style["login-register"]}
                       to={link.to}
                     >
                       {link.link}

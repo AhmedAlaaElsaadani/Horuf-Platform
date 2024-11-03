@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { authContext } from "../../Context/authContext";
 import ApiManager from "../../Utilies/ApiManager";
+import FloatingInput from "../Ui/FloatingInput/FloatingInput";
 
 export default function UpdatePassword({ flagDirection }) {
   const { t } = useTranslation();
@@ -62,6 +63,26 @@ export default function UpdatePassword({ flagDirection }) {
     validationSchema: validationSchema,
     onSubmit: updateYourPassword,
   });
+  const updateInputs = [
+    {
+      inputType: "password",
+      inputName: "prevPassword",
+      inputTransition: "prevPassword",
+      icon: "fa-lock",
+    },
+    {
+      inputType: "password",
+      inputName: "password",
+      inputTransition: "password",
+      icon: "fa-lock",
+    },
+    {
+      inputType: "password",
+      inputName: "confirmPassword",
+      inputTransition: "confirmPassword",
+      icon: "fa-lock",
+    },
+  ];
   return (
     <form
       action=""
@@ -69,90 +90,18 @@ export default function UpdatePassword({ flagDirection }) {
       className="UpdatePassword container rounded-3  shadow"
     >
       <div className="row">
-        <div className="col-md-12">
-          <div className={"form-floating"}>
-            <input
-              dir={flagDirection ? "ltr" : "rtl"}
-              type="password"
-              className="form-control mb-4"
-              id="prevPassword"
-              name="prevPassword"
-              placeholder={t("prevPassword")}
-              onChange={myFormik.handleChange}
-              value={myFormik.values.prevPassword}
+        {updateInputs.map((input, index) => (
+          <div className="col-md-12" key={index}>
+            <FloatingInput
+              key={index}
+              idx={index}
+              {...input}
+              myFormik={myFormik}
+              flagDirection={flagDirection}
+              t={t}
             />
-            <label
-              style={{
-                left: flagDirection ? "auto" : "0",
-                right: flagDirection ? "0" : "auto",
-              }}
-              htmlFor="prevPassword"
-            >
-              {t("prevPassword")} <i className="fa-solid fa-lock"></i>
-            </label>
           </div>
-          {myFormik.errors.prevPassword && myFormik.touched.prevPassword && (
-            <div className="alert alert-danger">
-              {myFormik.errors.prevPassword}
-            </div>
-          )}
-        </div>
-        <div className="col-md-12">
-          <div className={"form-floating"}>
-            <input
-              dir={flagDirection ? "ltr" : "rtl"}
-              type="password"
-              className="form-control mb-4"
-              id="password"
-              name="password"
-              placeholder={t("password")}
-              onChange={myFormik.handleChange}
-              value={myFormik.values.password}
-            />
-            <label
-              style={{
-                left: flagDirection ? "auto" : "0",
-                right: flagDirection ? "0" : "auto",
-              }}
-              htmlFor="password"
-            >
-              {t("password")} <i className="fa-solid fa-lock"></i>
-            </label>
-          </div>
-          {myFormik.errors.password && myFormik.touched.password && (
-            <div className="alert alert-danger">{myFormik.errors.password}</div>
-          )}
-        </div>
-
-        <div className="col-md-12">
-          <div className={"form-floating"}>
-            <input
-              dir={flagDirection ? "ltr" : "rtl"}
-              type="password"
-              className="form-control mb-4"
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder={t("confirmPassword")}
-              onChange={myFormik.handleChange}
-              value={myFormik.values.confirmPassword}
-            />
-            <label
-              style={{
-                left: flagDirection ? "auto" : "0",
-                right: flagDirection ? "0" : "auto",
-              }}
-              htmlFor="confirmPassword"
-            >
-              {t("confirmPassword")} <i className="fa-solid fa-lock"></i>
-            </label>
-          </div>
-          {myFormik.errors.confirmPassword &&
-            myFormik.touched.confirmPassword && (
-              <div className="alert alert-danger">
-                {myFormik.errors.confirmPassword}
-              </div>
-            )}
-        </div>
+        ))}
         <div className="col-md-12 align-items-center flex-column d-flex">
           <button
             type="submit"

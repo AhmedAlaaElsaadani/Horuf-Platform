@@ -1,0 +1,31 @@
+.FloatingLabel {
+  color: #6b7280;
+  font-size: 1.25em;
+  font-weight: 400;
+}
+.FloatingLabel i {
+  color: #0269b3;
+}
+.floating input{
+  border: none !important;
+  border-bottom: 0.0625em var(--input-border) solid !important;
+  background-color: var(--bg-color) !important;
+  color: var(--input-text-color) !important;
+}
+.floating > .floatingInput:-webkit-autofill ~ label {
+  top: 3px;
+  transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+  -webkit-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+  -moz-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+  -ms-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+  -o-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+}
+.floating > .floatingInput:focus ~ label,
+.floating > .floatingInput:not(:placeholder-shown) ~ label,
+.floating > .floatingSelect ~ label {
+  transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+  -webkit-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+  -moz-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+  -ms-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+  -o-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+}

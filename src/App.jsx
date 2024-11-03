@@ -1,80 +1,82 @@
-import { useEffect, useState } from "react";
+import React, { lazy, useEffect } from "react";
 import i18n from "./i18n";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RoutLayout from "./Component/RoutLayout/RoutLayout";
-import About from "./Pages/About/About";
-import Home from "./Pages/Home/Home";
 import { useTranslation } from "react-i18next";
+//Contexts
 import AuthProvider from "./Context/authContext";
-import SubjectsLayout from "./Pages/SubjectsLayout/SubjectsLayout";
-import Contact from "./Pages/Contact/Contact";
-import Subjects from "./Component/Subjects/Subjects";
-import Units from "./Component/Units/Units";
-import Content from "./Component/Content/Content";
-import Login from "./Pages/Login/Login";
-import Register from "./Pages/Register/Register";
-import EmailConfirmOtp from "./Pages/EmailConfirmOtp/EmailConfirmOtp";
-import ProtectedRoute from "./Component/ProtectedRoute/ProtectedRoute";
-import InverseProtectedRoute from "./Component/InverseProtectedRoute/InverseProtectedRoute";
-import ForgetPasswordEmail from "./Pages/ForgetPasswordEmail/ForgetPasswordEmail";
-import ForgetPasswordConfirmOtp from "./Pages/ForgetPasswordConfirmOtp/ForgetPasswordConfirmOtp";
-import ForgetPasswordResetPass from "./Pages/ForgetPasswordResetPass/ForgetPasswordResetPass";
-import Profile from "./Pages/Profile/Profile";
-import UpdatePassword from "./Component/UpdatePassword/UpdatePassword";
-import UpdateEmail from "./Component/UpdateEmail/UpdateEmail";
-import UpdateProfile from "./Component/UpdateProfile/UpdateProfile";
-import Projector from "./Component/Projector/Projector";
-import MyCourses from "./Component/MyCourses/MyCourses";
 import IsMobileProvider from "./Context/isMobileContext";
 import IsThemeModeProvider from "./Context/isThemeModeContext";
-
+import HomeLoading from "./Component/Ui/HomeLoading/HomeLoading";
+import { Helmet } from "react-helmet-async";
+//Components
+const RoutLayout = lazy(() => import("./Component/RoutLayout/RoutLayout"));
+const About = lazy(() => import("./Pages/About/About"));
+const Home = lazy(() => import("./Pages/Home/Home"));
+const SubjectsLayout = lazy(() =>
+  import("./Pages/SubjectsLayout/SubjectsLayout")
+);
+const Contact = lazy(() => import("./Pages/Contact/Contact"));
+const Subjects = lazy(() => import("./Component/Subjects/Subjects"));
+const Units = lazy(() => import("./Component/Units/Units"));
+const Content = lazy(() => import("./Component/Content/Content"));
+const Login = lazy(() => import("./Pages/Login/Login"));
+const Register = lazy(() => import("./Pages/Register/Register"));
+const EmailConfirmOtp = lazy(() =>
+  import("./Pages/EmailConfirmOtp/EmailConfirmOtp")
+);
+const ProtectedRoute = lazy(() =>
+  import("./Component/ProtectedRoute/ProtectedRoute")
+);
+const InverseProtectedRoute = lazy(() =>
+  import("./Component/InverseProtectedRoute/InverseProtectedRoute")
+);
+const ForgetPasswordEmail = lazy(() =>
+  import("./Pages/ForgetPasswordEmail/ForgetPasswordEmail")
+);
+const ForgetPasswordConfirmOtp = lazy(() =>
+  import("./Pages/ForgetPasswordConfirmOtp/ForgetPasswordConfirmOtp")
+);
+const ForgetPasswordResetPass = lazy(() =>
+  import("./Pages/ForgetPasswordResetPass/ForgetPasswordResetPass")
+);
+const Profile = lazy(() => import("./Pages/Profile/Profile"));
+const UpdatePassword = lazy(() =>
+  import("./Component/UpdatePassword/UpdatePassword")
+);
+const UpdateEmail = lazy(() => import("./Component/UpdateEmail/UpdateEmail"));
+const UpdateProfile = lazy(() =>
+  import("./Component/UpdateProfile/UpdateProfile")
+);
+const Projector = lazy(() => import("./Component/Projector/Projector"));
+const MyCourses = lazy(() => import("./Component/MyCourses/MyCourses"));
 /**
- * Api
- *      -login <Ahmed> 100% ✅ (T)
- *      -register <Ahmed> 100% ✅ (T)
- *      -forget password
- *      -update student profile
- *      -update student password
- *      -get student courses
- *      -get course units
- *      -get course content
- *      -get course video
- *      -get teachers
- *      -Contact
+ * @description
  *
- * contexts
- *      -AuthContext <Ahmed> 100% ✅ (T)
- * components
- *      - spinner
- *      - loading in first
- *      -navbar <Ahmed> 80%
- *      -RoutLayout <Ahmed> 80%
- *      -Home <Ahmed> 100% ✅ (T)
- *      -student account
- *                . Edit student profile
- *                . Change password
- *                . Update Email
- *                . My courses
- *      -About <Mohamed , Ahmed > 100% ✅
- *      -Contact
- *      -Footer
- *      -Login 80% (T)
- *      -Register 80% (T)
- *      -Forget password
- *      -Subjects <Ahmed>
- *                . Course units
- *                . Course content
- *                . Course video
- *      -Heading1 <Ahmed> 100% ✅
- *      -Heading2 <Ahmed> 100% ✅
  */
-
+/**
+ * 1) delete unused Css
+ * 2) change default image
+ * 3) Spinner Component Done ✅
+ * 4) lazy loading Done ✅
+ * 5) add 404 page
+ * 6) SEO
+ * 7) add favicon
+ * 8) add meta tags
+ * 9) add google analytics
+ * 10) add sitemap
+ * 12) lazy loading Done ✅
+ *
+ */
 function App() {
   const { t } = useTranslation();
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <RoutLayout />,
+      element: (
+        // <React.Suspense fallback={<HomeLoading />}>
+        <RoutLayout />
+        // </React.Suspense>
+      ),
       children: [
         {
           path: "/",
@@ -227,20 +229,21 @@ function App() {
     // const i18nextLng = localStorage.getItem("i18nextLng") || "ar";
     const i18nextLng = "ar";
     i18n.changeLanguage(i18nextLng);
-    if (i18nextLng === "ar") {
-      document.body.dir = "rtl";
-      document.title = "منصة حروف التعليمبة";
-    } else {
-      document.body.dir = "ltr";
-      document.title = "Horuf Education Platform";
-    }
+    if (i18nextLng === "ar") document.body.dir = "rtl";
+    else document.body.dir = "ltr";
   }, []);
 
   return (
     <>
+    <Helmet>
+        <meta name="Keywords" content={t("home_keywords_for_meta")} />
+        <meta name="description" content={t("home_desc_for_meta")} />
+        <title>{t("home_title_for_meta")}</title>
+      </Helmet>
       <IsThemeModeProvider>
         <IsMobileProvider>
           <AuthProvider>
+      
             <RouterProvider router={router} />
           </AuthProvider>
         </IsMobileProvider>

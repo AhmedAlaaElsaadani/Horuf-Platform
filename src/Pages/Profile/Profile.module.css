@@ -3,6 +3,7 @@
   font-size: 16px;
 }
 .profile-links {
+  flex-direction: column;
   padding: 1.75em 1.25em;
   background-color: var(--profile-nav-bg-color);
   border-radius: 0.9375em;
@@ -44,14 +45,6 @@
   -o-border-radius: 0.3125em;
 }
 
-.Profile form label {
-  color: #6b7280;
-  font-size: 1.25em;
-  font-weight: 400;
-}
-.Profile form label i {
-  color: #0269b3;
-}
 .Profile form button {
   width: fit-content;
 }
@@ -60,9 +53,17 @@
   .Profile {
     font-size: 14px;
   }
+  .profile-links {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+  }
 }
 @media (max-width: 425px) {
   .Profile {
     font-size: 10px;
+  }
+  .profile-links li {
+    padding: 8px 8px 12px;
+    font-size: 1em;
   }
 }

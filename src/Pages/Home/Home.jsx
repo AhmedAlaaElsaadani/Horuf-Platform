@@ -1,17 +1,19 @@
 import Lottie from "lottie-react";
-import React, { useContext } from "react";
+import React, { lazy, useContext } from "react";
 import homeAnimation from "../../assets/animations/Home.json";
 import style from "./Home.module.css";
 import { HashLink } from "react-router-hash-link";
 import { useTranslation } from "react-i18next";
 import { authContext } from "../../Context/authContext";
 import { motion } from "framer-motion";
-import Contact from "../../Pages/Contact/Contact";
+import Spinner from "../../Component/Ui/Spinner/Spinner";
+const Contact = lazy(() => import("../../Pages/Contact/Contact"));
 export default function Home() {
   const { t, i18n } = useTranslation();
   const { isRegistered } = useContext(authContext);
   return (
     <>
+     
       <section
         id="Home"
         className={style.Home}
@@ -51,7 +53,9 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Contact flagNotAloneCompounded={true} />
+      <React.Suspense fallback={<Spinner />}>
+        <Contact flagNotAloneCompounded={true} />
+      </React.Suspense>
     </>
   );
 }

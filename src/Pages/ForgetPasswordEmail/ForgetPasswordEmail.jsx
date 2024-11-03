@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import ApiManager from "../../Utilies/ApiManager";
 import * as Yup from "yup";
+import FloatingInput from "../../Component/Ui/FloatingInput/FloatingInput";
+import { motion } from "framer-motion";
 
 export default function ForgetPasswordEmail() {
   const [responseFlag, setResponseFlag] = useState(false);
@@ -75,6 +77,14 @@ export default function ForgetPasswordEmail() {
     },
     validationSchema: validationSchemaYup,
   });
+  const forgetInput = [
+    {
+      inputType: "email",
+      inputName: "email",
+      inputTransition: "email",
+      icon: "fa-envelope",
+    },
+  ];
   return (
     <section
       className={
@@ -93,42 +103,36 @@ export default function ForgetPasswordEmail() {
           "container shadow rounded-4 border p-3 " + style["parentContainer"]
         }
       >
-        <div className={style["heading"]}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className={style["heading"]}
+        >
           {" "}
           <h2 className="text-center py-3">{t("Reset Password")}</h2>
           <p className="text-center">
             {t("Enter your email to receive a verification code")}
           </p>
-        </div>
+        </motion.div>
         <form onSubmit={myFormik.handleSubmit} className="my-5" dir="ltr">
-          <div className={"form-floating"}>
-            <input
-              dir={flagDirection ? "ltr" : "rtl"}
-              type="email"
-              className="form-control mb-4"
-              id="email"
-              name="email"
-              placeholder={t("email")}
-              onChange={myFormik.handleChange}
-              value={myFormik.values.email}
+          {forgetInput.map((input, index) => (
+            <FloatingInput
+              key={index}
+              idx={index}
+              {...input}
+              myFormik={myFormik}
+              flagDirection={flagDirection}
+              t={t}
             />
-            <label
-              style={{
-                left: flagDirection ? "auto" : "0",
-                right: flagDirection ? "0" : "auto",
-              }}
-              htmlFor="email"
-            >
-              {t("email")} <i className="fa-solid fa-envelope"></i>
-            </label>
-            {myFormik.errors.email && myFormik.touched.email && (
-              <div className="alert text-center alert-danger">
-                {myFormik.errors.email}
-              </div>
-            )}
-          </div>
+          ))}
 
-          <div className="text-center">
+          <motion.div
+            initial={{ opacity: 0,x:100 }}
+            animate={{ opacity: 1,x:0 }}
+            transition={{ duration: 0.3 }}
+            className="text-center"
+          >
             <button
               type="submit"
               className="btn btn-primary "
@@ -152,7 +156,7 @@ export default function ForgetPasswordEmail() {
                 {resMessage.message}
               </div>
             )}
-          </div>
+          </motion.div>
         </form>
       </div>
     </section>

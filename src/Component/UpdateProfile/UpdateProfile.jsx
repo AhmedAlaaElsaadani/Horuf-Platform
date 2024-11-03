@@ -5,21 +5,14 @@ import * as Yup from "yup";
 import { authContext } from "../../Context/authContext";
 import img from "../../assets/Images/undraw_profile_pic_ic5t.svg";
 import ApiManager from "../../Utilies/ApiManager";
+import FloatingInput from "../Ui/FloatingInput/FloatingInput";
+import FloatingSelect from "../Ui/FloatingSelect/FloatingSelect";
 export default function UpdateProfile({ flagDirection }) {
   const { t } = useTranslation();
   const { user, token } = useContext(authContext);
   const [responseFlag, setResponseFlag] = useState(false);
   const [resMessage, setResMessage] = useState(null);
 
-  const Level = {
-    level_6: 6,
-    level_7: 7,
-    level_8: 8,
-    level_9: 9,
-    level_10: 10,
-    level_11: 11,
-    level_12: 12,
-  };
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required(t("Required")),
     lastName: Yup.string().required(t("Required")),
@@ -90,212 +83,119 @@ export default function UpdateProfile({ flagDirection }) {
     validationSchema: validationSchema,
     onSubmit: sendData,
   });
+  const updateInputs = [
+    {
+      inputType: "text",
+      inputName: "firstName",
+      inputTransition: "firstName",
+      icon: "fa-user",
+    },
+    {
+      inputType: "text",
+      inputName: "lastName",
+      inputTransition: "lastName",
+      icon: "fa-user",
+    },
+    {
+      inputType: "tel",
+      inputName: "phone",
+      inputTransition: "phoneNumber",
+      icon: "fa-phone-volume",
+    },
+    {
+      inputType: "tel",
+      inputName: "parentPhone",
+      inputTransition: "parentPhone",
+      icon: "fa-phone-volume",
+    },
+    {
+      inputType: "text",
+      inputName: "address",
+      inputTransition: "address",
+      icon: "fa-location-dot",
+    },
+  ];
+  const updateSelect = [
+    {
+      selectName: "level",
+      selectTransition: "level",
+      icon: "fa-user-graduate",
+      options: [
+        {
+          key: "level 6",
+          value: 6,
+        },
+        {
+          key: "level 7",
+          value: 7,
+        },
+        {
+          key: "level 8",
+          value: 8,
+        },
+        {
+          key: "level 9",
+          value: 9,
+        },
+        {
+          key: "level 10",
+          value: 10,
+        },
+        {
+          key: "level 11",
+          value: 11,
+        },
+        {
+          key: "level 12",
+          value: 12,
+        },
+      ],
+    },
+    {
+      selectName: "gender",
+      selectTransition: "Gender",
+      icon: "fa-user",
+      options: [
+        {
+          key: "Male",
+          value: "M",
+        },
+        {
+          key: "Female",
+          value: "F",
+        },
+      ],
+    },
+  ];
+
   return (
     <div action="" className="UpdateProfile container rounded-3  shadow">
       <div className="row justify-content-center">
         <form onSubmit={myFormik.handleSubmit} className="col-md-8">
-          <div className="col-md-12">
-            <div className={"form-floating"}>
-              <input
-                dir={flagDirection ? "ltr" : "rtl"}
-                type="text"
-                className="form-control mb-4 "
-                id="firstName"
-                name="firstName"
-                placeholder={t("firstName")}
-                onChange={myFormik.handleChange}
-                value={myFormik.values.firstName}
+          {updateInputs.map((input, index) => (
+            <div className="col-md-12">
+              <FloatingInput
+                key={index}
+                idx={index}
+                {...input}
+                myFormik={myFormik}
+                flagDirection={flagDirection}
+                t={t}
               />
-              <label
-                style={{
-                  left: flagDirection ? "auto" : "0",
-                  right: flagDirection ? "0" : "auto",
-                }}
-                htmlFor="firstName"
-              >
-                {t("firstName")} <i className="fa-solid fa-user"></i>
-              </label>
             </div>
-            {myFormik.errors.firstName && myFormik.touched.firstName && (
-              <div className="alert alert-danger">
-                {myFormik.errors.firstName}
-              </div>
-            )}
-          </div>
-
-          <div className="col-md-12">
-            <div className={"form-floating"}>
-              <input
-                dir={flagDirection ? "ltr" : "rtl"}
-                type="text"
-                className="form-control mb-4"
-                id="lastName"
-                name="lastName"
-                placeholder={t("lastName")}
-                onChange={myFormik.handleChange}
-                value={myFormik.values.lastName}
+          ))}
+          {updateSelect.map((select, index) => (
+            <div className="col-md-12">
+              <FloatingSelect
+                key={index}
+                idx={index}
+                {...select}
+                myFormik={myFormik}
+                flagDirection={flagDirection}
+                t={t}
               />
-              <label
-                style={{
-                  left: flagDirection ? "auto" : "0",
-                  right: flagDirection ? "0" : "auto",
-                }}
-                htmlFor="lastName"
-              >
-                {t("lastName")} <i className="fa-solid fa-user"></i>
-              </label>
             </div>
-            {myFormik.errors.lastName && myFormik.touched.lastName && (
-              <div className="alert alert-danger">
-                {myFormik.errors.lastName}
-              </div>
-            )}
-          </div>
-
-          <div className="col-md-12">
-            <div className={"form-floating"}>
-              <input
-                dir={flagDirection ? "ltr" : "rtl"}
-                type="tel"
-                className="form-control mb-4"
-                id="phone"
-                name="phone"
-                placeholder={t("phoneNumber")}
-                onChange={myFormik.handleChange}
-                value={myFormik.values.phone}
-              />
-              <label
-                style={{
-                  left: flagDirection ? "auto" : "0",
-                  right: flagDirection ? "0" : "auto",
-                }}
-                htmlFor="phone"
-              >
-                {t("phoneNumber")} <i className="fa-solid fa-phone-volume"></i>
-              </label>
-            </div>
-            {myFormik.errors.phone && myFormik.touched.phone && (
-              <div className="alert alert-danger">{myFormik.errors.phone}</div>
-            )}
-          </div>
-
-          <div className="col-md-12">
-            <div className={"form-floating"}>
-              <input
-                dir={flagDirection ? "ltr" : "rtl"}
-                type="tel"
-                className="form-control mb-4"
-                id="parentPhone"
-                name="parentPhone"
-                placeholder={t("parentPhone")}
-                onChange={myFormik.handleChange}
-                value={myFormik.values.parentPhone}
-              />
-              <label
-                style={{
-                  left: flagDirection ? "auto" : "0",
-                  right: flagDirection ? "0" : "auto",
-                }}
-                htmlFor="parentPhone"
-              >
-                {t("parentPhone")} <i className="fa-solid fa-phone-volume"></i>
-              </label>
-            </div>
-            {myFormik.errors.parentPhone && myFormik.touched.parentPhone && (
-              <div className="alert alert-danger">
-                {myFormik.errors.parentPhone}
-              </div>
-            )}
-          </div>
-          <div className="col-md-12">
-            <div className={"form-floating"}>
-              <input
-                dir={flagDirection ? "ltr" : "rtl"}
-                type="text"
-                className="form-control mb-4"
-                id="address"
-                name="address"
-                placeholder={t("address")}
-                onChange={myFormik.handleChange}
-                value={myFormik.values.address}
-              />
-              <label
-                style={{
-                  left: flagDirection ? "auto" : "0",
-                  right: flagDirection ? "0" : "auto",
-                }}
-                htmlFor="address"
-              >
-                {t("address")} <i className="fa-solid fa-location-dot"></i>
-              </label>
-            </div>
-            {myFormik.errors.address && myFormik.touched.address && (
-              <div className="alert alert-danger">
-                {myFormik.errors.address}
-              </div>
-            )}
-          </div>
-
-          <div className="col-md-12">
-            <div className={"form-floating"}>
-              <select
-                className={"form-select mb-4 "}
-                aria-label="Default select example"
-                dir={flagDirection ? "ltr" : "rtl"}
-                onChange={myFormik.handleChange}
-                value={myFormik.values.level}
-                name="level"
-                id="level"
-              >
-                {Object.entries(Level).map(([key, value]) => (
-                  <option key={key} value={value}>
-                    {t(key.replace("_", " "))}
-                  </option>
-                ))}
-              </select>
-              <label
-                style={{
-                  left: flagDirection ? "auto" : "0",
-                  right: flagDirection ? "0" : "auto",
-                }}
-                htmlFor="level"
-              >
-                {t("level")} <i className="fa-solid fa-user-graduate"></i>
-              </label>
-            </div>
-            {myFormik.errors.level && myFormik.touched.level && (
-              <div className="alert alert-danger">{myFormik.errors.level}</div>
-            )}
-          </div>
-
-          <div className="col-md-12">
-            <div className="form-floating">
-              <select
-                id="gender"
-                name="gender"
-                className="form-select mb-4"
-                dir={flagDirection ? "ltr" : "rtl"}
-                onChange={myFormik.handleChange}
-                value={myFormik.values.gender}
-              >
-                <option value="M" label={t("Male")} />
-                <option value="F" label={t("Female")} />
-              </select>
-              <label
-                style={{
-                  left: flagDirection ? "auto" : "0",
-                  right: flagDirection ? "0" : "auto",
-                }}
-                htmlFor="gender"
-              >
-                {t("Gender")} <i className="fa-solid fa-user"></i>
-              </label>
-            </div>
-            {myFormik.errors.gender && myFormik.touched.gender && (
-              <div className="alert alert-danger">{myFormik.errors.gender}</div>
-            )}
-          </div>
-
+          ))}
           <div className="col-md-12 flex-column align-items-center d-flex">
             <button
               type="submit"

@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { authContext } from "../../Context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import ApiManager from "../../Utilies/ApiManager";
+import FloatingInput from "../Ui/FloatingInput/FloatingInput";
 
 export default function UpdateEmail({ flagDirection }) {
   const { t } = useTranslation();
@@ -55,6 +56,14 @@ export default function UpdateEmail({ flagDirection }) {
       sendEmail(values.email);
     },
   });
+  const updateInputs = [
+    {
+      inputType: "email",
+      inputName: "email",
+      inputTransition: "email",
+      icon: "fa-envelope",
+    },
+  ];
   return (
     <form
       action=""
@@ -63,30 +72,16 @@ export default function UpdateEmail({ flagDirection }) {
     >
       <div className="row ">
         <div className="col-md-12">
-          <div className={"form-floating"}>
-            <input
-              dir={flagDirection ? "ltr" : "rtl"}
-              type="email"
-              className="form-control mb-4"
-              id="email"
-              name="email"
-              placeholder={t("email")}
-              onChange={myFormik.handleChange}
-              value={myFormik.values.email}
+          {updateInputs.map((input, index) => (
+            <FloatingInput
+              key={index}
+              idx={index}
+              {...input}
+              myFormik={myFormik}
+              flagDirection={flagDirection}
+              t={t}
             />
-            <label
-              style={{
-                left: flagDirection ? "auto" : "0",
-                right: flagDirection ? "0" : "auto",
-              }}
-              htmlFor="email"
-            >
-              {t("email")} <i className="fa-solid fa-envelope"></i>
-            </label>
-          </div>
-          {myFormik.errors.email && myFormik.touched.email && (
-            <div className="alert alert-danger">{myFormik.errors.email}</div>
-          )}
+          ))}
         </div>
         <div className="col-md-12 flex-column align-items-center d-flex">
           <button
