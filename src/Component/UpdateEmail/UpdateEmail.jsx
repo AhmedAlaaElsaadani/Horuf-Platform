@@ -108,18 +108,20 @@ export default function UpdateEmail({ flagDirection }) {
             </div>
           )}
         </div>
-        <p className="text-center text-danger">
-          {t("You need to verify your email it ")}
-          <Link
-            to="/EmailConfirmOtp"
-            state={{ token: token }}
-            onClick={async () => {
-              await ApiManager.sendOtp(token);
-            }}
-          >
-            {t("Verify Email Now")}
-          </Link>
-        </p>
+        {user && !user?.isVerified && (
+          <p className="text-center text-danger">
+            {t("You need to verify your email it ")}
+            <Link
+              to="/EmailConfirmOtp"
+              state={{ token: token }}
+              onClick={async () => {
+                await ApiManager.sendOtp(token);
+              }}
+            >
+              {t("Verify Email Now")}
+            </Link>
+          </p>
+        )}
       </div>
     </form>
   );

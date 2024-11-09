@@ -5,7 +5,7 @@ import logo from "../../assets/Images/logo.png";
 import { HashLink } from "react-router-hash-link";
 import { useTranslation } from "react-i18next";
 import style from "./Navbar.module.css";
-import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
+import DarkModeToggle from "../Ui/DarkModeToggle/DarkModeToggle";
 import i18n from "../../i18n";
 import { authContext } from "../../Context/authContext";
 import ApiManager from "../../Utilies/ApiManager";
@@ -121,7 +121,7 @@ const Navbar = () => {
     };
   }, []);
   useEffect(() => {
-    const options = { threshold: 0.01 };
+    const options = { threshold: 0.1 };
     let observer;
 
     const createObserver = () => {

@@ -54,7 +54,7 @@
 }
 .links a:nth-child(1) {
   background-color: #0269b3;
-  color: var(--home-main-color);
+  color: #fff;
   border-radius: 0.3125em;
   -webkit-border-radius: 0.3125em;
   -moz-border-radius: 0.3125em;

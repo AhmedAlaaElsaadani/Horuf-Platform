@@ -55,6 +55,7 @@ html {
   --form-heading-color: var(--Contact-heading-color);
   --form-message: var(--Login-message);
 }
+
 .dark {
   /* Global coloring  */
   --bg-color: #1e1e1e;

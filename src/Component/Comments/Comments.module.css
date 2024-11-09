@@ -1,5 +1,9 @@
+.comments{
+  margin-top: 3em;
+}
 .comment {
   border-bottom: 1px solid #0269b3;
+  padding-top: 1em;
 }
 .comment p {
   color: #0269b3;
@@ -12,4 +16,18 @@
   font-size: 0.875em;
   padding: 0.5em 0;
   font-weight: 400;
+}
+
+.comment button i{
+  transition: transform 0.5s ease-in-out;
+  -webkit-transition: transform 0.5s ease-in-out;
+  -moz-transition: transform 0.5s ease-in-out;
+  -ms-transition: transform 0.5s ease-in-out;
+  -o-transition: transform 0.5s ease-in-out;
+}
+.comment .comment:last-child{
+  border-bottom: none;
+}
+.rotated{
+  transform: rotate(180deg);
 }

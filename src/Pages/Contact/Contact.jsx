@@ -114,8 +114,7 @@ export default function Contact({ flagNotAloneCompounded }) {
 
   return (
     <>
-      {
-        !flagNotAloneCompounded &&
+      {!flagNotAloneCompounded && (
         <Helmet>
           <meta name="Keywords" content={t("contact_keywords_for_meta")} />
           <meta
@@ -124,7 +123,7 @@ export default function Contact({ flagNotAloneCompounded }) {
           />
           <title>{t("contact_title_meta")}</title>
         </Helmet>
-      }
+      )}
       <section
         id="Contact"
         className={style.Contact}

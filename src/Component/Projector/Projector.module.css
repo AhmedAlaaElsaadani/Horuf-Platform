@@ -80,6 +80,13 @@
     font-size: 14px;
   }
 }
+@media (max-width: 768px) {
+
+  .lesson-lists {
+    order: 2;
+  }
+  
+}
 @media (max-width: 425px) {
   .Projector {
     font-size: 10px;

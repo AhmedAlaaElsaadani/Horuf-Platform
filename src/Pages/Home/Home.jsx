@@ -7,13 +7,18 @@ import { useTranslation } from "react-i18next";
 import { authContext } from "../../Context/authContext";
 import { motion } from "framer-motion";
 import Spinner from "../../Component/Ui/Spinner/Spinner";
+import { Helmet } from "react-helmet-async";
 const Contact = lazy(() => import("../../Pages/Contact/Contact"));
 export default function Home() {
   const { t, i18n } = useTranslation();
   const { isRegistered } = useContext(authContext);
   return (
     <>
-     
+       <Helmet>
+        <meta name="Keywords" content={t("home_keywords_for_meta")} />
+        <meta name="description" content={t("home_desc_for_meta")} />
+        <title>{t("home_title_for_meta")}</title>
+      </Helmet>
       <section
         id="Home"
         className={style.Home}
