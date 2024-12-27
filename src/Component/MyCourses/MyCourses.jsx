@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../Context/authContext";
 import { useTranslation } from "react-i18next";
 import style from "./MyCourses.module.css";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import ApiManager from "../../Utilies/ApiManager";
 import { motion } from "framer-motion";
 export default function MyCourses() {
@@ -23,13 +23,17 @@ export default function MyCourses() {
       setLessons([]);
     }
   };
+  const flagDirection = useOutletContext();
 
   useEffect(() => {
     getData();
   }, []);
   return (
     <>
-      <div className={"container overflow-y-auto " + style["my-courses"]}>
+      <div
+        dir={flagDirection?"ltr":"rtl"}
+        className={"container overflow-y-auto " + style["my-courses"]}
+      >
         <div className="row g-3">
           <div className="col-12 text-center my-3">
             <h3>{t("myCourses-heading")}</h3>
@@ -100,7 +104,7 @@ export default function MyCourses() {
                   key={idx}
                   className="col-sm-12 col-lg-4 col-md-6"
                 >
-                  <Link to={`/subjects/lessons/${lesson.id}`}>
+                  <Link to={`/subjects/lessons/${lesson.id}`} >
                     <div className={"card position-relative " + style["card"]}>
                       <img
                         src={lesson.thumbnailUrl ? lesson.thumbnailUrl : ""}

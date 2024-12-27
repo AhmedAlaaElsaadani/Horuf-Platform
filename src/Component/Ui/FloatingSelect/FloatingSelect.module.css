@@ -13,17 +13,19 @@
   background-color: var(--bg-color) !important;
   color: var(--input-text-color) !important;
 }
-.floating > .floatingInput:-webkit-autofill ~ label {
-  transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -webkit-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -moz-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -ms-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -o-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-}
+.floating > .floatingInput:-webkit-autofill ~ label,
 .floating > .floatingSelect ~ label {
-  transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -webkit-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -moz-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -ms-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -o-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+  transform: scale(0.64) translateY(-16%) translateX(55%) !important;
+  -webkit-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
+  -moz-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
+  -ms-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
+  -o-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
+}
+.floating:has(input[dir="rtl"]) > .floatingInput:-webkit-autofill ~ label,
+.floating:has(input[dir="rtl"]) > .floatingSelect ~ label {
+  transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -webkit-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -moz-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -ms-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -o-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
 }

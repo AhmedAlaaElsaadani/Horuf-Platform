@@ -39,7 +39,7 @@
   left: 13px;
   width: 30px;
   height: 30px;
-  background-color: #fafd0f;
+  background-color: #f8f8f8;
   transform: scale(1);
   border-radius: 50%;
   transition: 0.3s ease top, 0.3s ease left, 0.3s ease transform,
@@ -47,23 +47,7 @@
   z-index: 1;
 }
 
-#star-1 {
-  position: relative;
-}
 
-#star-2 {
-  position: absolute;
-  transform: rotateZ(36deg);
-}
-
-.star {
-  top: 0;
-  left: -7px;
-  font-size: 54px;
-  line-height: 28px;
-  color: #fafd0f;
-  transition: 0.3s ease color;
-}
 
 #moon {
   position: absolute;
@@ -74,6 +58,10 @@
   background-color: #fff;
   border-radius: 50%;
   transition: 0.3s ease bottom;
+  -webkit-transition: 0.3s ease bottom;
+  -moz-transition: 0.3s ease bottom;
+  -ms-transition: 0.3s ease bottom;
+  -o-transition: 0.3s ease bottom;
 }
 
 #moon:before {
@@ -96,11 +84,11 @@
   top: 3px;
   left: 64px;
   transform: scale(0.3);
-  background-color: yellow;
+  background-color: #f8f8f8;
 }
 
 #toggle_checkbox:checked + label .star {
-  color: yellow;
+  color: #f8f8f8;
 }
 
 #toggle_checkbox:checked + label #moon {

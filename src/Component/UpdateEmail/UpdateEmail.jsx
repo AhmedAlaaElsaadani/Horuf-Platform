@@ -6,13 +6,15 @@ import { authContext } from "../../Context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import ApiManager from "../../Utilies/ApiManager";
 import FloatingInput from "../Ui/FloatingInput/FloatingInput";
+import { useOutletContext } from "react-router-dom";
 
-export default function UpdateEmail({ flagDirection }) {
+export default function UpdateEmail() {
   const { t } = useTranslation();
   const { user, token } = useContext(authContext);
   const [responseFlag, setResponseFlag] = useState(false);
   const [resMessage, setResMessage] = useState(null);
   const navigator = useNavigate();
+  const { flagDirection } = useOutletContext();
 
   const sendEmail = async (email) => {
     setResponseFlag(true);

@@ -1,4 +1,4 @@
- import React, { lazy, useEffect } from "react";
+import React, { lazy, useEffect } from "react";
 import i18n from "./i18n";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 const IsThemeModeProvider = lazy(() => import("./Context/isThemeModeContext"));
 const IsMobileProvider = lazy(() => import("./Context/isMobileContext"));
 const AuthProvider = lazy(() => import("./Context/authContext"));
- 
+
 //Components
 const RoutLayout = lazy(() => import("./Component/RoutLayout/RoutLayout"));
 const About = lazy(() => import("./Pages/About/About"));
@@ -236,7 +236,6 @@ function App() {
 
   return (
     <>
-      
       <IsThemeModeProvider>
         <IsMobileProvider>
           <AuthProvider>

@@ -8,7 +8,7 @@ export default function Footer() {
   const { t } = useTranslation();
   return (
     <footer
-      className={style["footer-container"] + " mt-3"}
+      className={style["footer-container"] + " mt-5"}
       style={{
         backgroundImage: `url(${footerImg})`,
       }}
@@ -32,7 +32,7 @@ export default function Footer() {
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="mb-0"
+            className={"mb-0 "+style["copy"]}
           >
             {t("Footer Copy")}
             <span className={style["comp-name"]}>{t("Footer comp")}</span>
@@ -45,8 +45,7 @@ export default function Footer() {
             className=" mb-1 text-center m-auto"
             style={{ fontSize: "12px", color: "rgba(255, 255, 255, 0.5)" }}
           >
-            {" "}
-            {t("Footer IzI1")}{" "}
+            {t("Footer IzI1")}
             <a
               style={{
                 color: "rgba(255, 255, 255, 0.5)",
@@ -56,7 +55,7 @@ export default function Footer() {
               href="https://www.izitechs.com"
             >
               IzI Techs
-            </a>{" "}
+            </a>
             {t("Footer IzI2")}
           </motion.p>
         </div>

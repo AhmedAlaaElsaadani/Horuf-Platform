@@ -105,7 +105,7 @@ export default function Profile() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="col-md-9 d-flex align-items-center"
           >
-            <Outlet flagDirection={flagDirection} />
+            <Outlet context={{flagDirection}} />
           </motion.div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export default function Heading2({
                   onClick={() => setLinks(links.slice(0, index + 1))}
                   to={link.to}
                 >
-                  {link.text}
+                  {link.text} 
                 </Link>
                 {index < links.length - 1 && <span>||</span>}{" "}
                 {/* Add separator except after the last link */}

@@ -21,12 +21,12 @@
     "lottie-react": "^2.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.4",
     "react-i18next": "^14.0.1",
     "react-router-dom": "^6.26.2",
     "react-router-hash-link": "^2.4.3",
-    "yup": "^1.4.0",
-    "react-helmet-async": "^2.0.4"
-
+    "sweetalert2": "^11.14.5",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

@@ -75,11 +75,16 @@
   padding: 10px;
   display: block;
   color: var(--nav-link-color) !important;
+  transition: color 0.3s ease-in;
+  -webkit-transition: color 0.3s ease-in;
+  -moz-transition: color 0.3s ease-in;
+  -ms-transition: color 0.3s ease-in;
+  -o-transition: color 0.3s ease-in;
 }
 .profile ul li:hover {
   background-color: #f1f1f1;
 }
-.profile ul a:hover {
+.profile ul li:hover a {
   color: var(--primary) !important;
 }
 .profile ul a.selected:active {

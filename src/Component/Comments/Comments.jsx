@@ -6,6 +6,8 @@ import FloatingInput from "../Ui/FloatingInput/FloatingInput";
 import Spinner from "../Ui/Spinner/Spinner";
 import ApiManager from "../../Utilies/ApiManager";
 import { IsMobileContext } from "../../Context/isMobileContext";
+import Swal from "sweetalert2";
+
 export default function Comments({ lessonId, t, flagDirection, token, user }) {
   const [comments, setComments] = useState(null);
   const [buttonLoading, setButtonLoading] = useState(false);
@@ -69,17 +71,39 @@ export default function Comments({ lessonId, t, flagDirection, token, user }) {
   };
 
   const deleteComment = async (commentId) => {
-    window.confirm(t("Are you sure you want to delete this comment?")) &&
-      (await ApiManager.deleteComment(token, commentId)
-        .then(async (response) => {
+    Swal.fire({
+      title: t("Are you sure?"),
+      text: t("You won't be able to revert this!"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: t("Yes, delete it!"),
+      cancelButtonText: t("Cancel"),
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await ApiManager.deleteComment(token, commentId);
           console.log(response);
+
           if (response.status === 200) {
+            Swal.fire(
+              t("Deleted!"),
+              t("Your comment has been deleted."),
+              "success"
+            );
             await getComments();
           }
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error(error);
-        }));
+          Swal.fire(
+            t("Error!"),
+            t("Something went wrong. Please try again."),
+            "error"
+          );
+        }
+      }
+    });
   };
   const submitForm = (values) => {
     if (commentParentId) {
@@ -212,17 +236,20 @@ function Comment({
         {flagUserMyComment && (
           <>
             <button
-              className={`btn btn-danger p-0 px-1 my-3 border-0 position-absolute top-0 ${
+              className={`btn btn-danger  my-3 rounded-circle border-0 d-flex justify-content-center align-items-center position-absolute top-0 ${
                 flagDirection ? "start-0" : "end-0"
               }`}
-              style={{ fontSize: "0.8rem" }}
+              style={{ fontSize: "0.8rem" ,
+                width: "25px",
+                height: "25px",
+               }}
               aria-label="delete comment button"
               onClick={() => deleteComment(comment.id)}
             >
               <i className="fa-solid fa-trash mx-2"></i>
             </button>
             <button
-              className="btn btn-secondary p-0 px-1 border-0  mb-2 ms-auto "
+              className="btn btn-secondary p-0 px-1  border-0  mb-2 ms-auto "
               style={{ fontSize: "0.8rem" }}
               onClick={() => {
                 // scroll to above the form
