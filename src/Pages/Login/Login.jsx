@@ -148,7 +148,7 @@ export default function Login() {
         </motion.div>
 
         {loginInputs.map((input, index) => (
-          <div className={style["inputContainer"] + " mb-3"}>
+          <div key={index} className={style["inputContainer"] + " mb-3"}>
             <FloatingInput
               key={index}
               idx={index}

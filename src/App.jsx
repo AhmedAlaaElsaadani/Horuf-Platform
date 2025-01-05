@@ -3,11 +3,10 @@ import i18n from "./i18n";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 //Contexts
-import AuthProvider from "./Context/authContext";
-import IsMobileProvider from "./Context/isMobileContext";
-import IsThemeModeProvider from "./Context/isThemeModeContext";
-import HomeLoading from "./Component/Ui/HomeLoading/HomeLoading";
-import { Helmet } from "react-helmet-async";
+const IsThemeModeProvider = lazy(() => import("./Context/isThemeModeContext"));
+const IsMobileProvider = lazy(() => import("./Context/isMobileContext"));
+const AuthProvider = lazy(() => import("./Context/authContext"));
+
 //Components
 const RoutLayout = lazy(() => import("./Component/RoutLayout/RoutLayout"));
 const About = lazy(() => import("./Pages/About/About"));
@@ -49,6 +48,7 @@ const UpdateProfile = lazy(() =>
 );
 const Projector = lazy(() => import("./Component/Projector/Projector"));
 const MyCourses = lazy(() => import("./Component/MyCourses/MyCourses"));
+const Error404 = lazy(() => import("./Component/Error404/Error404"));
 /**
  * @description
  *
@@ -222,6 +222,7 @@ function App() {
           ],
         },
       ],
+      errorElement: <Error404 />,
     },
   ]);
   useEffect(() => {
@@ -235,15 +236,9 @@ function App() {
 
   return (
     <>
-    <Helmet>
-        <meta name="Keywords" content={t("home_keywords_for_meta")} />
-        <meta name="description" content={t("home_desc_for_meta")} />
-        <title>{t("home_title_for_meta")}</title>
-      </Helmet>
       <IsThemeModeProvider>
         <IsMobileProvider>
           <AuthProvider>
-      
             <RouterProvider router={router} />
           </AuthProvider>
         </IsMobileProvider>

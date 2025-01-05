@@ -9,7 +9,7 @@
   font-size: 1rem;
   font-weight: 700;
 }
-.navbarTop a.login-register{
+.navbarTop a.login-register {
   color: #fff !important;
   transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
@@ -17,7 +17,7 @@
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
 }
-.navbarTop a::after{
+.navbarTop a::after {
   content: "";
   display: block;
   width: 0;
@@ -28,15 +28,15 @@
   -moz-transition: width 0.3s;
   -ms-transition: width 0.3s;
   -o-transition: width 0.3s;
-
 }
-.navbarTop a:hover::after{
+.navbarTop a:hover::after {
   width: 100%;
 }
-.profile{
-  margin:0  15px;
+/* Profile */
+.profile {
+  margin: 0 15px;
 }
-.profile .icon{
+.profile .icon {
   background-color: #f9f9f9;
   color: #0094ff;
   font-size: 1rem;
@@ -45,7 +45,7 @@
   height: 30px;
   margin: auto;
 }
-.profile .icon:hover{
+.profile .icon:hover {
   color: var(--primary);
 }
 .profile ul {
@@ -74,15 +74,24 @@
   font-weight: 700;
   padding: 10px;
   display: block;
+  color: var(--nav-link-color) !important;
+  transition: color 0.3s ease-in;
+  -webkit-transition: color 0.3s ease-in;
+  -moz-transition: color 0.3s ease-in;
+  -ms-transition: color 0.3s ease-in;
+  -o-transition: color 0.3s ease-in;
 }
-.profile ul a:hover {
-  color: var(--primary) !important;
+.profile ul li:hover {
   background-color: #f1f1f1;
+}
+.profile ul li:hover a {
+  color: var(--primary) !important;
 }
 .profile ul a.selected:active {
   color: var(--primary) !important;
   background-color: #f1f1f1 !important;
 }
+/* Login and Register link Color */
 
 .navbarTop a {
   text-align: center;

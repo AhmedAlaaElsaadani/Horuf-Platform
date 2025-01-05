@@ -9,7 +9,9 @@
 }
 .card {
   overflow: hidden;
-  max-height: 300px;
+  height: 200px;
+  display: flex;
+  align-items: center;
   transition: scale 0.5s;
   -webkit-transition: scale 0.5s;
   -moz-transition: scale 0.5s;

@@ -5,12 +5,14 @@ import * as Yup from "yup";
 import { authContext } from "../../Context/authContext";
 import ApiManager from "../../Utilies/ApiManager";
 import FloatingInput from "../Ui/FloatingInput/FloatingInput";
+import { useOutletContext } from "react-router-dom";
 
-export default function UpdatePassword({ flagDirection }) {
+export default function UpdatePassword() {
   const { t } = useTranslation();
   const { user, token } = useContext(authContext);
   const [responseFlag, setResponseFlag] = useState(false);
   const [resMessage, setResMessage] = useState(null);
+  const {flagDirection} = useOutletContext();
 
   const validationSchema = Yup.object({
     prevPassword: Yup.string()

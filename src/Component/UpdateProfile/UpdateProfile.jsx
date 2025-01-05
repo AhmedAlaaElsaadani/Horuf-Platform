@@ -7,11 +7,13 @@ import img from "../../assets/Images/undraw_profile_pic_ic5t.svg";
 import ApiManager from "../../Utilies/ApiManager";
 import FloatingInput from "../Ui/FloatingInput/FloatingInput";
 import FloatingSelect from "../Ui/FloatingSelect/FloatingSelect";
-export default function UpdateProfile({ flagDirection }) {
+import { useOutletContext } from "react-router-dom";
+export default function UpdateProfile() {
   const { t } = useTranslation();
   const { user, token } = useContext(authContext);
   const [responseFlag, setResponseFlag] = useState(false);
   const [resMessage, setResMessage] = useState(null);
+  const { flagDirection } = useOutletContext();
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required(t("Required")),
@@ -173,9 +175,8 @@ export default function UpdateProfile({ flagDirection }) {
       <div className="row justify-content-center">
         <form onSubmit={myFormik.handleSubmit} className="col-md-8">
           {updateInputs.map((input, index) => (
-            <div className="col-md-12">
+            <div key={index} className="col-md-12">
               <FloatingInput
-                key={index}
                 idx={index}
                 {...input}
                 myFormik={myFormik}
@@ -185,7 +186,7 @@ export default function UpdateProfile({ flagDirection }) {
             </div>
           ))}
           {updateSelect.map((select, index) => (
-            <div className="col-md-12">
+            <div key={index} className="col-md-12">
               <FloatingSelect
                 key={index}
                 idx={index}

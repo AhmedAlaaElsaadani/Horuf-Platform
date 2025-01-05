@@ -15,6 +15,11 @@
   "nav_link_edit_email": "Edit Email",
   "nav_link_my_courses": "My Lessons",
   "nav_link_logout": "Logout",
+  "You will be logged out.": "You will be logged out.",
+  "Yes, log me out!": "Yes, log me out!",
+  "Logged out!": "Logged out!",
+  "You have been successfully logged out.": "You have been successfully logged out.",
+
 
   "home_title_for_meta": "Horuf Academy",
   "home_desc_for_meta": "A comprehensive educational platform, aiming to support you in every step towards success in your educational journey with high-quality content and an easy-to-use user interface. Join us now!",
@@ -48,6 +53,22 @@
   "level 12": "Level 12",
 
   "other lessons": "Other Lessons",
+  "Comment": "Comment",
+  "Lesson Discussion": " Lesson Discussion",
+  "add Comment": "Add Comment",
+  "No comments yet": "No comments yet",
+  "Replies": "Replies",
+  "Hide Comments": "Hide Comments",
+  "Show Comments": "Show Comments",
+  "Reply": "Reply",
+  "Are you sure?": "Are you sure?",
+  "You won't be able to revert this!": "You won't be able to revert this!",
+  "Yes, delete it!": "Yes, delete it!",
+  "Cancel": "Cancel",
+  "Deleted!": "Deleted!",
+  "Your comment has been deleted.": "Your comment has been deleted.",
+  "Error!": "Error!",
+  "Something went wrong. Please try again.": "Something went wrong. Please try again.",
 
   "profile_title": "Your Profile",
 
@@ -147,5 +168,10 @@
 
   "No data available for subjects": "No subjects available for this grade",
   "No data available for units": "No units available for this subject",
-  "No data available for lessons": "No lessons available for this unit"
+  "No data available for lessons": "No lessons available for this unit",
+
+  "UH OH! You're lost.": "UH OH! You're lost.",
+  "Sorry, we can't find the page you're looking for. You can go back to the homepage": "Sorry, we can't find the page you're looking for. You can go back to the homepage",
+
+  "Whatsapp icon message": "Send a message to Horuf Academy on WhatsApp"
 }

@@ -1,7 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
 export const IsMobileContext = createContext();
 export default function IsMobileProvider({ children }) {
-  const [isMobile, setIsMobile] = useState(null);
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia("(max-width:768px)").matches
+  );
 
   const checkMobile = (e) => {
     setIsMobile(e.matches);

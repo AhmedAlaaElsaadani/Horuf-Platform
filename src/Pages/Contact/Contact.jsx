@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./Contact.module.css";
-import { useTranslation } from "react-i18next";
-import { useFormik } from "formik";
-import ApiManager from "../../Utilies/ApiManager";
-import * as Yup from "yup";
-import { motion } from "framer-motion";
-import img from "../../assets/Images/Heading2/2.jpeg";
-import Heading2 from "../../Component/Heading2/Heading2";
-import FloatingInput from "../../Component/Ui/FloatingInput/FloatingInput";
+
 import { Helmet } from "react-helmet-async";
 
 export default function Contact({ flagNotAloneCompounded }) {
@@ -114,8 +107,7 @@ export default function Contact({ flagNotAloneCompounded }) {
 
   return (
     <>
-      {
-        !flagNotAloneCompounded &&
+      {!flagNotAloneCompounded && (
         <Helmet>
           <meta name="Keywords" content={t("contact_keywords_for_meta")} />
           <meta
@@ -124,7 +116,7 @@ export default function Contact({ flagNotAloneCompounded }) {
           />
           <title>{t("contact_title_meta")}</title>
         </Helmet>
-      }
+      )}
       <section
         id="Contact"
         className={style.Contact}
@@ -156,7 +148,7 @@ export default function Contact({ flagNotAloneCompounded }) {
               initial={{ opacity: 0, x: i18n.language === "ar" ? 100 : -100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: 0.3 }}
-              className="col-md-6  d-flex flex-column justify-content-center"
+              className="col-md-6  d-flex flex-column px-1 justify-content-center"
             >
               {contactInputs.map((input, index) => (
                 <FloatingInput
@@ -177,11 +169,13 @@ export default function Contact({ flagNotAloneCompounded }) {
             >
               <div
                 className={
-                  " h-100 overflow-hidden d-flex flex-column " + style.message
+                  " h-100 overflow-hidden d-flex flex-column px-1 " +
+                  style.message
                 }
               >
                 <label htmlFor="message" className="form-label ">
-                  {t("message")} <i className="fa-solid fa-message"></i>
+                  <i className="fa-solid fa-message"></i>
+                  {t("message")}
                 </label>
                 <textarea
                   id="message"

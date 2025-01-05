@@ -46,15 +46,16 @@
   font-size: 1.125em;
   font-weight: 700;
   padding: 0.3125em 0.8125em;
-  opacity: 0.9;
+  opacity: 0.8;
   transition-property: color, background-color, scale, opacity;
-  transition-duration: 0.5s;
+  transition-duration: 0.4s;
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
 }
 .links a:nth-child(1) {
   background-color: #0269b3;
-  color: var(--home-main-color);
+  color: #fff;
+  border: 2px solid #0269b3;
   border-radius: 0.3125em;
   -webkit-border-radius: 0.3125em;
   -moz-border-radius: 0.3125em;
@@ -69,9 +70,14 @@
   -ms-border-radius: 0.3125em;
   -o-border-radius: 0.3125em;
 }
-.links a:hover {
+.links a:nth-child(1):hover {
   color: #0269b3;
-  background-color: var(--home-main-color);
+  background-color: #fff;
+  opacity: 1;
+}
+.links a:nth-child(2):hover {
+  background-color: #0269b3;
+  color: #fff;
   opacity: 1;
 }
 

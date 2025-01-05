@@ -1,0 +1,34 @@
+.WhatsappText {
+  background-color: var(--primary);
+  opacity: 0%;
+  position: absolute;
+  bottom: 10%;
+  width: 240px;
+  transition: opacity 0.5s ease-in-out;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+}
+.WhatsappIcon {
+  cursor: pointer;
+  background-color: var(--primary);
+  scale: 1.2;
+  transition: scale 0.5s ease-in-out;
+  -webkit-transition: scale 0.5s ease-in-out;
+  -moz-transition: scale 0.5s ease-in-out;
+  -ms-transition: scale 0.5s ease-in-out;
+  -o-transition: scale 0.5s ease-in-out;
+}
+.WhatsappIcon:hover {
+  scale: 1.4;
+}
+
+.WhatsappSocial:hover .WhatsappText {
+  opacity: 100%;
+  transition: opacity 0.5s ease-in-out;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+}

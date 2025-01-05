@@ -5,13 +5,14 @@ import logo from "../../assets/Images/logo.png";
 import { HashLink } from "react-router-hash-link";
 import { useTranslation } from "react-i18next";
 import style from "./Navbar.module.css";
-import DarkModeToggle from "../DarkModeToggle/DarkModeToggle";
+import DarkModeToggle from "../Ui/DarkModeToggle/DarkModeToggle";
 import i18n from "../../i18n";
 import { authContext } from "../../Context/authContext";
 import ApiManager from "../../Utilies/ApiManager";
 import { motion } from "framer-motion";
 import { isThemeModeContext } from "../../Context/isThemeModeContext";
 import { IsMobileContext } from "../../Context/isMobileContext";
+import Swal from "sweetalert2";
 // import whiteLogo from "../../assets/Images/Logo.png";
 
 const Navbar = () => {
@@ -60,8 +61,36 @@ const Navbar = () => {
   ];
   // logout function
   const logOut = async () => {
-    setToken(null);
-    await ApiManager.logOut(token);
+    Swal.fire({
+      title: t("Are you sure?"),
+      text: t("You will be logged out."),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: t("Yes, log me out!"),
+      cancelButtonText: t("Cancel"),
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+
+          await ApiManager.logOut(token);
+          setToken(null);
+          Swal.fire(
+            t("Logged out!"),
+            t("You have been successfully logged out."),
+            "success"
+          );
+        } catch (error) {
+          console.error("Logout failed:", error);
+          Swal.fire(
+            t("Error!"),
+            t("Something went wrong. Please try again."),
+            "error"
+          );
+        }
+      }
+    });
   };
   let profileLinks = [
     {
@@ -121,7 +150,7 @@ const Navbar = () => {
     };
   }, []);
   useEffect(() => {
-    const options = { threshold: 0.01 };
+    const options = { threshold: 0.1 };
     let observer;
 
     const createObserver = () => {

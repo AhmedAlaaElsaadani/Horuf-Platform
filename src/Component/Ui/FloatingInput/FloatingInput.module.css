@@ -5,27 +5,51 @@
 }
 .FloatingLabel i {
   color: #0269b3;
+  margin: 0 0.5em;
 }
-.floating input{
+.floating input {
   border: none !important;
+  padding-bottom: 5px !important;
   border-bottom: 0.0625em var(--input-border) solid !important;
   background-color: var(--bg-color) !important;
   color: var(--input-text-color) !important;
 }
-.floating > .floatingInput:-webkit-autofill ~ label {
-  top: 3px;
-  transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -webkit-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -moz-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -ms-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -o-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+.floating input[type="date"]::-webkit-calendar-picker-indicator {
+  color: #0269b3; /* This will only apply in supported browsers */
+  filter: invert(36%) sepia(79%) saturate(1645%) hue-rotate(189deg)
+    brightness(88%) contrast(93%);
+  cursor: pointer;
 }
+
+.floating input[type="date"]::-moz-calendar-picker-indicator {
+  color: #0269b3; /* This will only apply in supported browsers */
+  filter: invert(36%) sepia(79%) saturate(1645%) hue-rotate(189deg)
+    brightness(88%) contrast(93%);
+  cursor: pointer;
+}
+/* Arabic */
+/*Auto fill*/
+.floating > .floatingInput:-webkit-autofill ~ label ,
+/* Focus */
 .floating > .floatingInput:focus ~ label,
 .floating > .floatingInput:not(:placeholder-shown) ~ label,
 .floating > .floatingSelect ~ label {
-  transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -webkit-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -moz-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -ms-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
-  -o-transform: scale(1, 0.85) translateY(-0.5rem) translateX(0.15rem) !important;
+  transform: scale(0.64) translateY(-16%) translateX(55%) !important;
+  -webkit-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
+  -moz-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
+  -ms-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
+  -o-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
+}
+/* English */
+/*Auto fill*/
+.floating:has(input[dir="rtl"]) > .floatingInput:-webkit-autofill ~ label,
+/* Focus */
+.floating:has(input[dir="rtl"]) > .floatingInput:focus ~ label,
+.floating:has(input[dir="rtl"])> .floatingInput:not(:placeholder-shown)~ label,
+.floating:has(input[dir="rtl"]) > .floatingSelect ~ label {
+  transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -webkit-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -moz-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -ms-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -o-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
 }

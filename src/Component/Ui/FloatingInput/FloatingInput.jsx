@@ -38,7 +38,8 @@ export default function FloatingInput({
             right: flagDirection ? "0px" : "auto",
           }}
         >
-          {t(inputTransition)} <i className={`fa-solid ${icon}`}></i>
+          <i className={`fa-solid ${icon}`}></i>
+          {t(inputTransition)}
         </label>
       </motion.div>
 

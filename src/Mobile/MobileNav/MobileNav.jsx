@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { authContext } from "../../Context/authContext";
 import ApiManager from "../../Utilies/ApiManager";
 import { HashLink } from "react-router-hash-link";
-import DarkModeToggle from "../../Component/DarkModeToggle/DarkModeToggle";
+import DarkModeToggle from "../../Component/Ui/DarkModeToggle/DarkModeToggle";
 import { isThemeModeContext } from "../../Context/isThemeModeContext";
 import { IsMobileContext } from "../../Context/isMobileContext";
 const MobileNav = () => {
@@ -77,7 +77,7 @@ const MobileNav = () => {
   ];
 
   useEffect(() => {
-    const options = { threshold: 0.01 };
+    const options = { threshold: 0.1 };
     let observer;
 
     const createObserver = () => {

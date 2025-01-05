@@ -16,6 +16,11 @@
   "nav_link_verify_email": "تأكيد البريد الإلكتروني",
   "nav_link_my_courses": "دروسي",
   "nav_link_logout": "تسجيل الخروج",
+  "You will be logged out.": "سيتم تسجيل خروجك.",
+  "Yes, log me out!": "نعم، سجل خروجي!",
+  "Logged out!": "تم تسجيل الخروج!",
+  "You have been successfully logged out.": "تم تسجيل خروجك بنجاح.",
+
 
   "home_title_for_meta": "منصة حروف التعليمية",
   "home_desc_for_meta": "منصة تعليمية شاملة، تهدف إلى دعمك في كل خطوة نحو النجاح في رحلتك التعليمية بمحتوى عالي الجودة وواجهة مستخدم سهلة الاستخدام. انضم إلينا الآن!",
@@ -49,9 +54,26 @@
   "level 12": "الصف الثاني عشر",
 
   "other lessons": "دروس أخرى",
+  "Comment": "تعليق",
+  "Lesson Discussion": "مناقشة الدرس",
+  "add Comment": "أضف تعليق",
+  "No comments yet": "لا توجد تعليقات بعد",
+  "Replies": "ردود",
+  "Hide Comments": "إخفاء التعليقات",
+  "Show Comments": "عرض التعليقات",
+  "Reply": "رد",
+  "Are you sure?": "هل أنت متأكد؟",
+  "You won't be able to revert this!": "لا يمكنك التراجع عن هذا!",
+  "Yes, delete it!": "نعم، احذفه!",
+  "Cancel": "إلغاء",
+  "Deleted!": "تم الحذف!",
+  "Your comment has been deleted.": "تم حذف تعليقك.",
+  "Error!": "خطأ!",
+  "Something went wrong. Please try again.": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+
 
   "profile_title": "ملفك الشخصي",
-  
+
   "Footer Heading": "اكادمية حروف التعليمية",
   "Footer Copy": "2024 © جميع الحقوق محفوظة |",
   "Footer comp": "مؤسسة حروف للدعاية والإعلان والخدمات التعليمية",
@@ -149,5 +171,10 @@
 
   "No data available for subjects": "لا توجد مواد دراسية متاحة لهذة المرحلة الدراسية",
   "No data available for units": "لا توجد وحدات متاحة لهذة المادة",
-  "No data available for lessons": "لا توجد دروس متاحة لهذة الوحدة"
+  "No data available for lessons": "لا توجد دروس متاحة لهذة الوحدة",
+
+  "UH OH! You're lost.": "أوه لا! لقد تهت.",
+  "Sorry, we can't find the page you're looking for. You can go back to the homepage": "عذراً، لا يمكننا العثور على الصفحة التي تبحث عنها. يمكنك العودة إلى الصفحة الرئيسية",
+
+  "Whatsapp icon message": "ارسل رسالة على واتساب"
 }

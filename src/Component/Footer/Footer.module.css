@@ -15,13 +15,16 @@
   flex-direction: column;
 }
 .layer img {
-  width: 15%;
+  width: 10%;
   margin: 0 auto;
 }
 .layer h2 {
   color: #fff;
   font-size: 2em;
   font-weight: 700;
+}
+.footer-container .copy {
+  color: #fff !important;
 }
 .line {
   width: 100%;
@@ -44,7 +47,7 @@
     font-size: 1.5em;
   }
 }
-@media (max-width: 425px) {
+/* @media (max-width: 425px) {
   .footer-container {
     font-size: 12px;
   }
@@ -54,4 +57,4 @@
   .layer h2 {
     font-size: 1.25em;
   }
-}
+} */

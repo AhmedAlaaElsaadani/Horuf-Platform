@@ -217,7 +217,7 @@ export default class ApiManager {
 
     return axiosResult;
   }
-  // Authorized services Api <-- joined lesson -->
+  // Authorized services Api <-- getMyLessons , getLessons , joinLesson , getLessonDetails , getLessonComments , addComment -->
   /**
    * get my lessons
    * @param {string} token
@@ -271,6 +271,72 @@ export default class ApiManager {
    */
   static async getLessonDetails(token, lessonId) {
     let axiosResult = await axios.get(baseUrl + `/lessons//l/${lessonId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return axiosResult;
+  }
+  /**
+   * get lesson comments
+   * @param {string} token
+   * @param {string} lessonId
+   * @returns {object} response
+   */
+  static async getLessonComments(token, lessonId) {
+    let axiosResult = await axios.get(baseUrl + `/comments/l/${lessonId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return axiosResult;
+  }
+  /**
+   * add comment to lesson
+   * @param {string} token
+   * @param {string} lessonId
+   * @param {string} comment
+   * @returns {object} response
+   */
+  static async addComment(token, lessonId, comment) {
+    let axiosResult = await axios.post(
+      baseUrl + `/comments`,
+      { lessonId: lessonId, text: comment },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return axiosResult;
+  }
+  /**
+   * reply to comment
+   * @param {string} token
+   * @param {string} commentParentId
+   * @param {string} comment
+   * @returns {object} response
+   */
+  static async replyComment(token, lessonId, commentParentId, comment) {
+    let axiosResult = await axios.post(
+      baseUrl + `/comments`,
+      { lessonId: lessonId, ParentId: commentParentId, text: comment },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return axiosResult;
+  }
+  /**
+   * Delete comment
+   * @param {string} token
+   * @param {string} commentId
+   * @returns {object} response
+   */
+  static async deleteComment(token, commentId) {
+    let axiosResult = await axios.delete(baseUrl + `/comments/${commentId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

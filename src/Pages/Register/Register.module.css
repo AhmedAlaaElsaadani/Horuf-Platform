@@ -22,7 +22,6 @@
 }
 .Register input[type="date"] {
   display: flex;
-  justify-content: center;
 }
 .Register input[type="date"]::placeholder {
   color: #6b7280;
