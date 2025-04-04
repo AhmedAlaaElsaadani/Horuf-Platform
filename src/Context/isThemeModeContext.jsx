@@ -31,7 +31,7 @@ export default function IsThemeModeProvider({ children }) {
       setIsDarkMode(theme === "dark");
       // Otherwise, use the system preference
     } else setIsDarkMode(mediaQuery.matches);
-
+      // console.log(mediaQuery.matches);
     // Listen for changes in system theme preference
     const handleChange = (e) => {
       setIsDarkMode(e.matches);

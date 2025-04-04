@@ -120,6 +120,7 @@ const MobileNav = () => {
       mutationObserver.disconnect();
     };
   }, [location.pathname]);
+  
   const linksLoginRegister = [
     {
       link: t("nav_link_Login"),
@@ -156,6 +157,7 @@ const MobileNav = () => {
       <div className="position-fixed top-0 start-0 end-0 z-3" ref={navBarTop}>
         <NavbarTop />
       </div>
+
       <div className={`${style.mobile}`}>
         <div className="floated ">
           <div className={`${style.fixedButton} position-fixed`}>
