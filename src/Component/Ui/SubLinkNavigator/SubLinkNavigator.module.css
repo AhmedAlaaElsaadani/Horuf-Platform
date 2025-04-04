@@ -1,0 +1,36 @@
+.SubLink {
+  display: flex;
+  gap: 5px;
+}
+.subLinkItem a {
+  color: var(--bg-color-inverse) ;
+  border-bottom: 1px solid var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+.subLinkItem {
+  border-radius: 10px;
+}
+
+.subLinkItem:hover a {
+  color: #fff;
+  background-color: var(--primary);
+}
+
+.subLinkItem .active {
+  background-color: var(--primary);
+  color: #fff;
+}
+.subLinkItem .active a {
+  color: #fff;
+}
+@media screen and (max-width: 768px) {
+  .subLinkItem a {
+    font-weight: 300;
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+}

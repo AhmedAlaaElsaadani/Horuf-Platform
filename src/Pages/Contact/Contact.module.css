@@ -4,7 +4,7 @@
   font-size: 16px;
 }
 .ParentContainer {
-  min-height: 50vh;
+  /* height: 100%; */
   background-color: var(--bg-color);
 }
 .ParentContainer h3 {
@@ -24,19 +24,84 @@
   color: #6b7280;
   font-size: 1.25em;
   font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .Contact .message label i {
-  color: #0269b3;
-  margin: 0 0.5em;
+  color: var(--primary);
+}
+
+.Contact textarea::placeholder {
+  color: #6b7280 !important ;
 }
 .info {
-  border-radius: 1.5625em;
-  background: #0269b3;
-  height: 30vh;
-  -webkit-border-radius: 1.5625em;
-  -moz-border-radius: 1.5625em;
-  -ms-border-radius: 1.5625em;
-  -o-border-radius: 1.5625em;
+  /* border-radius: 1.5625em; */
+  background: var(--primary);
+  padding: 56px 0;
+}
+.info .info_icon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+.info .info_content {
+  color: #1e1e1e;
+  background: #fff;
+  position: relative;
+  font-weight: 700;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  padding: 45px 23px 31px 22px;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+}
+.cardIndex {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  opacity: 0.3;
+  cursor: pointer;
+  background-color: white;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.cardIndex:hover {
+  opacity: 1;
+}
+.cardIndex:active {
+  scale: 0.9;
+}
+.cardIndex.active {
+  opacity: 1;
 }
 
 @media (max-width: 991px) {

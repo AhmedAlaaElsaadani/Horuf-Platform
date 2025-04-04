@@ -9,34 +9,39 @@ import { motion } from "framer-motion";
 
 export default function About() {
   const { t } = useTranslation();
-  const [active, setActive] = useState("/About");
+  const [active, setActive] = useState("ourMission");
   const location = useLocation();
-  useEffect(() => {
-    setActive(location.pathname);
-  }, [location.pathname]);
   const links = [
     {
-      to: "/About/ourMission",
+      to: "./ourMission",
       text: t("about_links_1"),
-      active: "/About/ourMission",
+      active: "ourMission",
       jsx: <i className="fa-solid fa-bullseye mx-2"></i>,
     },
     {
-      to: "/About/ourVision",
+      to: "./ourVision",
       text: t("about_links_2"),
-      active: "/About/ourVision",
+      active: "ourVision",
       jsx: <i className="fa-solid fa-eye mx-2"></i>,
     },
     {
-      to: "/About/ourValues",
+      to: "./ourValues",
       text: t("about_links_3"),
-      active: "/About/ourValues",
+      active: "ourValues",
       jsx: <i className="fa-solid fa-bars-staggered mx-2"></i>,
     },
   ];
+  useEffect(() => {
+    let activeFlag = false;
+    links.forEach((link) =>
+      active.includes(link.active) ? (activeFlag = true) : ""
+    );
+    if (activeFlag) setActive(location.pathname);
+    else setActive("ourMission");
+  }, [location.pathname]);
+
   return (
     <>
-      
       <section
         id="About"
         className={`${style.About} overflow-hidden `}
@@ -78,7 +83,7 @@ export default function About() {
                     key={index}
                     to={link.to}
                     className={
-                      link.active === active ||
+                      active.includes(link.active) ||
                       (index == 0 && active == "/About")
                         ? style.active
                         : ""

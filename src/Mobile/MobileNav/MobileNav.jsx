@@ -12,6 +12,8 @@ import { HashLink } from "react-router-hash-link";
 import DarkModeToggle from "../../Component/Ui/DarkModeToggle/DarkModeToggle";
 import { isThemeModeContext } from "../../Context/isThemeModeContext";
 import { IsMobileContext } from "../../Context/isMobileContext";
+import NavbarTop from "../../Component/NavbarTop/NavbarTop";
+
 const MobileNav = () => {
   const { t } = useTranslation();
   const [active, setActive] = useState("Home");
@@ -39,9 +41,9 @@ const MobileNav = () => {
     },
     {
       icon: <i className="fa-solid fa-book"></i>,
-      link: t("mobile_nav_link_Subjects"),
-      active: "Subjects",
-      to: "subjects#subjects",
+      link: t("mobile_nav_link_Packages"),
+      active: "Packages",
+      to: "Packages#Packages",
     },
     {
       icon: <i className="fa-solid fa-envelope"></i>,
@@ -63,10 +65,15 @@ const MobileNav = () => {
       clickFun: null,
     },
     {
-      link: t("nav_link_my_courses"),
-      active: "my-courses",
-      to: "/profile/my-courses",
+      link: t("nav_link_my_packages"),
+      active: "myPackages",
+      to: "/myPackages",
       clickFun: null,
+    },
+    {
+      icon: <i className="fa-solid fa-lg fa-money-check"></i>,
+      to: "/profile/payments",
+      link: t("nav_link_payments"),
     },
     {
       link: t("nav_link_logout"),
@@ -131,7 +138,7 @@ const MobileNav = () => {
 
   useEffect(() => {
     // Add padding to the body to prevent the content from being hidden behind the navbar when the page is scrolled
-    if (isMobile) {
+    if (isMobile && navBar.current && navBarTop.current) {
       document.body.style.paddingBottom = `${navBar.current.clientHeight}px`;
       document.body.style.paddingTop = `${navBarTop.current.clientHeight}px`;
     } else {
@@ -142,21 +149,12 @@ const MobileNav = () => {
       document.body.style.paddingBottom = "0px";
       document.body.style.paddingTop = "0px";
     };
-  }, []);
+  }, [navBarTop.current, navBar.current]);
 
   return (
     <>
-      <div className={"w-100  fixed-top " + style["navbarTop"]} ref={navBarTop}>
-        <div className="container text-center p-3 ">
-          <motion.p
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="m-0 "
-          >
-            مرحبا بك فى اكادمية حروف <span>اكتشف المزيد ! </span>
-          </motion.p>
-        </div>
+      <div className="position-fixed top-0 start-0 end-0 z-3" ref={navBarTop}>
+        <NavbarTop />
       </div>
       <div className={`${style.mobile}`}>
         <div className="floated ">
@@ -274,20 +272,6 @@ const MobileNav = () => {
                           isDarkMode={isDarkMode}
                           setIsDarkMode={setIsDarkMode}
                         />
-                      </li>
-                      <li
-                        onClick={() =>
-                          isOpenSide ? setIsOpenSide(false) : isOpenSide
-                        }
-                      >
-                        <button
-                          className="btn btn-outline-primary"
-                          // onClick={toggleLanguage}
-                        >
-                          {/* {t("nav_lang")} */}
-                          الكويت
-                          <i className="fa-solid fa-globe mx-2"></i>
-                        </button>
                       </li>
                     </ul>
                   </motion.ul>

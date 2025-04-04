@@ -6,13 +6,11 @@ import { HashLink } from "react-router-hash-link";
 import { useTranslation } from "react-i18next";
 import style from "./Navbar.module.css";
 import DarkModeToggle from "../Ui/DarkModeToggle/DarkModeToggle";
-import i18n from "../../i18n";
-import { authContext } from "../../Context/authContext";
-import ApiManager from "../../Utilies/ApiManager";
 import { motion } from "framer-motion";
 import { isThemeModeContext } from "../../Context/isThemeModeContext";
 import { IsMobileContext } from "../../Context/isMobileContext";
-import Swal from "sweetalert2";
+import SubMenuNavbar from "../Ui/SubMenuNavbar/SubMenuNavbar";
+import NavbarTop from "../NavbarTop/NavbarTop";
 // import whiteLogo from "../../assets/Images/Logo.png";
 
 const Navbar = () => {
@@ -21,7 +19,6 @@ const Navbar = () => {
   const [active, setActive] = useState("Home");
   const { t } = useTranslation();
   const navBar = useRef(null);
-  const { isRegistered, setToken, token, user } = useContext(authContext);
   const { isDarkMode, setIsDarkMode } = useContext(isThemeModeContext);
   const { isMobile } = useContext(IsMobileContext);
 
@@ -37,9 +34,9 @@ const Navbar = () => {
       to: "About#About",
     },
     {
-      link: t("nav_link_Subjects"),
-      active: "Subjects",
-      to: "subjects#subjects",
+      link: t("nav_link_Packages"),
+      active: "Packages",
+      to: "Packages#Packages",
     },
     {
       link: t("nav_link_Contact"),
@@ -47,88 +44,23 @@ const Navbar = () => {
       to: "Contact#Contact",
     },
   ];
-  const linksLoginRegister = [
-    {
-      link: t("nav_link_Login"),
-      active: "Login",
-      to: "/Login",
-    },
-    {
-      link: t("nav_link_Register"),
-      active: "Register",
-      to: "/Register",
-    },
-  ];
-  // logout function
-  const logOut = async () => {
-    Swal.fire({
-      title: t("Are you sure?"),
-      text: t("You will be logged out."),
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: t("Yes, log me out!"),
-      cancelButtonText: t("Cancel"),
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-
-          await ApiManager.logOut(token);
-          setToken(null);
-          Swal.fire(
-            t("Logged out!"),
-            t("You have been successfully logged out."),
-            "success"
-          );
-        } catch (error) {
-          console.error("Logout failed:", error);
-          Swal.fire(
-            t("Error!"),
-            t("Something went wrong. Please try again."),
-            "error"
-          );
-        }
-      }
-    });
-  };
-  let profileLinks = [
-    {
-      link: t("nav_link_edit_password"),
-      active: "edit-password",
-      to: "/profile/edit-password",
-      clickFun: null,
-    },
-    {
-      link: t("nav_link_my_courses"),
-      active: "my-courses",
-      to: "/profile/my-courses",
-      clickFun: null,
-    },
-    {
-      link: t("nav_link_logout"),
-      active: "logout",
-      to: "",
-      clickFun: logOut,
-    },
-  ];
 
   const hideNavbar = () => {
     navbarCollapse.hide();
   };
 
-  const toggleLanguage = () => {
-    let flagDirection = i18n.language == "en";
+  // const toggleLanguage = () => {
+  //   let flagDirection = i18n.language == "en";
 
-    flagDirection ? i18n.changeLanguage("ar") : i18n.changeLanguage("en");
-    if (flagDirection) {
-      document.body.style.direction = "rtl";
-      document.title = "منصة حروف التعليمبة";
-    } else {
-      document.body.style.direction = "ltr";
-      document.title = "Harouf Education Platform";
-    }
-  };
+  //   flagDirection ? i18n.changeLanguage("ar") : i18n.changeLanguage("en");
+  //   if (flagDirection) {
+  //     document.body.style.direction = "rtl";
+  //     document.title = "منصة حروف التعليمبة";
+  //   } else {
+  //     document.body.style.direction = "ltr";
+  //     document.title = "Harouf Education Platform";
+  //   }
+  // };
   useEffect(() => {
     // Manually collapse the navbar when a link is clicked
     setNavbarCollapse(
@@ -198,110 +130,7 @@ const Navbar = () => {
         data-bs-theme={isDarkMode ? "dark" : "light"}
         ref={navBar}
       >
-        <div className={"w-100 " + style["navbarTop"]}>
-          <div className="container p-3 d-flex justify-content-between align-items-center">
-            <motion.p
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="m-0 "
-            >
-              مرحبا بك فى اكادمية حروف <span>اكتشف المزيد ! </span>
-            </motion.p>
-
-            <motion.ul
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="navbar-nav  "
-            >
-              {isRegistered ? (
-                <li
-                  className={"nav-item position-relative  " + style["profile"]}
-                >
-                  <div
-                    className={
-                      "nav-link rounded rounded-circle position-relative  d-grid shadow " +
-                      style["icon"]
-                    }
-                  >
-                    <i className="fa-solid fa-user m-auto  "></i>
-
-                    {user && !user?.isVerified && (
-                      <span
-                        className="position-absolute end-0 top-100 translate-middle p-1 bg-danger border border-light rounded-circle"
-                        style={{}}
-                      >
-                        <span className="visually-hidden">New alerts</span>
-                      </span>
-                    )}
-                  </div>
-                  <ul
-                    className={
-                      "navbar-nav p-0 z-3 position-absolute  rounded-3 "
-                    }
-                  >
-                    <li className="nav-item  position-relative">
-                      <Link
-                        className={
-                          "nav-link " +
-                          (active == "profile" ? style["selected"] : "")
-                        }
-                        to="/profile"
-                      >
-                        {t("nav_link_edit_profile")}
-                      </Link>
-                    </li>
-
-                    <li className="nav-item  position-relative">
-                      <Link
-                        className={
-                          "nav-link " +
-                          (active == "edit-email" ? style["selected"] : "")
-                        }
-                        to="/profile/edit-email"
-                      >
-                        {user && !user?.isVerified
-                          ? t("nav_link_verify_email")
-                          : t("nav_link_edit_email")}
-                        {user && !user?.isVerified && (
-                          <span className="position-absolute end-0 top-50 translate-middle-y p-1 mx-1 bg-danger border border-light rounded-circle">
-                            <span className="visually-hidden">New alerts</span>
-                          </span>
-                        )}
-                      </Link>
-                    </li>
-                    {profileLinks.map((link, idx) => (
-                      <li key={idx} className="nav-item  position-relative">
-                        <Link
-                          className={
-                            "nav-link " +
-                            (link.active == active ? style["selected"] : "")
-                          }
-                          to={link.to}
-                          onClick={link.clickFun}
-                        >
-                          {link.link}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ) : (
-                linksLoginRegister.map((link, idx) => (
-                  <li key={idx} className="nav-item ">
-                    <HashLink
-                      className={"nav-link " + style["login-register"]}
-                      to={link.to}
-                    >
-                      {link.link}
-                    </HashLink>
-                  </li>
-                ))
-              )}
-            </motion.ul>
-          </div>
-        </div>
+        <NavbarTop />
         <div className="container d-flex justify-content-between  ">
           <HashLink
             className="navbar-brand  py-3 rounded-3 overflow-hidden"
@@ -361,21 +190,12 @@ const Navbar = () => {
               transition={{ duration: 0.5 }}
               className="navbar-nav  d-flex justify-content-center align-items-center"
             >
+              <SubMenuNavbar />
               <li>
                 <DarkModeToggle
                   isDarkMode={isDarkMode}
                   setIsDarkMode={setIsDarkMode}
                 />
-              </li>
-              <li>
-                <button
-                  className="btn btn-outline-primary"
-                  // onClick={toggleLanguage}
-                >
-                  {/* {t("nav_lang")} */}
-                  الكويت
-                  <i className="fa-solid fa-globe mx-2"></i>
-                </button>
               </li>
             </motion.ul>
           </div>

@@ -3,7 +3,7 @@ import ApiManager from "../Utilies/ApiManager";
 import HomeLoading from "../Component/Ui/HomeLoading/HomeLoading";
 export const authContext = createContext();
 export default function AuthProvider({ children }) {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [isRegistered, setIsRegistered] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,19 +23,15 @@ export default function AuthProvider({ children }) {
     try {
       const { data } = await ApiManager.getProfile(token);
       if (data.code == 200) {
-        setUser(data);
+        setUser(data.data);
       }
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
+    } catch (error) {}
+    setLoading(false);
   };
 
   useEffect(() => {
     //get token from local storage to handle refresh
-    let tokenFromLocalStorage = localStorage.getItem("token");
-    if (tokenFromLocalStorage) {
-      setToken(tokenFromLocalStorage);
+    if (token) {
       checkSession();
     }
   }, []);

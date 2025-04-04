@@ -9,6 +9,8 @@ import { authContext } from "../../Context/authContext";
 import FloatingInput from "../../Component/Ui/FloatingInput/FloatingInput";
 import FloatingSelect from "../../Component/Ui/FloatingSelect/FloatingSelect";
 import { motion } from "framer-motion";
+import SelectElement from "../../Component/Ui/SelectElement/SelectElement";
+import { educationLevels } from "../../Utilies/data";
 
 export default function Register() {
   const { t, i18n } = useTranslation();
@@ -17,15 +19,6 @@ export default function Register() {
   const [resMessage, setResMessage] = useState(null);
   const { setToken, setIsRegistered } = useContext(authContext);
   let navigator = useNavigate();
-  const Level = {
-    level_6: 6,
-    level_7: 7,
-    level_8: 8,
-    level_9: 9,
-    level_10: 10,
-    level_11: 11,
-    level_12: 12,
-  };
   useEffect(() => {
     setFlagDirection(i18n.language === "ar");
   }, [i18n.language]);
@@ -34,10 +27,18 @@ export default function Register() {
     firstName: Yup.string().required(t("Required")),
     lastName: Yup.string().required(t("Required")),
     phone: Yup.string()
-      .matches(/^(00965|\+965|965)?[5691][0-9]{7}$/, t("Invalid phone number"))
+      //match egyption phonenumber
+
+      .matches(
+        /^(0020|\+20|20)?(010|011|012|015)[0-9]{8}$/,
+        t("Phone number is not valid")
+      )
       .required(t("Required")),
     parentPhone: Yup.string()
-      .matches(/^(00965|\+965|965)?[5691][0-9]{7}$/, t("Invalid phone number"))
+      .matches(
+        /^(0020|\+20|20)?(010|011|012|015)[0-9]{8}$/,
+        t("Phone number is not valid")
+      )
       .required(t("Required"))
       .notOneOf(
         [Yup.ref("phone")],
@@ -54,12 +55,7 @@ export default function Register() {
       .required(t("Required"))
       .oneOf([Yup.ref("password"), null], t("Passwords must match")),
     address: Yup.string().required(t("Required")),
-    birthday: Yup.date()
-      .max(
-        new Date(new Date().setFullYear(new Date().getFullYear() - 10)),
-        t("You must be at least 10 years old")
-      )
-      .required(t("Required")),
+    birthday: Yup.date().required(t("Required")),
     level: Yup.number().required(t("Required")),
     gender: Yup.string().required(t("Required")),
   });
@@ -69,6 +65,7 @@ export default function Register() {
     let data = JSON.stringify({
       ...values,
       gender: "M" == values.gender,
+      EduSchoolLevel: parseInt(values.level),
     });
 
     setResponseFlag(true);
@@ -76,7 +73,7 @@ export default function Register() {
       .then((response) => {
         let res = response.data;
 
-        if (res.code == 200 && res.token) {
+        if (res.code == 200) {
           setResMessage({
             flag: true,
             message: t("You need to verify your email"),
@@ -125,7 +122,7 @@ export default function Register() {
       address: "",
       birthday: "",
       gender: "M",
-      level: 6,
+      level: "",
     },
     onSubmit: registerToWebsite,
     validationSchema: validationSchemaYup,
@@ -192,41 +189,22 @@ export default function Register() {
     {
       selectName: "level",
       selectTransition: "level",
+      translation: "level",
+      onChange: myFormik.handleChange,
+      defaultValue: myFormik.values.level,
       icon: "fa-user-graduate",
-      options: [
-        {
-          key: "level 6",
-          value: 6,
-        },
-        {
-          key: "level 7",
-          value: 7,
-        },
-        {
-          key: "level 8",
-          value: 8,
-        },
-        {
-          key: "level 9",
-          value: 9,
-        },
-        {
-          key: "level 10",
-          value: 10,
-        },
-        {
-          key: "level 11",
-          value: 11,
-        },
-        {
-          key: "level 12",
-          value: 12,
-        },
-      ],
+      error: myFormik.errors.level,
+      touched: myFormik.touched.level,
+      options: educationLevels,
     },
     {
       selectName: "gender",
       selectTransition: "Gender",
+      translation: "Gender",
+      onChange: myFormik.handleChange,
+      defaultValue: myFormik.values.gender,
+      error: myFormik.errors.gender,
+      touched: myFormik.touched.gender,
       icon: "fa-user",
       options: [
         {
@@ -292,14 +270,7 @@ export default function Register() {
           </div>
           {registerSelect.map((select, index) => (
             <div className="col-md-12">
-              <FloatingSelect
-                key={index}
-                idx={index}
-                {...select}
-                myFormik={myFormik}
-                flagDirection={flagDirection}
-                t={t}
-              />
+              <SelectElement key={index + 5} idx={index} {...select} t={t} />
             </div>
           ))}
           {registerInputs2.map((input, index) => (

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import "./WhatsappComponent.css";
 import { motion } from "framer-motion";
@@ -13,7 +12,6 @@ const WhatsappComponent = () => {
 
   return (
     <>
-      <Helmet></Helmet>
       <a
         // href="https://wa.me/message/T4HZAXRBWHYTP1?src=qr"
         target="_blank"

@@ -32,7 +32,7 @@ export default function Footer() {
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className={"mb-0 "+style["copy"]}
+            className={"mb-0 " + style["copy"]}
           >
             {t("Footer Copy")}
             <span className={style["comp-name"]}>{t("Footer comp")}</span>
@@ -47,11 +47,7 @@ export default function Footer() {
           >
             {t("Footer IzI1")}
             <a
-              style={{
-                color: "rgba(255, 255, 255, 0.5)",
-                fontWeight: "600",
-                textDecoration: "none",
-              }}
+            className={style["comp-name"]}
               href="https://www.izitechs.com"
             >
               IzI Techs

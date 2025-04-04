@@ -1,12 +1,11 @@
 import React from "react";
 
-export default function Spinner({ sectionFlag =true }) {
+export default function Spinner({ sectionFlag = true }) {
   //sectionFlag is a flag to determine the spinner location
   return (
     <div
       className="w-100 p-5 d-flex "
       style={{
-        backgroundColor: "var(--bg-color)",
         minHeight: sectionFlag
           ? `calc(100vh - ${parseInt(
               window.getComputedStyle(document.body).paddingTop,

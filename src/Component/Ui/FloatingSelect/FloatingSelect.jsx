@@ -6,36 +6,7 @@ export default function FloatingSelect({
   selectName,
   selectTransition,
   icon,
-  options = [
-    {
-      key: "level 6",
-      value: 6,
-    },
-    {
-      key: "level 7",
-      value: 7,
-    },
-    {
-      key: "level 8",
-      value: 8,
-    },
-    {
-      key: "level 9",
-      value: 9,
-    },
-    {
-      key: "level 10",
-      value: 10,
-    },
-    {
-      key: "level 11",
-      value: 11,
-    },
-    {
-      key: "level 12",
-      value: 12,
-    },
-  ],
+  options,
   myFormik,
   t,
   flagDirection,

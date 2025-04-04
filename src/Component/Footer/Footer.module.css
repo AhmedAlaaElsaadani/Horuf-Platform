@@ -35,7 +35,15 @@
 .comp-name {
   color: var(--primary);
   font-weight: 700;
+  text-decoration: "none";
+  transition-property: color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
 }
+.comp-name:hover {
+  color: var(--primHover);
+}
+
 @media (max-width: 991px) {
   .footer-container {
     font-size: 14px;

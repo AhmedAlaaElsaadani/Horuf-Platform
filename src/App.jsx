@@ -2,6 +2,7 @@ import React, { lazy, useEffect } from "react";
 import i18n from "./i18n";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
 //Contexts
 const IsThemeModeProvider = lazy(() => import("./Context/isThemeModeContext"));
 const IsMobileProvider = lazy(() => import("./Context/isMobileContext"));
@@ -11,13 +12,9 @@ const AuthProvider = lazy(() => import("./Context/authContext"));
 const RoutLayout = lazy(() => import("./Component/RoutLayout/RoutLayout"));
 const About = lazy(() => import("./Pages/About/About"));
 const Home = lazy(() => import("./Pages/Home/Home"));
-const SubjectsLayout = lazy(() =>
-  import("./Pages/SubjectsLayout/SubjectsLayout")
-);
+const Content = lazy(() => import("./Pages/Content/Content"));
 const Contact = lazy(() => import("./Pages/Contact/Contact"));
-const Subjects = lazy(() => import("./Component/Subjects/Subjects"));
-const Units = lazy(() => import("./Component/Units/Units"));
-const Content = lazy(() => import("./Component/Content/Content"));
+const Packages = lazy(() => import("./Pages/Packages/Packages"));
 const Login = lazy(() => import("./Pages/Login/Login"));
 const Register = lazy(() => import("./Pages/Register/Register"));
 const EmailConfirmOtp = lazy(() =>
@@ -43,30 +40,17 @@ const UpdatePassword = lazy(() =>
   import("./Component/UpdatePassword/UpdatePassword")
 );
 const UpdateEmail = lazy(() => import("./Component/UpdateEmail/UpdateEmail"));
+const Payments = lazy(() => import("./Component/Payments/Payments"));
 const UpdateProfile = lazy(() =>
   import("./Component/UpdateProfile/UpdateProfile")
 );
-const Projector = lazy(() => import("./Component/Projector/Projector"));
-const MyCourses = lazy(() => import("./Component/MyCourses/MyCourses"));
+const MyPackages = lazy(() => import("./Pages/MyPackages/MyPackages"));
+// payments
+const Pay = lazy(() => import("./Pages/Pay/Pay"));
+const PayWithCode = lazy(() => import("./Component/PayWithCode/PayWithCode"));
+const Fawaterak = lazy(() => import("./Component/Fawaterak/Fawaterak"));
+// const Projector = lazy(() => import("./Component/Projector/Projector"));
 const Error404 = lazy(() => import("./Component/Error404/Error404"));
-/**
- * @description
- *
- */
-/**
- * 1) delete unused Css
- * 2) change default image
- * 3) Spinner Component Done ✅
- * 4) lazy loading Done ✅
- * 5) add 404 page
- * 6) SEO
- * 7) add favicon
- * 8) add meta tags
- * 9) add google analytics
- * 10) add sitemap
- * 12) lazy loading Done ✅
- *
- */
 function App() {
   const { t } = useTranslation();
   const router = createBrowserRouter([
@@ -81,6 +65,25 @@ function App() {
         {
           path: "/",
           element: <Home />,
+          children: [
+            {
+              index: true,
+              element: <p>{t("about_mission")}</p>,
+            },
+            {
+              path: "ourMission",
+              element: <p>{t("about_mission")} </p>,
+            },
+            {
+              path: "ourVision",
+              element: <p>{t("about_vision")}</p>,
+            },
+
+            {
+              path: "ourValues",
+              element: <p>{t("about_values")}</p>,
+            },
+          ],
         },
         {
           path: "/about",
@@ -106,31 +109,40 @@ function App() {
           ],
         },
         {
-          path: "/subjects",
-          element: <SubjectsLayout />,
+          path: "/Packages",
+          element: <Packages />,
+        },
+        {
+          path: "/content/:packageId",
+          element: (
+            <ProtectedRoute>
+              <Content />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/pay/:packageID",
+          element: (
+            <ProtectedRoute>
+              <Pay />
+            </ProtectedRoute>
+          ),
           children: [
             {
-              path: "",
-              element: <Subjects />,
+              index: true,
+              element: <PayWithCode />,
             },
             {
-              path: "units/:subjectID",
-              element: <Units />,
-            },
-            {
-              path: "content/:unitID",
-              element: <Content />,
-            },
-            {
-              path: "lessons/:lessonID",
-              element: (
-                <ProtectedRoute>
-                  <Projector />
-                </ProtectedRoute>
-              ),
+              path: "fawaterk",
+              element: <Fawaterak />,
             },
           ],
         },
+        {
+          path: "/pay",
+          element: <Pay />,
+        },
+
         {
           path: "/contact",
           element: <Contact />,
@@ -189,37 +201,29 @@ function App() {
           children: [
             {
               path: "",
-              element: (
-                <ProtectedRoute>
-                  <UpdateProfile />
-                </ProtectedRoute>
-              ),
+              element: <UpdateProfile />,
             },
             {
               path: "edit-email",
-              element: (
-                <ProtectedRoute>
-                  <UpdateEmail />
-                </ProtectedRoute>
-              ),
+              element: <UpdateEmail />,
             },
             {
               path: "edit-password",
-              element: (
-                <ProtectedRoute>
-                  <UpdatePassword />
-                </ProtectedRoute>
-              ),
+              element: <UpdatePassword />,
             },
             {
-              path: "my-courses",
-              element: (
-                <ProtectedRoute>
-                  <MyCourses />
-                </ProtectedRoute>
-              ),
+              path: "payments",
+              element: <Payments />,
             },
           ],
+        },
+        {
+          path: "/MyPackages",
+          element: (
+            <ProtectedRoute>
+              <MyPackages />
+            </ProtectedRoute>
+          ),
         },
       ],
       errorElement: <Error404 />,
@@ -233,7 +237,31 @@ function App() {
     if (i18nextLng === "ar") document.body.dir = "rtl";
     else document.body.dir = "ltr";
   }, []);
+  /**
+   * Packages Page
+   * 1) add a package page
+   *        - add a package card Done
+   *        - add a select element Done
+   * 2) add a package details page Done
+   * 3) Edit my Courses page
+   * 4) add payments page
+   * 5) add a pay gateway
+   * 6) edit content page
+   * 7) check gender in profile page
+   * 1: Pending
+2: Completed,
+3: Cancelled,
+4: Failed
+2: Card
+3: Fawry
+4: EWallet
 
+1: Payment
+2: Admin
+3: Code
+طريقة التجديد
+
+   */
   return (
     <>
       <IsThemeModeProvider>

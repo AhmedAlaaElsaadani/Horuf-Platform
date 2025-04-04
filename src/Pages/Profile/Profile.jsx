@@ -43,9 +43,9 @@ export default function Profile() {
       clickFun: null,
     },
     {
-      link: t("nav_link_my_courses"),
-      active: "/profile/my-courses",
-      to: "/profile/my-courses",
+      link: t("nav_link_payments"),
+      active: "/profile/payments",
+      to: "/profile/payments",
       clickFun: null,
     },
     {

@@ -51,9 +51,7 @@ export default function Login() {
     await ApiManager.login(data)
       .then((response) => {
         let res = response.data;
-        console.log(res);
-
-        if (!res.code && res.token) {
+        if (res.success) {
           if (res.isVerified) {
             setResMessage({ flag: true, message: t("Login successfully") });
 

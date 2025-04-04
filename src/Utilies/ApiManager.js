@@ -1,7 +1,19 @@
 import axios from "axios";
-const baseUrl = "https://api.kw.hrouf-academy.com";
+const baseUrl = "https://api-v3.hrouf-academy.com";
+const getHeaders = (token = null) => {
+  return token
+    ? {
+        Authorization: `Bearer ${token}`,
+        izitechs_origin: window.location.href,
+        "Content-Type": "application/json",
+      }
+    : {
+        "Content-Type": "application/json",
+        izitechs_origin: window.location.href,
+      };
+};
 export default class ApiManager {
-  // login Apis <-- Logout, Login, Register, sendOtp, otpConfirm , Update Profile , Get Profile  , forgotPasswordSendOtpToEmail, confirmOtpForResetPassword, resetPassword -->
+  // login Apis <-- Logout, Login, Register, sendOtp, otpConfirm , forgotPasswordSendOtpToEmail, confirmOtpForResetPassword, resetPassword -->
   /**
    * log out user
    *
@@ -13,9 +25,7 @@ export default class ApiManager {
       baseUrl + "/auth/logout",
       {},
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: getHeaders(token),
       }
     );
     return axiosResult;
@@ -26,12 +36,10 @@ export default class ApiManager {
    * @returns {object} response
    */
   static async login(user) {
-    const myHeaders = {
-      "Content-Type": "application/json",
-    };
-
     let axiosResult = await axios.post(baseUrl + "/auth/login", user, {
-      headers: myHeaders,
+      headers: {
+        ...getHeaders(),
+      },
     });
     return axiosResult;
   }
@@ -43,11 +51,8 @@ export default class ApiManager {
    */
 
   static async register(user) {
-    const myHeaders = {
-      "Content-Type": "application/json",
-    };
     let axiosResult = await axios.post(baseUrl + "/auth/register", user, {
-      headers: myHeaders,
+      headers: getHeaders(),
     });
     return axiosResult;
   }
@@ -63,7 +68,7 @@ export default class ApiManager {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
+          ...getHeaders(token),
         },
       }
     );
@@ -82,7 +87,7 @@ export default class ApiManager {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
+          ...getHeaders(token),
         },
       }
     );
@@ -96,7 +101,11 @@ export default class ApiManager {
    */
   static async forgotPasswordSendOtpToEmail(email) {
     let axiosResult = await axios.post(
-      baseUrl + `/auth/SendOTPResetPassword?email=${email}`
+      baseUrl + `/auth/SendOTPResetPassword?email=${email}`,
+      {},
+      {
+        headers: getHeaders(),
+      }
     );
 
     return axiosResult;
@@ -109,7 +118,14 @@ export default class ApiManager {
    */
   static async confirmOtpForResetPassword(otp, email) {
     let axiosResult = await axios.post(
-      baseUrl + `/auth/ConfirmResetPasswordOTP?OTP=${otp}&email=${email}`
+      baseUrl + `/auth/ConfirmResetPasswordOTP?OTP=${otp}&email=${email}`,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          ...getHeaders(),
+        },
+      }
     );
 
     return axiosResult;
@@ -126,12 +142,17 @@ export default class ApiManager {
       token: token,
     };
 
-    let axiosResult = await axios.post(baseUrl + `/auth/ResetPassword`, data);
+    let axiosResult = await axios.post(baseUrl + `/auth/ResetPassword`, data, {
+      headers: {
+        "Content-Type": "application/json",
+        ...getHeaders(),
+      },
+    });
 
     return axiosResult;
   }
 
-  // profile Apis <-- updateProfile, getProfile, updateEmail, checkIfSessionEnd,  -->
+  // profile Apis <-- updateProfile, getProfile, updateEmail, updatePassword, checkIfSessionEnd,  -->
   /**
    * Update Profile
    * @param {object} user
@@ -142,7 +163,7 @@ export default class ApiManager {
   static async updateProfile(user, token) {
     const headers = {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      ...getHeaders(token),
     };
 
     let axiosResult = await axios.put(
@@ -178,9 +199,7 @@ export default class ApiManager {
       baseUrl + `/auth/change-email?email=${email}`,
       {},
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: getHeaders(token),
       }
     );
     return axiosResult;
@@ -195,9 +214,7 @@ export default class ApiManager {
       baseUrl + `/auth/change-password`,
       password,
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: getHeaders(token),
       }
     );
     return axiosResult;
@@ -211,101 +228,104 @@ export default class ApiManager {
       baseUrl + "/auth/validate",
       {},
       {
-        headers: { Authorization: `Bearer ${token}` }, // Correct usage in axios
+        headers: getHeaders(token),
       }
     );
 
     return axiosResult;
   }
-  // Authorized services Api <-- getMyLessons , getLessons , joinLesson , getLessonDetails , getLessonComments , addComment -->
+  // Authorized services Api <--  subscribeWithCode, subscribeWithPayment, getMyPayments, getMyPackages, getVideoComments -->
+
   /**
-   * get my lessons
+   * subscribe to package with code
    * @param {string} token
+   * @param {string} code
    * @returns {object} response
    */
-  static async getMyLessons(token) {
-    let axiosResult = await axios.get(baseUrl + "/lessons/joined", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return axiosResult;
-  }
-  /**
-   * get all lessons for unit
-   * @param {string} token
-   * @param {string} unitId
-   * @returns {object} response
-   */
-  static async getLessons(token, unitId) {
-    let axiosResult = await axios.get(baseUrl + `/lessons/c/${unitId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return axiosResult;
-  }
-  /**
-   * join lesson
-   * @param {string} token
-   * @param {string} lessonId
-   * @returns {object} response
-   */
-  static async joinLesson(token, lessonId) {
+  static async subscribeWithCode(token, packageId, code) {
     let axiosResult = await axios.post(
-      baseUrl + `/lessons/join/${lessonId}`,
+      baseUrl + `/plans/${packageId}/code/${code}`,
       {},
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: getHeaders(token),
       }
     );
     return axiosResult;
   }
   /**
-   * get lesson details
+   * subscribe to package with payment
    * @param {string} token
-   * @param {string} lessonId
+   * @param {string} packageId
    * @returns {object} response
    */
-  static async getLessonDetails(token, lessonId) {
-    let axiosResult = await axios.get(baseUrl + `/lessons//l/${lessonId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  static async subscribeWithPayment(token, packageId) {
+    let axiosResult = await axios.post(
+      baseUrl + `/plans/${packageId}/subscribe`,
+      {},
+      {
+        headers: getHeaders(token),
+      }
+    );
+    return axiosResult;
+  }
+  /**
+   * get my payments
+   * @param {string} token
+   * @returns {object} response
+   *
+   */
+  static async getMyPayments(token) {
+    let axiosResult = await axios.get(baseUrl + `/payments/history`, {
+      headers: getHeaders(token),
     });
     return axiosResult;
   }
   /**
-   * get lesson comments
+   * get my packages
    * @param {string} token
-   * @param {string} lessonId
    * @returns {object} response
    */
-  static async getLessonComments(token, lessonId) {
-    let axiosResult = await axios.get(baseUrl + `/comments/l/${lessonId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  static async getMyPackages(token) {
+    let axiosResult = await axios.get(baseUrl + `/plans/subscribed`, {
+      headers: getHeaders(token),
     });
     return axiosResult;
   }
+
   /**
-   * add comment to lesson
+   * get package comments
    * @param {string} token
-   * @param {string} lessonId
+   * @param {string} packageId
+   * @param {string} videoId
+   * @returns {object} response
+   */
+  static async getVideoComments(token, packageId, videoId) {
+    let axiosResult = await axios.get(
+      baseUrl + `/plans/${packageId}/v/${videoId}/c`,
+      {
+        headers: getHeaders(token),
+      }
+    );
+    return axiosResult;
+  }
+  /**
+   * add comment to package
+   * @param {string} token
+   * @param {string} packageId
+   * @param {string} videoId
    * @param {string} comment
    * @returns {object} response
    */
-  static async addComment(token, lessonId, comment) {
+  static async addComment(token, packageId, commentParentId, videoId, comment) {
     let axiosResult = await axios.post(
-      baseUrl + `/comments`,
-      { lessonId: lessonId, text: comment },
+      baseUrl + `/plans/${packageId}/v/${videoId}/c`,
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // parentId when replying to a comment
+        parentId: commentParentId,
+        text: comment,
+      },
+      {
+        headers: getHeaders(token),
       }
     );
     return axiosResult;
@@ -317,14 +337,12 @@ export default class ApiManager {
    * @param {string} comment
    * @returns {object} response
    */
-  static async replyComment(token, lessonId, commentParentId, comment) {
+  static async editComment(token, packageId, videoId, commentId, comment) {
     let axiosResult = await axios.post(
-      baseUrl + `/comments`,
-      { lessonId: lessonId, ParentId: commentParentId, text: comment },
+      baseUrl + `/plans/${packageId}/v/${videoId}/c/${commentId}`,
+      { text: comment },
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: getHeaders(token),
       }
     );
     return axiosResult;
@@ -335,31 +353,55 @@ export default class ApiManager {
    * @param {string} commentId
    * @returns {object} response
    */
-  static async deleteComment(token, commentId) {
-    let axiosResult = await axios.delete(baseUrl + `/comments/${commentId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  static async deleteComment(token, packageId, videoId, commentId) {
+    let axiosResult = await axios.delete(
+      baseUrl + `/plans/${packageId}/v/${videoId}/c/${commentId}`,
+      {
+        headers: getHeaders(token),
+      }
+    );
+    return axiosResult;
+  }
+  // unAuthorized services Api <-- getSubjects, getPackages, getPackageDetails, contactUs -->
+  /**
+   * get all subjects
+   * @returns {object} response
+   */
+  static async getSubjects() {
+    let axiosResult = await axios.get(baseUrl + `/subjects`, {
+      headers: getHeaders(),
     });
     return axiosResult;
   }
-  // unAuthorized services Api <-- subjects  , units   , lessons   , get my lessons , contactUs -->
   /**
-   * get all subjects
-   * @param {number} levelId
+   * get all Packages
+   * @param {string} EduSchoolLevel
+   * @param {string} SubjectId
    * @returns {object} response
    */
-  static async getSubjects(levelId) {
-    let axiosResult = await axios.get(baseUrl + `/subjects/l/${levelId}`);
+  static async getPackages(EduSchoolLevel, SubjectId, token) {
+    const EduSchoolLevelParam = EduSchoolLevel
+      ? `EduSchoolLevel=${EduSchoolLevel}&`
+      : "";
+    const SubjectIdParam = SubjectId ? `SubjectId=${SubjectId}` : "";
+    let axiosResult = await axios.get(
+      baseUrl + `/plans?${EduSchoolLevelParam}${SubjectIdParam}`,
+      {
+        headers: getHeaders(token),
+      }
+    );
     return axiosResult;
   }
   /**
-   * get all units for subject
-   * @param {string} subjectId
+   * get Package details
+   * @param {string} packageId
+   * @param {string} token
    * @returns {object} response
    */
-  static async getUnits(subjectId) {
-    let axiosResult = await axios.get(baseUrl + `/chapters/s/${subjectId}`);
+  static async getPackageDetails(packageId, token) {
+    let axiosResult = await axios.get(baseUrl + `/plans/${packageId}`, {
+      headers: getHeaders(token),
+    });
     return axiosResult;
   }
 
@@ -373,6 +415,7 @@ export default class ApiManager {
     let config = {
       headers: {
         "Content-Type": "application/json",
+        ...getHeaders(),
       },
     };
     let axiosResult = await axios.post(baseUrl + "/contact-us", data, config);

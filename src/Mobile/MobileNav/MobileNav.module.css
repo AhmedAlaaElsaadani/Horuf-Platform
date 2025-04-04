@@ -10,12 +10,7 @@
   height: 60px;
 }
 
-.navbarTop {
-  background-color: var(--primary) !important;
-}
-.navbarTop p{
-  color: white ;
-}
+
 .fixedButton {
   z-index: 1000;
   bottom: calc(60px + 1rem); /* Place it above the Mobilenav */

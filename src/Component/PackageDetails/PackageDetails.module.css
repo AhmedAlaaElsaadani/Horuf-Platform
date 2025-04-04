@@ -1,0 +1,115 @@
+.packageDetails {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
+  color: blanchedalmond;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.package-container {
+  background-color: #fff;
+  max-height: 70vh;
+  overflow: auto;
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.package-container .textContainer {
+  margin: 10px 0;
+}
+.package-container h2 {
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: center;
+  color: var(--primary);
+}
+.package-container .textContainer .unit {
+  font-size: 1rem;
+  font-weight: 300;
+  background-color: var(--primary);
+  color: #fefefe;
+  padding: 5px 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.textContainer button {
+  color: white !important;
+  scale: 1 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.textContainer button:after {
+  content: "" !important;
+  display: none !important;
+}
+.package-container .textContainer .teacher {
+  background-color: rgba(2, 105, 179, 0.15);
+  padding: 3px 13px 5px 8px;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.package-container .imageWrapper {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.package-container .imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.package-container .imageWrapper span {
+  position: absolute;
+  background-color: var(--primary);
+  color: #fff;
+  padding: 1px 15px 0px 16px;
+  margin: 10px;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+/* Scrollbar */
+.packageDetails ::-webkit-scrollbar-track {
+  margin: 0px 0px;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+}
+@media (max-width: 576px) {
+  .textContainer  {
+    order: 6 !important;
+  }
+}

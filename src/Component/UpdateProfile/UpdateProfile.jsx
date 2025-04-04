@@ -39,7 +39,7 @@ export default function UpdateProfile() {
       lastName: values.lastName,
       phone: values.phone,
       parentPhone: values.parentPhone,
-      level: values.level,
+      eduLevel: parseInt(values.level),
       address: values.address,
       gender: values.gender == "M",
     });

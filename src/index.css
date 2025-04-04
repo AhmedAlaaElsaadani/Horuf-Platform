@@ -48,10 +48,8 @@ html {
   --Login-heading-color: #1e1e1e;
   --Login-message: #6b7280;
 
-  
   /* Register */
-  --Register-message:#6b7280;
-
+  --Register-message: #6b7280;
 
   /* profile */
   --profile-nav-bg-color: #fff;
@@ -84,7 +82,7 @@ html {
   --input-text-color: #f5f5f5;
   --Login-heading-color: #f5f5f5;
   --Login-message: #eeeff0a7;
-  
+
   /* Register */
   --Register-heading-color: #f5f5f5;
   --Register-message: #eeeff0a7;
@@ -110,20 +108,15 @@ body {
 a {
   text-decoration: none;
 }
+button {
+  transition: all 0.3s ease-in-out !important;
+  -webkit-transition: all 0.3s ease-in-out !important;
+  -moz-transition: all 0.3s ease-in-out !important;
+  -ms-transition: all 0.3s ease-in-out !important;
+  -o-transition: all 0.3s ease-in-out !important;
+}
 button:active {
   scale: 0.9;
-}
-form input,
-form textarea,
-form select {
-  border: none !important;
-  border-bottom: 0.0625em var(--input-border) solid !important;
-  background-color: var(--bg-color) !important;
-  color: var(--input-text-color) !important;
-}
-
-form textarea::placeholder {
-  color: #6b7280 !important ;
 }
 
 /* 
@@ -166,4 +159,9 @@ form textarea::placeholder {
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+}
+
+/* sweet alert */
+.swal2-confirm {
+  background-color: var(--primary) !important;
 }

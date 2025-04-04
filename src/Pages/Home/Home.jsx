@@ -8,20 +8,21 @@ import { authContext } from "../../Context/authContext";
 import { motion } from "framer-motion";
 import Spinner from "../../Component/Ui/Spinner/Spinner";
 import { Helmet } from "react-helmet-async";
-const Contact = lazy(() => import("../../Pages/Contact/Contact"));
+const Contact = lazy(() => import("../Contact/Contact"));
+const About = lazy(() => import("../About/About"));
 export default function Home() {
   const { t, i18n } = useTranslation();
   const { isRegistered } = useContext(authContext);
   return (
     <>
-       <Helmet>
+      <Helmet>
         <meta name="Keywords" content={t("home_keywords_for_meta")} />
         <meta name="description" content={t("home_desc_for_meta")} />
         <title>{t("home_title_for_meta")}</title>
       </Helmet>
       <section
         id="Home"
-        className={style.Home}
+        className={style.Home + " my-3"}
         style={{
           minHeight: `calc(100vh - ${parseInt(
             window.getComputedStyle(document.body).paddingTop,
@@ -41,8 +42,13 @@ export default function Home() {
               <p>{t("home_subtitle")}</p>
               <p>{t("home_desc")}</p>
               <div className={style["links"]}>
-                {!isRegistered && (
+                {!isRegistered ? (
                   <HashLink to={"/register"}> {t("home_links_1")}</HashLink>
+                ) : (
+                  <HashLink to="/packages#packages">
+                
+                    {t("Packages")}
+                  </HashLink>
                 )}
                 <HashLink to="/About"> {t("home_links_2")}</HashLink>
               </div>
@@ -58,6 +64,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <React.Suspense fallback={<Spinner />}>
+        <About flagNotAloneCompounded={true} />
+      </React.Suspense>
       <React.Suspense fallback={<Spinner />}>
         <Contact flagNotAloneCompounded={true} />
       </React.Suspense>

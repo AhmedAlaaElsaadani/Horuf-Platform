@@ -3,13 +3,7 @@ import style from "./Heading2.module.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-export default function Heading2({
-  headingText,
-  img,
-  flagLinks = false,
-  links,
-  setLinks,
-}) {
+export default function Heading2({ headingText, img, headingSubText = null }) {
   return (
     <div style={{ backgroundImage: `url(${img})` }} className={style.Heading2}>
       <div
@@ -18,7 +12,7 @@ export default function Heading2({
           " d-flex justify-content-center align-items-center w-100  "
         }
       >
-        {flagLinks ? (
+        {/* {flagLinks ? (
           <motion.div
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
@@ -35,10 +29,11 @@ export default function Heading2({
                 </Link>
                 {index < links.length - 1 && <span>||</span>}{" "}
                 {/* Add separator except after the last link */}
-              </React.Fragment>
-            ))}
-          </motion.div>
-        ) : (
+        {/* </React.Fragment> */}
+        {/* ))} */}
+        {/* </motion.div> */}
+        {/* ) : ( */}
+        <div className={style["text"]}>
           <motion.h2
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,7 +41,9 @@ export default function Heading2({
           >
             {headingText}
           </motion.h2>
-        )}
+          {headingSubText && <motion.p>{headingSubText}</motion.p>}
+        </div>
+        {/* )} */}
       </div>
     </div>
   );

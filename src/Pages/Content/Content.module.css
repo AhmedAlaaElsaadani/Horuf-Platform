@@ -1,0 +1,108 @@
+.packageContent {
+  font-size: 16px;
+}
+.package-container .unitContainer .unit {
+  display: inline-flex;
+  padding-right: 1em;
+  align-items: center;
+  border-radius: 10px;
+  /* color: var(--bg-color-inverse) !important; */
+  color: #fff;
+  background-color: rgba(2, 105, 179, 0.15);
+  font-size: 1em;
+  font-weight: 700;
+  width: 100%;
+}
+.unitContainer button {
+  position: relative;
+  color: var(--bg-color-inverse) !important;
+  background-color: rgba(2, 105, 179, 0.15);
+  scale: 1 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.unitContainer button::before {
+  content: "▼" !important;
+  position: absolute;
+  left: 15px;
+  bottom: 50%;
+  pointer-events: none;
+  color: var(--primary);
+  transform: rotate(180deg) translateY(-13px);
+  -webkit-transform: rotate(180deg) translateY(-13px);
+  -moz-transform: rotate(180deg) translateY(-13px);
+  -ms-transform: rotate(180deg) translateY(-13px);
+  -o-transform: rotate(180deg) translateY(-13px);
+  transition: all ease-in-out 0.3s;
+  -webkit-transition: all ease-in-out 0.3s;
+  -moz-transition: all ease-in-out 0.3s;
+  -ms-transition: all ease-in-out 0.3s;
+  -o-transition: all ease-in-out 0.3s;
+}
+
+:global(button.collapsed)::before {
+  transform: translateY(50%);
+  -webkit-transform: translateY(50%);
+  -moz-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  -o-transform: translateY(50%);
+}
+.unitContainer button:after {
+  display: none;
+}
+.video {
+  cursor: pointer;
+  margin: 5px 0;
+}
+.video span {
+  color: var(--bg-color-inverse);
+}
+.video,
+.video span {
+  transition-property: color margin;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+
+.video:hover {
+  color: var(--primary);
+}
+.video:hover span {
+  color: var(--primary);
+
+  margin: 0 10px;
+}
+.active {
+  justify-content: space-between;
+  color: var(--primary);
+}
+.active span {
+  color: var(--primary);
+  margin: 0 10px;
+}
+.videoText h4 {
+  color: var(--primary);
+  font-size: 1.7em;
+  font-weight: 700;
+}
+.videoText p {
+  font-size: 1em;
+  font-weight: 700;
+}
+@media (max-width: 768px) {
+  .packageContent {
+    font-size: 14px;
+  }
+  .packageContent {
+    max-width: 100%;
+  }
+  .videoContainer {
+    order: -1;
+  }
+}
+@media (max-width: 576px) {
+  .packageContent {
+    font-size: 12px;
+  }
+}

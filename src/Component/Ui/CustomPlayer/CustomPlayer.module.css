@@ -1,0 +1,152 @@
+.playerWrapper {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color-inverse);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playerContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.plyrPlayer {
+  width: 100%;
+  height: 100%;
+}
+
+/* Custom Plyr styles */
+:global(.plyr) {
+  height: 100% !important;
+}
+
+:global(.plyr__video-wrapper) {
+  height: 100% !important;
+}
+
+:global(.plyr--video) {
+  height: 100% !important;
+}
+
+/* Custom control colors */
+:global(.plyr--full-ui input[type="range"]) {
+  color: var(--primary);
+}
+
+:global(.plyr--video .plyr__control--overlaid) {
+  background: var(--primary);
+}
+
+:global(.plyr--video .plyr__control:hover) {
+  background: var(--primary);
+}
+
+/* Hide YouTube logo and branding */
+:global(.plyr__video-wrapper iframe[src*="youtube"]) {
+  top: -50px !important;
+  height: calc(100% + 100px) !important;
+}
+
+:global(.plyr--youtube .plyr__control--overlaid) {
+  background: var(--primary) !important;
+}
+
+:global(.plyr--youtube.plyr--paused .plyr__control--overlaid) {
+  background: var(--primary) !important;
+}
+
+/* Enhance caption visibility */
+:global(.plyr__captions) {
+  font-family: Arial, sans-serif;
+  font-size: 20px !important;
+  font-weight: 500;
+  color: white !important;
+  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000,
+    -2px 2px 0 #000;
+  line-height: 1.5;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* Make captions container more visible */
+:global(.plyr--captions-enabled) {
+  --plyr-captions-background: rgba(0, 0, 0, 0.8);
+  --plyr-captions-text-color: #ffffff;
+}
+
+/* Ensure captions are always visible when enabled */
+:global(.plyr--captions-active) {
+  z-index: 3;
+}
+
+/* Additional control styles */
+:global(.plyr__control[data-plyr="restart"]:hover),
+:global(.plyr__control[data-plyr="rewind"]:hover),
+:global(.plyr__control[data-plyr="fast-forward"]:hover) {
+  background: var(--primary);
+}
+
+:global(.plyr__tooltip) {
+  background: var(--primary);
+  color: white;
+}
+
+:global(.plyr__tooltip::before) {
+  border-top-color: var(--primary);
+}
+
+:global(.plyr__menu__container) {
+  background: var(--bg-color);
+  color: var(--black-light-color);
+}
+
+:global(.plyr__menu__container .plyr__control--forward::after) {
+  border-left-color: var(--primary);
+}
+
+:global(.plyr__menu__container .plyr__control--back::before) {
+  border-right-color: var(--primary);
+}
+
+:global(
+    .plyr__menu__container
+      .plyr__control[role="menuitemradio"][aria-checked="true"]::before
+  ) {
+  background: var(--primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .playerWrapper {
+    max-height: 300px;
+  }
+}
+
+/* Update tablet-specific styles */
+@media (min-width: 768px) and (max-width: 992px) {
+  .playerWrapper {
+    height: 100% !important;
+    max-height: 500px !important;
+  }
+
+  .playerContainer {
+    height: 100% !important;
+  }
+
+  :global(.plyr),
+  :global(.plyr__video-wrapper),
+  :global(.plyr--video) {
+    height: 100% !important;
+  }
+
+  :global(.plyr__video-wrapper iframe) {
+    height: 100% !important;
+    top: 0 !important;
+  }
+}

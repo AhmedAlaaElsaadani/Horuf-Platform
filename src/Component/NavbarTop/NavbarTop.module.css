@@ -1,0 +1,24 @@
+.navbarTop-container {
+  width: 100%;
+  background-color: var(--primary);
+  color: white;
+  overflow: hidden;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  direction: rtl;
+}
+
+.navbarTop {
+  display: inline-block;
+  white-space: nowrap;
+  animation: navbarTop 10s linear infinite;
+}
+@keyframes navbarTop {
+  0% {
+    margin-right: 0;
+  }
+  100% {
+    margin-right: 100%;
+  }
+}
