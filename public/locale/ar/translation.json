@@ -50,7 +50,7 @@
   "package not found": "الباقة غير موجودة",
 
   "Packages": "الباقات",
-  "Renew monthly": "تجدد الباقة شهري",
+  "Renew monthly": "تجدد الباقة شهريًا",
   "subjects": "موادنا الدراسية",
   "units": "الوحدات",
   "teacher": "المدرس",
@@ -79,15 +79,17 @@
   "payment_subtitle": "اشترك الآن وابدأ رحلتك التعليمية",
   "codePay": "الدفع بالكود",
   "payAnotherWay": "الدفع بطريقة أخرى",
-  "packageCode": "كود الباقة",
-  "activeSubscription": "إشترك الأن",
+  "packageCode": " أدخل كود الباقة",
+  "activeSubscription": "اشترك الأن",
   "pay": "ادفع الأن",
   "You have successfully subscribed to this package": "لقد تم الاشتراك بنجاح في هذه الباقة",
+  "You aren't subscriber to this package": "أنت لست مشترك بهذه الباقة",
   "paymentError": {
     "coupon not found": "الكود غير صحيح",
     "you already have a valid subscription for this plan": "انت مشترك بالفعل في هذه الباقة",
     "you have reached the maximum number of attempts try again after 1 hour": "لقد وصلت إلى عدد المحاولات المسموح بها، الرجاء المحاولة مرة أخرى بعد ساعة",
-    "code must be number": "يجب أن يكون الكود رقمًا"
+    "code must be number": "يجب أن يكون الكود رقمًا",
+    "code must be 14 characters": "يجب أن يكون الكود 14 خانة"
   },
   "payment": {
     "Visa-Mastercard": "Visa",
@@ -119,6 +121,8 @@
   "Yes, delete it!": "نعم، احذفه!",
   "Cancel": "إلغاء",
   "Deleted!": "تم الحذف!",
+  "Delete": "حذف",
+  "Edit": "تعديل",
   "Your comment has been deleted.": "تم حذف تعليقك.",
   "Error!": "خطأ!",
   "Success": "نجاح",

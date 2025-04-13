@@ -47,8 +47,6 @@ const UpdateProfile = lazy(() =>
 const MyPackages = lazy(() => import("./Pages/MyPackages/MyPackages"));
 // payments
 const Pay = lazy(() => import("./Pages/Pay/Pay"));
-const PayWithCode = lazy(() => import("./Component/PayWithCode/PayWithCode"));
-const Fawaterak = lazy(() => import("./Component/Fawaterak/Fawaterak"));
 // const Projector = lazy(() => import("./Component/Projector/Projector"));
 const Error404 = lazy(() => import("./Component/Error404/Error404"));
 function App() {
@@ -123,20 +121,11 @@ function App() {
         {
           path: "/pay/:packageID",
           element: (
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <Pay />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           ),
-          children: [
-            {
-              index: true,
-              element: <PayWithCode />,
-            },
-            {
-              path: "fawaterk",
-              element: <Fawaterak />,
-            },
-          ],
+       
         },
         {
           path: "/pay",
@@ -236,32 +225,8 @@ function App() {
     i18n.changeLanguage(i18nextLng);
     if (i18nextLng === "ar") document.body.dir = "rtl";
     else document.body.dir = "ltr";
+
   }, []);
-  /**
-   * Packages Page
-   * 1) add a package page
-   *        - add a package card Done
-   *        - add a select element Done
-   * 2) add a package details page Done
-   * 3) Edit my Courses page
-   * 4) add payments page
-   * 5) add a pay gateway
-   * 6) edit content page
-   * 7) check gender in profile page
-   * 1: Pending
-2: Completed,
-3: Cancelled,
-4: Failed
-2: Card
-3: Fawry
-4: EWallet
-
-1: Payment
-2: Admin
-3: Code
-طريقة التجديد
-
-   */
   return (
     <>
       <IsThemeModeProvider>

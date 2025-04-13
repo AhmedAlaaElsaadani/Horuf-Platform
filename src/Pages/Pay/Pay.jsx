@@ -1,10 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import SubLinkNavigator from "../../Component/Ui/SubLinkNavigator/SubLinkNavigator";
 import img from "../../assets/Images/Heading2/1.jpeg";
 import Heading2 from "../../Component/Heading2/Heading2";
+import Fawaterak from "../../Component/Fawaterak/Fawaterak";
+import PayWithCode from "../../Component/PayWithCode/PayWithCode";
 
 export default function Pay() {
   const { packageID } = useParams();
@@ -42,9 +43,9 @@ export default function Pay() {
         headingSubText={t("payment_subtitle")}
       />
       <div className="container my-5">
-        <SubLinkNavigator options={links} />
         <div className="row justify-content-center flex-column">
-          <Outlet />
+          <PayWithCode />
+          <Fawaterak />
         </div>
       </div>
     </section>

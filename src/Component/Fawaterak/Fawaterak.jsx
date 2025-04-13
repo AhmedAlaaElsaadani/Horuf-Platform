@@ -86,13 +86,59 @@ const Fawaterak = () => {
       });
     }
   };
+  const paymentMethods = [
+    {
+      paymentId: 2,
+      nameEn: "Visa-Mastercard",
+      nameAr: "فيزا -ماستر كارد",
+      redirect: "true",
+      logo: "https://staging.fawaterk.com/clients/payment_options/MC_VI_MEpng",
+    },
+    {
+      paymentId: 3,
+      nameEn: "Fawry",
+      nameAr: "فوري",
+      redirect: "false",
+      logo: "https://staging.fawaterk.com/clients/payment_options/fawrypng",
+    },
+    {
+      paymentId: 4,
+      nameEn: "MobileWallets",
+      nameAr: "المحافظ الالكترونية",
+      redirect: "false",
+      logo: "https://staging.fawaterk.com/clients/payment_options/pay5.png",
+    },
+  ];
 
   return (
     <div className="d-flex flex-column align-items-center">
+      <h2 className="text-center my-2 text-dark p-2 rounded-2 border-bottom border-primary border-2">
+        {t("payAnotherWay")}
+      </h2>
+      <div className="row w-100 mt-3">
+        {paymentMethods.map((method, index) => (
+          <div
+            key={index}
+            className="col-md-4 col-sm-4  d-flex justify-content-center"
+          >
+            <img src={method.logo} alt={method.nameEn} />
+          </div>
+        ))}
+      </div>
       {startPaying && (
-        <button className="btn btn-outline-info" onClick={handlePayment}>
-          {t("pay")}
-        </button>
+        <div className="m">
+          <button
+            className="btn btn-outline-info my-5 rounded-circle"
+            style={{
+              width: "100px",
+              height: "100px",
+              fontSize: "17px",
+            }}
+            onClick={handlePayment}
+          >
+            {t("pay")}
+          </button>
+        </div>
       )}
       <div id="fawaterkDivId"></div>
     </div>

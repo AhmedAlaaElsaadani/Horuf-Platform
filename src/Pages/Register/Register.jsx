@@ -7,17 +7,16 @@ import { Link, useNavigate } from "react-router-dom";
 import ApiManager from "../../Utilies/ApiManager";
 import { authContext } from "../../Context/authContext";
 import FloatingInput from "../../Component/Ui/FloatingInput/FloatingInput";
-import FloatingSelect from "../../Component/Ui/FloatingSelect/FloatingSelect";
 import { motion } from "framer-motion";
 import SelectElement from "../../Component/Ui/SelectElement/SelectElement";
-import { educationLevels } from "../../Utilies/data";
+import { educationLevels, phoneRegax } from "../../Utilies/data";
 
 export default function Register() {
   const { t, i18n } = useTranslation();
   const [flagDirection, setFlagDirection] = useState(i18n.language === "ar");
   const [responseFlag, setResponseFlag] = useState(false);
   const [resMessage, setResMessage] = useState(null);
-  const { setToken, setIsRegistered } = useContext(authContext);
+  const { setToken } = useContext(authContext);
   let navigator = useNavigate();
   useEffect(() => {
     setFlagDirection(i18n.language === "ar");
@@ -27,18 +26,10 @@ export default function Register() {
     firstName: Yup.string().required(t("Required")),
     lastName: Yup.string().required(t("Required")),
     phone: Yup.string()
-      //match egyption phonenumber
-
-      .matches(
-        /^(0020|\+20|20)?(010|011|012|015)[0-9]{8}$/,
-        t("Phone number is not valid")
-      )
+      .matches(phoneRegax, t("Phone number is not valid"))
       .required(t("Required")),
     parentPhone: Yup.string()
-      .matches(
-        /^(0020|\+20|20)?(010|011|012|015)[0-9]{8}$/,
-        t("Phone number is not valid")
-      )
+      .matches(phoneRegax, t("Phone number is not valid"))
       .required(t("Required"))
       .notOneOf(
         [Yup.ref("phone")],
@@ -72,15 +63,16 @@ export default function Register() {
     await ApiManager.register(data)
       .then((response) => {
         let res = response.data;
+        console.log(res);
 
         if (res.code == 200) {
           setResMessage({
             flag: true,
             message: t("You need to verify your email"),
           });
+
           setTimeout(() => {
             setToken(res.token);
-            setIsRegistered(true);
             navigator("/EmailConfirmOtp", { state: { token: res.token } });
           }, 1000);
         } else {

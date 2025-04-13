@@ -167,10 +167,31 @@ export default class ApiManager {
     };
 
     let axiosResult = await axios.put(
-      baseUrl + "/students/update-profile",
+      baseUrl + "/accounts/update-profile",
       user,
       {
         headers: headers,
+      }
+    );
+    return axiosResult;
+  }
+  /**
+   * @param {string} token
+   * @param {File} image
+   * @returns {object}
+   */
+  static async updateImage(token, image) {
+    const formdata = new FormData();
+
+    formdata.append("image", image);
+    const axiosResult = await axios.put(
+      baseUrl + "/accounts/update-profile-image",
+      formdata,
+      {
+        headers: {
+          ...getHeaders(token),
+          "Content-Type": "multipart/form-data",
+        },
       }
     );
     return axiosResult;

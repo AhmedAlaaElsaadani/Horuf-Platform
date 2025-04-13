@@ -49,3 +49,4 @@ export const educationLevels = [
     value: 12,
   },
 ];
+export const phoneRegax = /^(0020|\+20|20|0)?(10|11|12|15)[0-9]{8}$/;

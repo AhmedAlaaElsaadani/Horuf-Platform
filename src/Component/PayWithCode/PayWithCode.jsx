@@ -9,7 +9,7 @@ import ApiManager from "../../Utilies/ApiManager";
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import { authContext } from "../../Context/authContext";
-
+import style from "./PayWithCode.module.css";
 export default function PayWithCode() {
   const { packageID } = useParams();
   const { t } = useTranslation();
@@ -83,25 +83,40 @@ export default function PayWithCode() {
   });
 
   return (
-    <form
-      onSubmit={myFormik.handleSubmit}
-      className="col-md-12 d-flex flex-column justify-content-center align-items-center"
-    >
-      <div className="w-100 my-3">
-        <FloatingInput {...codeInput} idx={0} myFormik={myFormik} />
-      </div>
-      <motion.button
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.5,
-          delay: 0.4,
-        }}
-        type="submit"
-        className="btn btn-primary"
+    <>
+      <form
+        onSubmit={myFormik.handleSubmit}
+        className={"col-md-12  " + style.payWithCode}
       >
-        {t("activeSubscription")}
-      </motion.button>
-    </form>
+        <h2 className="text-center my-2 text-dark p-2 rounded-2 border-bottom border-primary border-2 ">
+          {t("codePay")}
+        </h2>
+        <div className="w-75 my-3">
+          <FloatingInput {...codeInput} idx={0} myFormik={myFormik} />
+        </div>
+        <div className={style.btnContainerForHover}>
+          <motion.button
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.5,
+              delay: 0.4,
+            }}
+            type="submit"
+            className={`btn  ${
+              myFormik.values.packageCode.length < 14 ? "disabled" : "btn-info"
+            }`}
+            // when the code isn't 14 characters long
+            disabled={myFormik.values.packageCode.length < 14}
+          >
+            {t("activeSubscription")}
+          </motion.button>
+          <p className="text-danger text-center mt-2">
+            {t("paymentError.code must be 14 characters")}
+          </p>
+        </div>
+      </form>
+      <div className={style.bottomBorder}></div>
+    </>
   );
 }

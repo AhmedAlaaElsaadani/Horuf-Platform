@@ -1,0 +1,35 @@
+.payWithCode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.payWithCode h2 {
+  padding: 10px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+.payWithCode input {
+  border: 1px solid var(--primary) !important;
+}
+.payWithCode p {
+  opacity: 0;
+}
+.btnContainerForHover {
+  display: flex;
+  flex-direction: column;
+}
+.btnContainerForHover:hover button:disabled + p {
+  opacity: 1 !important;
+}
+.bottomBorder {
+  width: 100%;
+  border-bottom: 4px solid var(--primary) !important;
+  border-top: 4px solid var(--primary) !important;
+  margin-bottom: 20px;
+  height: 5px;
+}

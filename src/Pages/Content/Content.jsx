@@ -9,6 +9,7 @@ import Spinner from "../../Component/Ui/Spinner/Spinner";
 import Heading2 from "../../Component/Heading2/Heading2";
 import img from "../../assets/Images/Heading2/1.jpeg";
 import CustomPlayer from "../../Component/Ui/CustomPlayer/CustomPlayer";
+import Comments from "../../Component/Comments/Comments";
 
 export default function Content() {
   let { packageId } = useParams();
@@ -16,12 +17,13 @@ export default function Content() {
   const [isLoading, setIsLoading] = useState(true);
   const { t, i18n } = useTranslation();
   const [errorMessage, setErrorMessage] = useState(null);
-  const { token } = useContext(authContext);
+  const { token, user } = useContext(authContext);
   const [flagDirection, setFlagDirection] = useState(i18n.language === "ar");
   useEffect(() => {
     setFlagDirection(i18n.language === "ar");
   }, [i18n.language]);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  // get the package details from the api
   const getPackageDetails = async () => {
     setErrorMessage(null);
     // get package details from api
@@ -38,11 +40,7 @@ export default function Content() {
       }
     }
   };
-
-  useEffect(() => {
-    getPackageDetails();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // when the user click on the video we go to that video
   const goToLesson = (unitIdx, videoIdx, video) => {
     reRenderVideo();
     setSelectedVideo({
@@ -51,12 +49,14 @@ export default function Content() {
       ...video,
     });
   };
+  // the video dosen't change when the user click for that we render the whole component
   const reRenderVideo = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
     }, 500);
   };
+  // when the video ended we go to the next video
   const goToNextVideo = () => {
     if (selectedVideo.unitIdx == packageDetails.units.length - 1) {
       if (
@@ -83,6 +83,10 @@ export default function Content() {
       });
     }
   };
+  useEffect(() => {
+    getPackageDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <section
       style={{
@@ -194,26 +198,36 @@ export default function Content() {
                   {isLoading ? (
                     <Spinner sectionFlag={false} />
                   ) : (
-                    <div className="w-100 ">
-                      <div className="overflow-hidden">
-                        <CustomPlayer
-                          videoUrl={selectedVideo.videoUrl}
-                          onEnded={() => {
-                            goToNextVideo();
-                          }}
-                          onReady={() => {}}
+                    <>
+                      <div className="w-100 mb-5">
+                        <div className="overflow-hidden">
+                          <CustomPlayer
+                            videoUrl={selectedVideo.videoUrl}
+                            onEnded={() => {
+                              goToNextVideo();
+                            }}
+                            onReady={() => {}}
+                          />
+                        </div>
+                        <div
+                          className={
+                            "d-flex gap-3 my-2 mt-5 flex-column " +
+                            style.videoText
+                          }
+                        >
+                          <h4 className="m-0">{selectedVideo.title}</h4>
+                          <p>{selectedVideo.description}</p>
+                        </div>
+                        <Comments
+                          flagDirection={flagDirection}
+                          t={t}
+                          token={token}
+                          user={user}
+                          videoId={selectedVideo.id}
+                          packageId={packageId}
                         />
                       </div>
-                      <div
-                        className={
-                          "d-flex gap-3 my-2 mt-5 flex-column " +
-                          style.videoText
-                        }
-                      >
-                        <h4 className="m-0">{selectedVideo.title}</h4>
-                        <p>{selectedVideo.description}</p>
-                      </div>
-                    </div>
+                    </>
                   )}
                 </motion.div>
               </div>

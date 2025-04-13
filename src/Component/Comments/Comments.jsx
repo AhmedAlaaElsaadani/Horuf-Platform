@@ -7,22 +7,46 @@ import Spinner from "../Ui/Spinner/Spinner";
 import ApiManager from "../../Utilies/ApiManager";
 import { IsMobileContext } from "../../Context/isMobileContext";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-export default function Comments({ lessonId, t, flagDirection, token, user }) {
+export default function Comments({
+  packageId,
+  videoId,
+  t,
+  flagDirection,
+  token,
+  user,
+}) {
   const [comments, setComments] = useState(null);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [flagDisplayComment, setFlagDisplayComment] = useState(false);
   const { isMobile } = useContext(IsMobileContext);
   const formComment = useRef(null);
   const [commentParentId, setCommentParentId] = useState(null);
-
+  const navigate = useNavigate();
   const getComments = async () => {
     try {
       setComments(null);
-      let { data } = await ApiManager.getLessonComments(token, lessonId);
-      setComments(data);
+      let { data } = await ApiManager.getVideoComments(
+        token,
+        packageId,
+        videoId
+      );
+      if (data.success) {
+        setComments(data.data);
+      }
     } catch (error) {
       setComments([]);
+      console.error(error);
+      if (error.response.status === 400) {
+        Swal.fire({
+          icon: "error",
+          title: t("Error!"),
+          text: t("You aren't subscriber to this package"),
+          confirmButtonText: t("OK"),
+        });
+        navigate("/");
+      }
     }
   };
   useEffect(() => {
@@ -31,7 +55,7 @@ export default function Comments({ lessonId, t, flagDirection, token, user }) {
 
   const addComment = async (values) => {
     setButtonLoading(true);
-    await ApiManager.addComment(token, lessonId, values.Comment)
+    await ApiManager.addComment(token, packageId, null, videoId, values.Comment)
       .then(async (response) => {
         console.log(response);
         if (response.status === 200) {
@@ -48,10 +72,11 @@ export default function Comments({ lessonId, t, flagDirection, token, user }) {
 
   const replyComment = async (values) => {
     setButtonLoading(true);
-    await ApiManager.replyComment(
+    await ApiManager.addComment(
       token,
-      lessonId,
+      packageId,
       commentParentId,
+      videoId,
       values.Comment
     )
       .then(async (response) => {
@@ -83,7 +108,12 @@ export default function Comments({ lessonId, t, flagDirection, token, user }) {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await ApiManager.deleteComment(token, commentId);
+          const response = await ApiManager.deleteComment(
+            token,
+            packageId,
+            videoId,
+            commentId
+          );
           console.log(response);
 
           if (response.status === 200) {
@@ -114,7 +144,6 @@ export default function Comments({ lessonId, t, flagDirection, token, user }) {
   };
   const myFormik = useFormik({
     initialValues: {
-      lessonId: lessonId,
       Comment: "",
     },
     onSubmit: submitForm,
@@ -169,7 +198,7 @@ export default function Comments({ lessonId, t, flagDirection, token, user }) {
           </button>
         </div>
       </form>
-      <div className={!flagDisplayComment && isMobile && " d-none"}>
+      <div className={!flagDisplayComment && isMobile ? " d-none" : ""}>
         {comments ? (
           comments.length !== 0 ? (
             comments.map((comment) => (
@@ -211,6 +240,23 @@ function Comment({
   const flagUserMyComment = user && user.id === comment.accountId;
 
   const [replyFlag, setReplyFlag] = useState(false);
+  const [show, setShow] = useState(false);
+  const items = [
+    {
+      icon: <i className="fa-solid fa-flag"></i>,
+      text: t("Reply"),
+      onClick: () => {
+        formComment.current.scrollIntoView({ behavior: "smooth" });
+        formComment.current.Comment.focus();
+        setCommentParentId(comment.id);
+      },
+    },
+    {
+      icon: <i className="fa-solid fa-trash"></i>,
+      text: t("Delete"),
+      onClick: () => deleteComment(comment.id),
+    },
+  ];
   const wetherThisCommentHasReplies =
     flagComment && comment.replies && comment.replies.length !== 0;
   return (
@@ -225,9 +271,7 @@ function Comment({
           <i className="rounded-circle text-white fs-6 fa-solid fa-user" />
         </div>
 
-        <p className="lead p-0 mx-2 mb-0">
-          {comment.firstName + " " + comment.lastName}
-        </p>
+        <p className="lead p-0 mx-2 mb-0">{comment.userName}</p>
       </div>
       <div className={style["comment-body"]}>
         <p>{comment.text}</p>
@@ -236,30 +280,36 @@ function Comment({
         {flagUserMyComment && (
           <>
             <button
-              className={`btn btn-danger  my-3 rounded-circle border-0 d-flex justify-content-center align-items-center position-absolute top-0 ${
+              className={`btn btn-outline-info my-3 p-1 rounded-circle position-absolute top-0 ${
                 flagDirection ? "start-0" : "end-0"
-              }`}
-              style={{ fontSize: "0.8rem" ,
-                width: "25px",
-                height: "25px",
-               }}
+              } ${style["more-options-btn"]}`}
               aria-label="delete comment button"
-              onClick={() => deleteComment(comment.id)}
+              // onClick={() => deleteComment(comment.id)}
+              onClick={() => setShow(!show)}
             >
-              <i className="fa-solid fa-trash mx-2"></i>
+              <i className="fa-solid fa-ellipsis-vertical"></i>
             </button>
-            <button
-              className="btn btn-secondary p-0 px-1  border-0  mb-2 ms-auto "
-              style={{ fontSize: "0.8rem" }}
-              onClick={() => {
-                // scroll to above the form
-                formComment.current.scrollIntoView({ behavior: "smooth" });
-                formComment.current.Comment.focus();
-                setCommentParentId(comment.id);
-              }}
-            >
-              {t("Reply")}
-            </button>
+            {show && (
+              <div
+                className={`position-absolute top-0 my-5 ${
+                  style["more-options"]
+                } ${flagDirection ? "start-0" : "end-0"}`}
+              >
+                {items.map((item, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => {
+                      item.onClick();
+                      setShow(!show);
+                    }}
+                    className={`${style.optionItem}`}
+                  >
+                    {item.icon}
+                    <span>{t(item.text)} </span>
+                  </div>
+                ))}
+              </div>
+            )}
           </>
         )}
         {wetherThisCommentHasReplies && (
@@ -288,70 +338,3 @@ function Comment({
     </div>
   );
 }
-
-  /**
-   * get lesson comments
-   * @param {string} token
-   * @param {string} lessonId
-   * @returns {object} response
-   */
-  // static async getLessonComments(token, lessonId) {
-  //   let axiosResult = await axios.get(baseUrl + `/comments/l/${lessonId}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-  //   return axiosResult;
-  // }
-  /**
-   * add comment to lesson
-   * @param {string} token
-   * @param {string} lessonId
-   * @param {string} comment
-   * @returns {object} response
-   */
-  // static async addComment(token, lessonId, comment) {
-  //   let axiosResult = await axios.post(
-  //     baseUrl + `/comments`,
-  //     { lessonId: lessonId, text: comment },
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     }
-  //   );
-  //   return axiosResult;
-  // }
-  /**
-   * reply to comment
-   * @param {string} token
-   * @param {string} commentParentId
-   * @param {string} comment
-   * @returns {object} response
-   */
-  // static async replyComment(token, lessonId, commentParentId, comment) {
-  //   let axiosResult = await axios.post(
-  //     baseUrl + `/comments`,
-  //     { lessonId: lessonId, ParentId: commentParentId, text: comment },
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     }
-  //   );
-  //   return axiosResult;
-  // }
-  /**
-   * Delete comment
-   * @param {string} token
-   * @param {string} commentId
-   * @returns {object} response
-   */
-  // static async deleteComment(token, commentId) {
-  //   let axiosResult = await axios.delete(baseUrl + `/comments/${commentId}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-  //   return axiosResult;
-  // }

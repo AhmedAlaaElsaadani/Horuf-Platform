@@ -82,11 +82,13 @@
   "activeSubscription": "active subscription",
   "pay": "Pay",
   "You have successfully subscribed to this package": "You have successfully subscribed to this package",
+  "You aren't subscriber to this package": "You aren't subscriber to this package",
   "paymentError": {
     "coupon not found": "Coupon not found",
     "you already have a valid subscription for this plan": "You already have a valid subscription for this plan",
     "you have reached the maximum number of attempts try again after 1 hour": "You have reached the maximum number of attempts try again after 1 hour",
-    "code must be number": "Code must be number"
+    "code must be number": "Code must be number",
+    "code must be 14 characters": "Code must be 14 characters"
   },
   "payment": {
     "Visa-Mastercard": "Visa",
@@ -119,6 +121,8 @@
   "Yes, delete it!": "Yes, delete it!",
   "Cancel": "Cancel",
   "Deleted!": "Deleted!",
+  "Delete": "Delete",
+  "Edit": "Edit",
   "Your comment has been deleted.": "Your comment has been deleted.",
   "Error!": "Error!",
   "Something went wrong. Please try again.": "Something went wrong. Please try again.",

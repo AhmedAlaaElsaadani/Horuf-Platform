@@ -13,6 +13,8 @@ import { useTranslation } from "react-i18next";
 export default function RoutLayout() {
   const { isMobile } = useContext(IsMobileContext);
   const { t } = useTranslation();
+  
+
   return (
     <>
       <Helmet>

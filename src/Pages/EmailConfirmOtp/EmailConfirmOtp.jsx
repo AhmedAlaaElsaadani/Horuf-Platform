@@ -19,8 +19,10 @@ export default function EmailConfirmOtp() {
   const navigator = useNavigate();
 
   useEffect(() => {
+    console.log("tokenLocal", location.state);
     if (location.state && location.state.token) {
       setTokenLocal(location.state.token);
+      
     } else {
       navigator("/");
     }
