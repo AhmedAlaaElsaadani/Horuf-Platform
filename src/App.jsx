@@ -121,11 +121,10 @@ function App() {
         {
           path: "/pay/:packageID",
           element: (
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <Pay />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           ),
-       
         },
         {
           path: "/pay",
@@ -225,7 +224,6 @@ function App() {
     i18n.changeLanguage(i18nextLng);
     if (i18nextLng === "ar") document.body.dir = "rtl";
     else document.body.dir = "ltr";
-
   }, []);
   return (
     <>

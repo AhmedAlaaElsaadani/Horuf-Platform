@@ -171,17 +171,18 @@ export default function Comments({
           flagDirection={flagDirection}
         />
         <div className="d-flex justify-content-between w-100">
-          {isMobile ? (
+          {!isMobile ? (
             <button
               type="button"
               onClick={() => setFlagDisplayComment(!flagDisplayComment)}
               className="btn btn-outline-info mt-2 p-1"
             >
               {flagDisplayComment ? t("Hide Comments") : t("Show Comments")}
-            </button>
+            </button> 
           ) : (
             <div />
           )}
+
           <button
             type="submit"
             disabled={buttonLoading}

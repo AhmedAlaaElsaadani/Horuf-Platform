@@ -88,7 +88,7 @@ export default function PayWithCode() {
         onSubmit={myFormik.handleSubmit}
         className={"col-md-12  " + style.payWithCode}
       >
-        <h2 className="text-center my-2 text-dark p-2 rounded-2 border-bottom border-primary border-2 ">
+        <h2 className="text-center my-2 p-2 rounded-2 border-bottom border-primary border-2 ">
           {t("codePay")}
         </h2>
         <div className="w-75 my-3">
@@ -116,7 +116,15 @@ export default function PayWithCode() {
           </p>
         </div>
       </form>
-      <div className={style.bottomBorder}></div>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.5,
+          delay: 0.5,
+        }}
+        className={style.bottomBorder}
+      ></motion.div>
     </>
   );
 }
