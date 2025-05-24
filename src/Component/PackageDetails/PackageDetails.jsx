@@ -14,6 +14,7 @@ export default function PackageDetails({ packageId, closeModal }) {
   const { t } = useTranslation();
   const [packageDetails, setPackageDetails] = useState(null);
   const { token, isRegistered } = useContext(authContext);
+  const [loading, setLoading] = useState(false)
   const containerElement = useRef();
   const navigate = useNavigate();
   const getPackageDetails = async () => {
@@ -65,6 +66,7 @@ export default function PackageDetails({ packageId, closeModal }) {
   const subscribeForFree = async (packageDetailsId) => {
     if (isRegistered) {
       try {
+        setLoading(true);
         const { data } = await ApiManager.subscribeForFreePackage(
           packageDetailsId,
           token
@@ -75,9 +77,11 @@ export default function PackageDetails({ packageId, closeModal }) {
             icon: "success",
             confirmButtonText: t("OK"),
           }).then(() => {
+            setLoading(false);
             navigate("/content/" + packageDetailsId);
           });
         } else {
+          setLoading(false);
           Swal.fire({
             title: t("subscription failed"),
             text: data.message,
@@ -87,6 +91,13 @@ export default function PackageDetails({ packageId, closeModal }) {
         }
       } catch (error) {
         console.error(error);
+        Swal.fire({
+          title: t("Something went wrong, please try again later"),
+          text: data.message,
+          icon: "error",
+          confirmButtonText: t("OK"),
+        });
+
       }
     } else {
       Swal.fire({
@@ -347,9 +358,17 @@ export default function PackageDetails({ packageId, closeModal }) {
                 ) : (
                   <button
                     className="btn btn-outline-primary w-100"
-                    onClick={() => subscribe(packageDetails.id)}
+                    onClick={() =>
+                      packageDetails.price === 0
+                        ? subscribeForFree(packageDetails.id)
+                        : subscribe(packageDetails.id)
+                    }
                   >
-                    {t("subscribe")}
+                    {loading ?
+                      <div className="spinner-border text-" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                      : t("subscribe")}
                   </button>
                 )}
               </div>

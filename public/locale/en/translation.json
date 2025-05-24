@@ -47,6 +47,8 @@
   "closeDate": "Close Date",
   "package not found": "Package not found",
   "free": "Free",
+  "subscription failed": "Subscription failed",
+  "subscription successful": "Subscription successful",
 
   "Subjects_title_meta": "Horuf Academy - Subjects",
   "Packages": "Packages",

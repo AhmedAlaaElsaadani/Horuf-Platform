@@ -10,10 +10,11 @@ import { IsMobileContext } from "../../Context/isMobileContext";
 import Spinner from "../Ui/Spinner/Spinner";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
+import ScrollToTop from "../Ui/ScrollToTop/ScrollToTop";
 export default function RoutLayout() {
   const { isMobile } = useContext(IsMobileContext);
   const { t } = useTranslation();
-  
+
 
   return (
     <>
@@ -22,6 +23,7 @@ export default function RoutLayout() {
         <meta name="description" content={t("home_desc_for_meta")} />
         <title>{t("home_title_for_meta")}</title>
       </Helmet>
+      <ScrollToTop />
       <React.Suspense fallback={<Spinner sectionFlag={false} />}>
         {!isMobile && (
           <>
