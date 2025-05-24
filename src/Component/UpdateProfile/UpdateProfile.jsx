@@ -75,7 +75,7 @@ export default function UpdateProfile() {
             });
           setResponseFlag(false);
         });
-    } catch (error) {}
+    } catch (error) { }
   };
   const myFormik = useFormik({
     initialValues: {
@@ -125,10 +125,9 @@ export default function UpdateProfile() {
   const updateSelect = [
     {
       selectName: "level",
-      selectTransition: "level",
       translation: "level",
       onChange: myFormik.handleChange,
-      defaultValue: myFormik.values.level,
+      selectValue: myFormik.values.level,
       icon: "fa-user-graduate",
       error: myFormik.errors.level,
       touched: myFormik.touched.level,
@@ -136,10 +135,9 @@ export default function UpdateProfile() {
     },
     {
       selectName: "gender",
-      selectTransition: "Gender",
       translation: "Gender",
       onChange: myFormik.handleChange,
-      defaultValue: myFormik.values.gender,
+      selectValue: myFormik.values.gender,
       error: myFormik.errors.gender,
       touched: myFormik.touched.gender,
       icon: "fa-user",
@@ -230,7 +228,11 @@ export default function UpdateProfile() {
           ))}
           {updateSelect.map((select, index) => (
             <div className="col-md-12">
-              <SelectElement key={index + 5} idx={index} {...select} t={t} />
+              <SelectElement key={index + 5} idx={index} {...select} t={t}
+                changeValue={
+                  (value) =>
+                    myFormik.setFieldValue(select.selectName, value)
+                } />
             </div>
           ))}
           <div className="col-md-12 flex-column align-items-center d-flex">
@@ -250,9 +252,8 @@ export default function UpdateProfile() {
 
             {resMessage && (
               <div
-                className={`my-3 ${
-                  resMessage.flag ? "text-success" : "text-danger"
-                }`}
+                className={`my-3 ${resMessage.flag ? "text-success" : "text-danger"
+                  }`}
               >
                 {resMessage.message}
               </div>

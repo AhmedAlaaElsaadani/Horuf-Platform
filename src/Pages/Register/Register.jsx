@@ -180,7 +180,6 @@ export default function Register() {
   const registerSelect = [
     {
       selectName: "level",
-      selectTransition: "level",
       translation: "level",
       onChange: myFormik.handleChange,
       selectValue: myFormik.values.level,
@@ -191,7 +190,6 @@ export default function Register() {
     },
     {
       selectName: "gender",
-      selectTransition: "Gender",
       translation: "Gender",
       onChange: myFormik.handleChange,
       selectValue: myFormik.values.gender,
@@ -264,9 +262,8 @@ export default function Register() {
             <div className="col-md-12">
               <SelectElement key={index + 5} idx={index} {...select}
                 changeValue={
-                  (value) => {
-                    myFormik.setFieldValue(select.selectName, value);
-                  }
+                  (value) =>
+                    myFormik.setFieldValue(select.selectName, value)
                 } t={t} />
             </div>
           ))}

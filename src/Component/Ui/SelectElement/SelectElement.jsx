@@ -38,7 +38,7 @@ export default function SelectElement({
     if (!selectValue) return "";
     const selectedOption = options.find(opt => opt.value === selectValue);
     return selectedOption ? t(selectedOption.key) : "";
-  }, [selectName, options, t]);
+  }, [selectName, options, t, selectValue]);
 
   // Focus search input when dropdown opens
   useEffect(() => {
