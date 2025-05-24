@@ -183,7 +183,7 @@ export default function Register() {
       selectTransition: "level",
       translation: "level",
       onChange: myFormik.handleChange,
-      defaultValue: myFormik.values.level,
+      selectValue: myFormik.values.level,
       icon: "fa-user-graduate",
       error: myFormik.errors.level,
       touched: myFormik.touched.level,
@@ -194,7 +194,7 @@ export default function Register() {
       selectTransition: "Gender",
       translation: "Gender",
       onChange: myFormik.handleChange,
-      defaultValue: myFormik.values.gender,
+      selectValue: myFormik.values.gender,
       error: myFormik.errors.gender,
       touched: myFormik.touched.gender,
       icon: "fa-user",
@@ -262,7 +262,12 @@ export default function Register() {
           </div>
           {registerSelect.map((select, index) => (
             <div className="col-md-12">
-              <SelectElement key={index + 5} idx={index} {...select} t={t} />
+              <SelectElement key={index + 5} idx={index} {...select}
+                changeValue={
+                  (value) => {
+                    myFormik.setFieldValue(select.selectName, value);
+                  }
+                } t={t} />
             </div>
           ))}
           {registerInputs2.map((input, index) => (
@@ -299,9 +304,8 @@ export default function Register() {
 
             {resMessage && (
               <div
-                className={`my-3 ${
-                  resMessage.flag ? "text-success" : "text-danger"
-                }`}
+                className={`my-3 ${resMessage.flag ? "text-success" : "text-danger"
+                  }`}
               >
                 {resMessage.message}
               </div>
