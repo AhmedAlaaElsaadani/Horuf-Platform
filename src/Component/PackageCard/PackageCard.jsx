@@ -19,6 +19,10 @@ const PackageCard = ({ packageObject, idx, setPackageId }) => {
         lessonsCount: 5,
       }
      */
+
+  const checkIfFree = (price) => {
+    return price === 0 ? t("free") : price + " " + t("EGP");
+  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -74,7 +78,7 @@ const PackageCard = ({ packageObject, idx, setPackageId }) => {
               {t("moreDetails")}
             </button>
             <span className="border border-primary px-2 py-1 rounded-3 text-primary">
-              {packageObject.price}
+              {checkIfFree(packageObject.price)}
             </span>
           </div>
         </div>

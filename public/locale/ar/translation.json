@@ -48,7 +48,10 @@
   "you have no packages yet": "لا يوجد لديك باقات حاليا",
   "closeDate": "تاريخ الانتهاء",
   "package not found": "الباقة غير موجودة",
-
+  "free": "مجاني",
+  "subscription failed": "فشل الاشتراك",
+  "subscription successful": "تم الاشتراك بنجاح",
+  
   "Packages": "الباقات",
   "Renew monthly": "تجدد الباقة شهريًا",
   "subjects": "موادنا الدراسية",

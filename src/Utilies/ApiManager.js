@@ -425,6 +425,22 @@ export default class ApiManager {
     });
     return axiosResult;
   }
+  /**
+   * subscribe for free package
+   * @param {string} packageId
+   * @param {string} token
+   * @returns {object} response
+   */
+  static async subscribeForFreePackage(packageId, token) {
+    let axiosResult = await axios.post(
+      baseUrl + `/plans/${packageId}/subscribe-free`,
+      {},
+      {
+        headers: getHeaders(token),
+      }
+    );
+    return axiosResult;
+  }
 
   /**
    * Contact us

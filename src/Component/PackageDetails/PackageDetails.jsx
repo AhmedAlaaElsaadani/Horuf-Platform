@@ -24,7 +24,7 @@ export default function PackageDetails({ packageId, closeModal }) {
         setPackageDetails(data.data);
         setRealPrice(data.data.price);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   useEffect(() => {
     // get package details from api
@@ -58,6 +58,48 @@ export default function PackageDetails({ packageId, closeModal }) {
       });
     }
   };
+  const checkIfFree = (price) => {
+    return price === 0
+      ? t("free") : t("price") + ": " + price + " EGP";
+  };
+  const subscribeForFree = async (packageDetailsId) => {
+    if (isRegistered) {
+      try {
+        const { data } = await ApiManager.subscribeForFreePackage(
+          packageDetailsId,
+          token
+        );
+        if (data.success) {
+          Swal.fire({
+            title: t("subscription successful"),
+            icon: "success",
+            confirmButtonText: t("OK"),
+          }).then(() => {
+            navigate("/content/" + packageDetailsId);
+          });
+        } else {
+          Swal.fire({
+            title: t("subscription failed"),
+            text: data.message,
+            icon: "error",
+            confirmButtonText: t("OK"),
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      Swal.fire({
+        title: t("you must login first"),
+        icon: "warning",
+        confirmButtonText: t("OK"),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  }
   //  {
   //   units: [
   //     {
@@ -291,7 +333,8 @@ export default function PackageDetails({ packageId, closeModal }) {
                   src={packageDetails.thumbnailUrl}
                   alt={packageDetails.title}
                 />
-                <span>{packageDetails.price} EGP</span>
+                <span>              {checkIfFree(packageDetails.price)}
+                </span>
               </div>
               <div className="d-flex justify-content-center gap-3 align-items-center mt-2 px-4">
                 {packageDetails.isSubscribed ? (
