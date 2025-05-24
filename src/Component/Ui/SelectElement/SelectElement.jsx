@@ -14,6 +14,8 @@ export default function SelectElement({
   touched,
   // when be more than one select in the same page
   idx = 0,
+  // when you want to use search in select
+  searchFlag = false,
 }) {
   const { t } = useTranslation();
   return (
