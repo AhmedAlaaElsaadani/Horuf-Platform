@@ -1,4 +1,5 @@
 /* floating label */
+
 .FloatingLabel {
   color: #6b7280;
   font-size: 1.25em;
@@ -16,6 +17,9 @@
   border-bottom: 0.0625em var(--input-border) solid !important;
   background-color: var(--bg-color) !important;
   color: var(--input-text-color) !important;
+}
+.floating input::placeholder::selection {
+  opacity: 0 !important;
 }
 .floating input:focus {
   box-shadow: 0 0 0 0.25rem #0269b378 !important;
@@ -37,31 +41,31 @@
   cursor: pointer;
   -webkit-filter: invert(42%) sepia(19%) saturate(467%) hue-rotate(130deg);
 }
-/* Arabic */
+/* English */
 /*Auto fill*/
 .floating > .floatingInput:-webkit-autofill ~ label ,
 /* Focus */
 .floating > .floatingInput:focus ~ label,
 .floating > .floatingInput:not(:placeholder-shown) ~ label,
 .floating > .floatingSelect ~ label {
-  transform: scale(0.64) translateY(-16%) translateX(55%) !important;
-  -webkit-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
-  -moz-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
-  -ms-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
-  -o-transform: scale(0.64) translateY(-16%) translateX(55%) !important;
+  transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -webkit-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -moz-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -ms-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  -o-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
 }
-/* English */
+/* Arabic */
 /*Auto fill*/
 .floating:has(input[dir="rtl"]) > .floatingInput:-webkit-autofill ~ label,
 /* Focus */
 .floating:has(input[dir="rtl"]) > .floatingInput:focus ~ label,
 .floating:has(input[dir="rtl"])> .floatingInput:not(:placeholder-shown)~ label,
 .floating:has(input[dir="rtl"]) > .floatingSelect ~ label {
-  transform: scale(0.64) translateY(-16%) translateX(0%) !important;
-  -webkit-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
-  -moz-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
-  -ms-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
-  -o-transform: scale(0.64) translateY(-16%) translateX(0%) !important;
+  transform: scale(0.64) translateY(-16%) translateX(51%) !important;
+  -webkit-transform: scale(0.64) translateY(-16%) translateX(51%) !important;
+  -moz-transform: scale(0.64) translateY(-16%) translateX(51%) !important;
+  -ms-transform: scale(0.64) translateY(-16%) translateX(51%) !important;
+  -o-transform: scale(0.64) translateY(-16%) translateX(51%) !important;
 }
 /* Password icon style */
 .floating .passwordIcon {
@@ -112,7 +116,7 @@
 }
 /* disabled input */
 .floating input:disabled {
-  background-color:#6b7280 !important;
+  background-color: #6b7280 !important;
   color: #fff !important;
   opacity: 0.7;
 }

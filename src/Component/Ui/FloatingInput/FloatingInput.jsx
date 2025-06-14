@@ -16,16 +16,45 @@ export default function FloatingInput({
   const { t, i18n } = useTranslation();
   const [flagDirection, setFlagDirection] = useState(i18n.language === "en");
   const [showPassword, setShowPassword] = useState(false);
+  const [shouldShake, setShouldShake] = useState(false);
+
 
   useEffect(() => {
     setFlagDirection(i18n.language === "en");
   }, [i18n.language]);
 
+  // Trigger shake animation when error appears
+  useEffect(() => {
+    if (myFormik.errors[inputName] && myFormik.touched[inputName]) {
+      setShouldShake(true);
+      // Reset shake after animation completes
+      const timer = setTimeout(() => setShouldShake(false), 600);
+      return () => clearTimeout(timer);
+    }
+  }, [myFormik.errors[inputName], myFormik.touched[inputName], inputName]);
+
+  // Shake animation variants
+  const shakeVariants = {
+    shake: {
+      x: [-10, 10, -10, 10, -5, 5, 0],
+      transition: {
+        duration: 0.6,
+        ease: "easeInOut"
+      }
+    },
+    normal: {
+      x: 0
+    }
+  };
   return (
     <>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          ...(shouldShake ? shakeVariants.shake : shakeVariants.normal)
+        }}
         transition={{
           duration: animationFlag ? 0.5 : 0,
           delay: animationFlag ? 0.4 + idx * 0.1 : 0,
@@ -49,8 +78,8 @@ export default function FloatingInput({
           className={style["FloatingLabel"]}
           htmlFor={inputName}
           style={{
-            left: flagDirection ? "auto" : "0px",
-            right: flagDirection ? "0px" : "auto",
+            left: !flagDirection ? "auto" : "0px",
+            right: !flagDirection ? "0px" : "auto",
           }}
         >
           <i className={`fa-solid ${icon}`}></i>
@@ -59,9 +88,8 @@ export default function FloatingInput({
 
         {inputType === "password" && (
           <i
-            className={`fa-solid ${style.passwordIcon} ${
-              showPassword ? "fa-eye" : "fa-eye-slash"
-            } `}
+            className={`fa-solid ${style.passwordIcon} ${showPassword ? "fa-eye" : "fa-eye-slash"
+              } `}
             onClick={() => setShowPassword(!showPassword)}
             style={{
               position: "absolute",
