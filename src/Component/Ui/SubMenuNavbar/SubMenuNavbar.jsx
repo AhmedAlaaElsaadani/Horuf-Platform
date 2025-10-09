@@ -115,21 +115,31 @@ export default function SubMenuNavbar() {
   });
   return (
     <li className="position-relative " ref={containerRef}>
-      <button
-        className={`${style.myaccount}`}
-        onClick={() => setShowSubMenu(!showSubMenu)}
-      >
-        {isRegistered ? (
-          <>
-            {t("myAccount")} <i className="fa-solid  mx-2 fa-user"></i>
-          </>
-        ) : (
-          <>
-            {t("nav_link_Register")}{" "}
+
+
+      {isRegistered ? (
+
+        <button
+          className={`${style.myaccount}`}
+          onClick={() => setShowSubMenu(!showSubMenu)}
+        >
+          <button>{t("myAccount")}</button>
+          {t("myAccount")} <i className="fa-solid  mx-2 fa-user"></i>
+        </button>) : (
+        <div className={"d-flex gap-2 " + style.loginRegisterContainer} >
+          <Link
+            className={`${style.myaccount} `}
+            to="/Register"
+          >
+            {t("nav_link_Register")}
+          </Link>
+          <Link to="/Login" className="btn btn-outline-primary border-0 " >
             <i className="fa-solid  mx-2 fa-door-open"></i>
-          </>
-        )}
-      </button>
+          </Link>
+        </div>
+      )
+
+      }
       {showSubMenu &&
         (isRegistered ? (
           <div className={`${style.subMenuDropdown}`}>
@@ -139,7 +149,7 @@ export default function SubMenuNavbar() {
                 className={`${style.subMenuItem}`}
                 key={idx}
               >
-                <Link to={item.to}  target={idx == 5 ? "_blank" : ''}>
+                <Link to={item.to} target={idx == 5 ? "_blank" : ''}>
                   {item.icon}
                   <span className={`${style.subMenuItemText}`}>
                     {t(item.text)}{" "}
@@ -153,22 +163,24 @@ export default function SubMenuNavbar() {
             </div>
           </div>
         ) : (
-          <div className={`${style.subMenuDropdown}`}>
-            {linksLoginRegister.map((linkItem, idx) => (
-              <div
-                onClick={() => setShowSubMenu(!showSubMenu)}
-                className={`${style.subMenuItem}`}
-                key={idx}
-              >
-                <Link to={linkItem.to}>
-                  {linkItem.icon}
-                  <span className={`${style.subMenuItemText}`}>
-                    {t(linkItem.text)}
-                  </span>
-                </Link>
-              </div>
-            ))}
-          </div>
+          // <div className={`${style.subMenuDropdown}`}>
+          //   {linksLoginRegister.map((linkItem, idx) => (
+          //     <div
+          //       onClick={() => setShowSubMenu(!showSubMenu)}
+          //       className={`${style.subMenuItem}`}
+          //       key={idx}
+          //     >
+          //       <Link to={linkItem.to}>
+          //         {linkItem.icon}
+          //         <span className={`${style.subMenuItemText}`}>
+          //           {t(linkItem.text)}
+          //         </span>
+          //       </Link>
+          //     </div>
+          //   ))}
+          // </div>
+          <>
+          </>
         ))}
     </li>
   );

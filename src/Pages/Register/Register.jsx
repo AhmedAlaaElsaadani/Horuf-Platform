@@ -23,40 +23,39 @@ export default function Register() {
   }, [i18n.language]);
 
   const validationSchemaYup = Yup.object().shape({
-    firstName: Yup.string().required(t("Required")),
-    lastName: Yup.string().required(t("Required")),
-    phone: Yup.string()
+    name: Yup.string().required(t("Required")),
+    gender: Yup.boolean().required(t("Required")),
+    phone1: Yup.string()
       .matches(phoneRegax, t("Phone number is not valid"))
       .required(t("Required")),
-    parentPhone: Yup.string()
+    phone2: Yup.string()
       .matches(phoneRegax, t("Phone number is not valid"))
-      .required(t("Required"))
       .notOneOf(
-        [Yup.ref("phone")],
-        t("Phone number and parent phone must be different")
+        [Yup.ref("phone1")],
+        t("Phone number and second phone number must be different")
       ),
+    eduSchoolLevel: Yup.number().required(t("Required")),
     email: Yup.string()
       .email(t("Invalid email address"))
       .required(t("Required")),
     password: Yup.string()
       .min(6, t("Password must contain at least 6 characters"))
-
       .required(t("Required")),
     confirmPassword: Yup.string()
       .required(t("Required"))
       .oneOf([Yup.ref("password"), null], t("Passwords must match")),
-    address: Yup.string().required(t("Required")),
-    birthday: Yup.date().required(t("Required")),
-    level: Yup.number().required(t("Required")),
-    gender: Yup.string().required(t("Required")),
   });
 
   // send message to the server
   const registerToWebsite = async (values) => {
     let data = JSON.stringify({
-      ...values,
-      gender: "M" == values.gender,
-      EduSchoolLevel: parseInt(values.level),
+      name: values.name,
+      gender: values.gender,
+      phone1: values.phone1,
+      phone2: values.phone2,
+      eduSchoolLevel: parseInt(values.eduSchoolLevel),
+      email: values.email,
+      password: values.password,
     });
 
     setResponseFlag(true);
@@ -104,17 +103,14 @@ export default function Register() {
 
   const myFormik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      phone: "",
-      parentPhone: "",
+      name: "",
+      gender: true, // true for male, false for female
+      phone1: "",
+      phone2: "",
+      eduSchoolLevel: "",
       email: "",
       password: "",
       confirmPassword: "",
-      address: "",
-      birthday: "",
-      gender: "M",
-      level: "",
     },
     onSubmit: registerToWebsite,
     validationSchema: validationSchemaYup,
@@ -122,26 +118,20 @@ export default function Register() {
   const registerInputs = [
     {
       inputType: "text",
-      inputName: "firstName",
-      inputTransition: "firstName",
-      icon: "fa-user",
-    },
-    {
-      inputType: "text",
-      inputName: "lastName",
-      inputTransition: "lastName",
+      inputName: "name",
+      inputTransition: "name",
       icon: "fa-user",
     },
     {
       inputType: "tel",
-      inputName: "phone",
+      inputName: "phone1",
       inputTransition: "phoneNumber",
       icon: "fa-phone",
     },
     {
       inputType: "tel",
-      inputName: "parentPhone",
-      inputTransition: "parentPhone",
+      inputName: "phone2",
+      inputTransition: "secondPhoneNumber",
       icon: "fa-phone",
     },
   ];
@@ -152,18 +142,6 @@ export default function Register() {
     icon: "fa-envelope",
   };
   const registerInputs2 = [
-    {
-      inputType: "text",
-      inputName: "address",
-      inputTransition: "address",
-      icon: "fa-map-marker",
-    },
-    {
-      inputType: "date",
-      inputName: "birthday",
-      inputTransition: "birthday",
-      icon: "fa-calendar",
-    },
     {
       inputType: "password",
       inputName: "password",
@@ -179,13 +157,13 @@ export default function Register() {
   ];
   const registerSelect = [
     {
-      selectName: "level",
+      selectName: "eduSchoolLevel",
       translation: "level",
       onChange: myFormik.handleChange,
-      selectValue: myFormik.values.level,
+      selectValue: myFormik.values.eduSchoolLevel,
       icon: "fa-user-graduate",
-      error: myFormik.errors.level,
-      touched: myFormik.touched.level,
+      error: myFormik.errors.eduSchoolLevel,
+      touched: myFormik.touched.eduSchoolLevel,
       options: educationLevels,
     },
     {
@@ -199,11 +177,11 @@ export default function Register() {
       options: [
         {
           key: "Male",
-          value: "M",
+          value: true,
         },
         {
           key: "Female",
-          value: "F",
+          value: false,
         },
       ],
     },
@@ -234,7 +212,7 @@ export default function Register() {
             <p>{t("Register_desc")}</p>
           </motion.div>
           {registerInputs.map((input, index) => (
-            <div className="col-md-6">
+            <div className={index === 0 ? "col-md-12" : "col-md-6"}>
               <FloatingInput
                 key={index}
                 idx={index}
@@ -259,7 +237,7 @@ export default function Register() {
             }
           </div>
           {registerSelect.map((select, index) => (
-            <div className="col-md-12">
+            <div className="col-md-6">
               <SelectElement key={index + 5} idx={index} {...select}
                 changeValue={
                   (value) =>

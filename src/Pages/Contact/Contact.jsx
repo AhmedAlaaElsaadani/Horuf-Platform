@@ -166,7 +166,7 @@ export default function Contact({ flagNotAloneCompounded }) {
             onSubmit={myFormik.handleSubmit}
             className={
               "row  justify-content-between shadow my-3 pt-5 rounded-5 " +
-              style.ParentContainer
+              style.ParentContainer 
             }
           >
             <motion.div

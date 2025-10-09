@@ -18,35 +18,32 @@ export default function UpdateProfile() {
   const { flagDirection } = useOutletContext();
   const [loadingImageUpdate, setLoadingImageUpdate] = useState(false);
   const [profileImage, setProfileImage] = useState(
-    user.image ? user.image : img
+    user?.image ? user?.image : img
   );
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required(t("Required")),
-    lastName: Yup.string().required(t("Required")),
-    phone: Yup.string()
+    name: Yup.string().required(t("Required")),
+    phone1: Yup.string()
       .matches(phoneRegax, t("Phone number is not valid"))
       .required(t("Required")),
-    parentPhone: Yup.string()
+    phone2: Yup.string()
       .matches(phoneRegax, t("Phone number is not valid"))
-      .required(t("Required"))
       .notOneOf(
-        [Yup.ref("phone")],
-        t("Phone number and parent phone must be different")
+        [Yup.ref("phone1")],
+        t("Phone number and second phone number must be different")
       ),
-    level: Yup.number().required(t("Required")),
-    gender: Yup.string().required(t("Required")),
+    eduSchoolLevel: Yup.number().required(t("Required")),
+    gender: Yup.boolean().required(t("Required")),
     address: Yup.string().required(t("Required")),
   });
   const sendData = async (values) => {
     setResponseFlag(true);
     let user = JSON.stringify({
-      firstName: values.firstName,
-      lastName: values.lastName,
-      phone: values.phone,
-      parentPhone: values.parentPhone,
-      eduLevel: parseInt(values.level),
+      name: values.name,
+      phone1: values.phone1,
+      phone2: values.phone2,
+      eduSchoolLevel: parseInt(values.eduSchoolLevel),
       address: values.address,
-      gender: values.gender == "M",
+      gender: values.gender,
     });
 
     try {
@@ -79,13 +76,12 @@ export default function UpdateProfile() {
   };
   const myFormik = useFormik({
     initialValues: {
-      firstName: user?.firstName,
-      lastName: user?.lastName,
-      phone: user?.phoneNumber,
-      parentPhone: user?.parentPhone,
+      name: user?.name || `${user?.firstName || ''} ${user?.lastName || ''}`.trim(),
+      phone1: user?.phone1 || user?.phoneNumber,
+      phone2: user?.phone2 || user?.parentPhone,
       address: user?.address,
-      level: user?.level,
-      gender: user?.gender == "male" ? "M" : "F",
+      eduSchoolLevel: user?.eduSchoolLevel || user?.level,
+      gender: user?.gender === "male" || user?.gender === true ? true : false,
     },
     validationSchema: validationSchema,
     onSubmit: sendData,
@@ -93,26 +89,20 @@ export default function UpdateProfile() {
   const updateInputs = [
     {
       inputType: "text",
-      inputName: "firstName",
-      inputTransition: "firstName",
-      icon: "fa-user",
-    },
-    {
-      inputType: "text",
-      inputName: "lastName",
-      inputTransition: "lastName",
+      inputName: "name",
+      inputTransition: "name",
       icon: "fa-user",
     },
     {
       inputType: "tel",
-      inputName: "phone",
+      inputName: "phone1",
       inputTransition: "phoneNumber",
       icon: "fa-phone-volume",
     },
     {
       inputType: "tel",
-      inputName: "parentPhone",
-      inputTransition: "parentPhone",
+      inputName: "phone2",
+      inputTransition: "secondPhoneNumber",
       icon: "fa-phone-volume",
     },
     {
@@ -124,13 +114,13 @@ export default function UpdateProfile() {
   ];
   const updateSelect = [
     {
-      selectName: "level",
+      selectName: "eduSchoolLevel",
       translation: "level",
       onChange: myFormik.handleChange,
-      selectValue: myFormik.values.level,
+      selectValue: myFormik.values.eduSchoolLevel,
       icon: "fa-user-graduate",
-      error: myFormik.errors.level,
-      touched: myFormik.touched.level,
+      error: myFormik.errors.eduSchoolLevel,
+      touched: myFormik.touched.eduSchoolLevel,
       options: educationLevels,
     },
     {
@@ -144,11 +134,11 @@ export default function UpdateProfile() {
       options: [
         {
           key: "Male",
-          value: "M",
+          value: true,
         },
         {
           key: "Female",
-          value: "F",
+          value: false,
         },
       ],
     },
@@ -227,8 +217,8 @@ export default function UpdateProfile() {
             </div>
           ))}
           {updateSelect.map((select, index) => (
-            <div className="col-md-12">
-              <SelectElement key={index + 5} idx={index} {...select} t={t}
+            <div key={index + 5} className="col-md-12">
+              <SelectElement idx={index} {...select} t={t}
                 changeValue={
                   (value) =>
                     myFormik.setFieldValue(select.selectName, value)
