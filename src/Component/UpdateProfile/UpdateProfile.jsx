@@ -6,6 +6,7 @@ import { authContext } from "../../Context/authContext";
 import img from "../../assets/Images/uploadimage.png";
 import ApiManager from "../../Utilies/ApiManager";
 import FloatingInput from "../Ui/FloatingInput/FloatingInput";
+import PhoneInput from "../Ui/PhoneInput/PhoneInput";
 import { useOutletContext } from "react-router-dom";
 import { educationLevels, phoneRegax } from "../../Utilies/data";
 import SelectElement from "../Ui/SelectElement/SelectElement";
@@ -23,10 +24,8 @@ export default function UpdateProfile() {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required(t("Required")),
     phone1: Yup.string()
-      .matches(phoneRegax, t("Phone number is not valid"))
       .required(t("Required")),
     phone2: Yup.string()
-      .matches(phoneRegax, t("Phone number is not valid"))
       .notOneOf(
         [Yup.ref("phone1")],
         t("Phone number and second phone number must be different")
@@ -94,22 +93,23 @@ export default function UpdateProfile() {
       icon: "fa-user",
     },
     {
-      inputType: "tel",
+      inputType: "text",
+      inputName: "address",
+      inputTransition: "address",
+      icon: "fa-location-dot",
+    },
+  ];
+
+  const updatePhoneInputs = [
+    {
       inputName: "phone1",
       inputTransition: "phoneNumber",
       icon: "fa-phone-volume",
     },
     {
-      inputType: "tel",
       inputName: "phone2",
       inputTransition: "secondPhoneNumber",
       icon: "fa-phone-volume",
-    },
-    {
-      inputType: "text",
-      inputName: "address",
-      inputTransition: "address",
-      icon: "fa-location-dot",
     },
   ];
   const updateSelect = [
@@ -213,6 +213,17 @@ export default function UpdateProfile() {
                 myFormik={myFormik}
                 flagDirection={flagDirection}
                 t={t}
+              />
+            </div>
+          ))}
+          {updatePhoneInputs.map((phoneInput, index) => (
+            <div key={`phone-${index}`} className="col-md-12">
+              <PhoneInput
+                idx={index + updateInputs.length}
+                {...phoneInput}
+                myFormik={myFormik}
+                initialValue={myFormik.values[phoneInput.inputName]}
+                initialCountry="+965"
               />
             </div>
           ))}

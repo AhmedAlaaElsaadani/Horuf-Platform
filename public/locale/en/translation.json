@@ -216,7 +216,7 @@
   "Required": "Required",
   "Invalid email address": "Invalid email address",
   "Passwords must match": "Passwords must match",
-  "Phone number and parent phone must be different": "Phone number and parent phone must be different",
+  "Phone number and second phone number must be different": "Phone number and second phone number must be different",
   "Phone number is not valid": "Invalid phone number",
   "Must be 10 characters or more": "Must be 10 characters or more",
   "Invalid email or password": "Invalid email or password",

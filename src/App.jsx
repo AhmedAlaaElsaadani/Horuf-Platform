@@ -182,9 +182,9 @@ function App() {
         {
           path: "/profile",
           element: (
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <Profile />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           ),
           children: [
             {

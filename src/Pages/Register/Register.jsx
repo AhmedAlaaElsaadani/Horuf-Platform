@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ApiManager from "../../Utilies/ApiManager";
 import { authContext } from "../../Context/authContext";
 import FloatingInput from "../../Component/Ui/FloatingInput/FloatingInput";
+import PhoneInput from "../../Component/Ui/PhoneInput/PhoneInput";
 import { motion } from "framer-motion";
 import SelectElement from "../../Component/Ui/SelectElement/SelectElement";
 import { educationLevels, phoneRegax } from "../../Utilies/data";
@@ -26,10 +27,8 @@ export default function Register() {
     name: Yup.string().required(t("Required")),
     gender: Yup.boolean().required(t("Required")),
     phone1: Yup.string()
-      .matches(phoneRegax, t("Phone number is not valid"))
       .required(t("Required")),
     phone2: Yup.string()
-      .matches(phoneRegax, t("Phone number is not valid"))
       .notOneOf(
         [Yup.ref("phone1")],
         t("Phone number and second phone number must be different")
@@ -122,14 +121,15 @@ export default function Register() {
       inputTransition: "name",
       icon: "fa-user",
     },
+  ];
+
+  const registerPhoneInputs = [
     {
-      inputType: "tel",
       inputName: "phone1",
       inputTransition: "phoneNumber",
       icon: "fa-phone",
     },
     {
-      inputType: "tel",
       inputName: "phone2",
       inputTransition: "secondPhoneNumber",
       icon: "fa-phone",
@@ -212,7 +212,7 @@ export default function Register() {
             <p>{t("Register_desc")}</p>
           </motion.div>
           {registerInputs.map((input, index) => (
-            <div className={index === 0 ? "col-md-12" : "col-md-6"}>
+            <div className="col-md-12">
               <FloatingInput
                 key={index}
                 idx={index}
@@ -220,6 +220,17 @@ export default function Register() {
                 myFormik={myFormik}
                 flagDirection={flagDirection}
                 t={t}
+              />
+            </div>
+          ))}
+          {registerPhoneInputs.map((phoneInput, index) => (
+            <div key={`phone-${index}`} className="col-md-6">
+              <PhoneInput
+                idx={index + registerInputs.length}
+                {...phoneInput}
+                myFormik={myFormik}
+                initialValue={myFormik.values[phoneInput.inputName]}
+                initialCountry="+965"
               />
             </div>
           ))}

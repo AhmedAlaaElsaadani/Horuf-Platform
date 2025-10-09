@@ -216,7 +216,7 @@
   "Required": "مطلوب",
   "Invalid email address": "هذا البريد الإلكتروني غير صالح",
   "Passwords must match": "يجب أن تتطابق كلمات المرور",
-  "Phone number and parent phone must be different": "يجب أن يكون رقم الهاتف ورقم هاتف ولي الأمر مختلفين",
+  "Phone number and second phone number must be different": "يجب أن يكون رقم الهاتف ورقم الهاتف الثاني مختلفين",
   "Phone number is not valid": "هذا الرقم غير صالح",
   "Must be 10 characters or more": "يجب أن تكون 10 أحرف أو أكثر",
   "Invalid email or password": "البريد الإلكتروني أو كلمة المرور غير صالحة",
